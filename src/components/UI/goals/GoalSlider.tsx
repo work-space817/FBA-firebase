@@ -7,17 +7,20 @@ import { getAdditionalUserInfo } from "firebase/auth";
 import Goal from "./Goal";
 import setAuthToken from "../../../api/setAuthToken";
 import getUserId from "../../../api/getUserId";
+import Loading from "../../common/loading/Loading";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const GoalSlider: React.FC = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const userId = getUserId();
     const fetchUserGoals = async () => {
+      setLoading(true);
       try {
         const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
-        console.log("userId: ", userId);
 
         const querySnapshot = await getDocs(collection(userGoalsRef, "goal"));
         const goalsData = querySnapshot.docs.map(
@@ -26,6 +29,7 @@ const GoalSlider: React.FC = () => {
         setGoalsList(goalsData);
         console.log("Цілі успішно отримані з Firestore:", goalsData);
         getVisibleItems();
+        setLoading(false);
       } catch (error) {
         console.error(
           "Сталася помилка при отриманні цілей користувача:",
@@ -72,13 +76,29 @@ const GoalSlider: React.FC = () => {
   return (
     <div className="col ">
       <div className="d-flex justify-content-evenly align-items-center">
+        {loading && <Loading />}
         <button
           onClick={handlePreviousGoal}
           className="bg-transparent border-0"
         >
           <ArrowsSVG id="ArrowLeft" />
         </button>
-        {goalViewList}
+
+        {goalsList.length > 3 ? (
+          <>
+            <div className="col-3 goal-item d-flex flex-column align-items-center justify-content-evenly rounded-5 shadow">
+              <div className="p-3">
+                <GoalSVG id="Empty" />
+              </div>
+              <div className="p-3 d-flex flex-column">
+                <span>Add new goal</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>{goalViewList}</>
+        )}
+
         <button onClick={handleNextGoal} className="bg-transparent border-0">
           <ArrowsSVG id="ArrowRight" />
         </button>

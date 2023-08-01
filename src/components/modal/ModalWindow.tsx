@@ -4,8 +4,8 @@ import React from "react";
 
 interface IModalProps {
   children: React.ReactNode;
-  title: string;
-  buttonText: string;
+  title?: string;
+  buttonText?: string;
 }
 
 const ModalWindow: FC<IModalProps> = ({ children, title, buttonText }) => {

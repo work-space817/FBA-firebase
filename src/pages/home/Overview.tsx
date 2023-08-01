@@ -35,7 +35,8 @@ const Overview: FC = () => {
               <Link
                 to="/auth"
                 onClick={(e) => {
-                  localStorage.removeItem("token" || "uid");
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("uid");
                   dispatch({ type: AuthUserActionType.LOGOUT_USER });
                 }}
               >

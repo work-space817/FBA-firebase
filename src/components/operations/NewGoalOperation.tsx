@@ -3,6 +3,7 @@ import { IGoalOperation } from "./types";
 import InputComponent from "../common/input/Input";
 import { auth, firestore } from "../../api/config";
 import { addDoc, collection, doc } from "firebase/firestore";
+import getUserId from "../../api/getUserId";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
@@ -19,12 +20,9 @@ const NewGoalOperation = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const onSubmitHandler = async (e: any) => {
-    e.preventDefault();
     try {
-      //? getUserId();
-      const userId = auth.currentUser?.uid;
-      console.log("userId: ", userId);
-      const userGoalsRef = doc(collection(firestore, "goals"), userId);
+      const userId = getUserId();
+      const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
       await addDoc(collection(userGoalsRef, "goal"), {
         ...data,
       });

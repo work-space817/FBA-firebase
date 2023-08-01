@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/Input";
+import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../api/config";
+import setAuthToken from "../../../api/setAuthToken";
 
 const LogIn = () => {
   const init: ILogIn = {
@@ -18,23 +21,22 @@ const LogIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // http
-    //   .post("api/account/login", data)
-    //   .then((resp) => {
-    //     console.log("resp: ", resp);
-    //     const token = resp.data.token as string;
-    //     setAuthToken(token);
-    //     const user = jwt_decode<IUser>(token);
-    //     dispatch({ type: AuthUserActionType.LOGIN_USER, payload: user });
-    //     navigate("/");
-    //   })
-    //   .catch((badReqeust) => {
-    //     // const errors = badReqeust.response.data.errors as ILoginPageError;
-    //     console.log("Вхід не успішний", badReqeust.response.data);
-    //     setError("Дані вказано не вірно");
-    //   });
+    try {
+      const logInResult = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const user = logInResult.user;
+      const userToken = (await getIdToken(user)) as string;
+      const uid = auth.currentUser?.uid as string;
+      setAuthToken(userToken, uid);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
