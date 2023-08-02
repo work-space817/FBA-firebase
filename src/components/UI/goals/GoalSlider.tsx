@@ -9,11 +9,15 @@ import setAuthToken from "../../../api/setAuthToken";
 import getUserId from "../../../api/getUserId";
 import Loading from "../../common/loading/Loading";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import GoalEmpty from "./GoalEmpty";
 
 const GoalSlider: React.FC = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [loading, setLoading] = useState<boolean>(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  console.log("windowWidth: ", windowWidth);
+  const [minVisibleItem, setMinVisibleItem] = useState(3);
 
   useEffect(() => {
     const userId = getUserId();
@@ -50,15 +54,35 @@ const GoalSlider: React.FC = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % goalsList.length);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    if (windowWidth > 1200) {
+      setMinVisibleItem(3);
+    } else if (windowWidth < 1200 && windowWidth > 900) {
+      setMinVisibleItem(2);
+    }
+  }, [windowWidth]);
+
+  // useEffect(() => {
+  //   if (windowWidth < 1200) {
+  //     alert("Ширина вікна менше 1200px");
+  //   }
+  // }, [windowWidth]);
+
   function getVisibleItems() {
     const visibleItems = [];
-    const itemsToShow = Math.min(goalsList.length, 3);
+    const itemsToShow = Math.min(goalsList.length, minVisibleItem);
 
     for (let i = 0; i < itemsToShow; i++) {
       const itemIndex =
         currentIndex + i >= goalsList.length
           ? currentIndex + i - goalsList.length
           : currentIndex + i;
+
       visibleItems.push(goalsList[itemIndex]);
     }
 
@@ -71,11 +95,13 @@ const GoalSlider: React.FC = () => {
       title={goal?.title}
       cost={goal?.cost}
       date={goal?.expireDate}
+      goalSVG={undefined}
     />
   ));
+
   return (
-    <div className="col ">
-      <div className="d-flex justify-content-evenly align-items-center">
+    <div className="col">
+      <div className="d-flex justify-content-evenly align-items-center pb-5">
         {loading && <Loading />}
         <button
           onClick={handlePreviousGoal}
@@ -83,22 +109,15 @@ const GoalSlider: React.FC = () => {
         >
           <ArrowsSVG id="ArrowLeft" />
         </button>
-
-        {goalsList.length > 3 ? (
+        {goalsList.length < 3 ? (
           <>
-            <div className="col-3 goal-item d-flex flex-column align-items-center justify-content-evenly rounded-5 shadow">
-              <div className="p-3">
-                <GoalSVG id="Empty" />
-              </div>
-              <div className="p-3 d-flex flex-column">
-                <span>Add new goal</span>
-              </div>
-            </div>
+            {goalViewList}
+            <GoalEmpty />
           </>
         ) : (
+          // <div className="d-flex px-3 gap-3">{goalViewList}</div>
           <>{goalViewList}</>
         )}
-
         <button onClick={handleNextGoal} className="bg-transparent border-0">
           <ArrowsSVG id="ArrowRight" />
         </button>

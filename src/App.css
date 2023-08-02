@@ -54,3 +54,7 @@ button {
 .goal-item {
   height: 12rem;
 }
+.current-goal-index {
+  left: 95%;
+  top: 10px;
+}

@@ -4,7 +4,7 @@ import SidebarSVG from "../../../helpers/selectorsSVG/SidebarSVG";
 const DefaultSidebar = () => {
   return (
     <>
-      <div className="sidebar-fonts col-auto col-md-3 col-xl-2  border-end">
+      <div className="sidebar-fonts col-auto col-md-3 col-lg-2  border-end">
         <div className="d-flex flex-column align-items-center  pt-5 text-white min-vh-100 ">
           <div className="cloud d-grid text-dark align-items-center">
             <div className="div1">

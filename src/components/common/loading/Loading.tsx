@@ -5,9 +5,10 @@ const LoadingContainer = () => {
     <div className="my_eclipse">
       <div className="progress">
         <div>
-          {/* <FaSpinner size="3x" /> */}
           <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-          <span className="sr-only">Loading...</span>
+          <div className="spinner-border text-dark" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
     </div>

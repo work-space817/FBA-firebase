@@ -1,14 +1,19 @@
 import { FC, useRef } from "react";
 import { Modal } from "bootstrap";
 import React from "react";
-
 interface IModalProps {
   children: React.ReactNode;
-  title?: string;
-  buttonText?: string;
+  title: string;
+  buttonText?: string | React.ReactNode;
+  customActive?: React.ReactNode;
 }
 
-const ModalWindow: FC<IModalProps> = ({ children, title, buttonText }) => {
+const ModalWindow: FC<IModalProps> = ({
+  children,
+  title,
+  buttonText,
+  customActive,
+}) => {
   const modalRef = useRef(null);
 
   const showModal = () => {
@@ -27,12 +32,19 @@ const ModalWindow: FC<IModalProps> = ({ children, title, buttonText }) => {
   };
   return (
     <>
-      <button
-        className="bg-custom rounded-4 p-2 text-white"
-        onClick={showModal}
-      >
-        <span>{buttonText}</span>
-      </button>
+      {customActive ? (
+        <button className="bg-transparent" onClick={showModal}>
+          {customActive}
+        </button>
+      ) : (
+        <button
+          className="bg-custom rounded-4 p-2 text-white"
+          onClick={showModal}
+        >
+          <span>{buttonText}</span>
+        </button>
+      )}
+
       <div className="modal fade" tabIndex={-1} ref={modalRef}>
         <div className="modal-dialog">
           <div className="modal-content">
