@@ -10,6 +10,13 @@ import Overview from "./pages/home/Overview";
 import { useSelector } from "react-redux";
 import { IAuthUser } from "./store/reducers/types";
 
+//fonts
+import "./fonts/Quicksand-Light.ttf";
+import "./fonts/Quicksand-Regular.ttf";
+import "./fonts/Quicksand-Medium.ttf";
+import "./fonts/Quicksand-SemiBold.ttf";
+import "./fonts/Quicksand-Bold.ttf";
+
 const App = () => {
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 

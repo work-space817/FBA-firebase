@@ -5,14 +5,16 @@ const DefaultSidebar = () => {
   return (
     <>
       <div className="sidebar-fonts col-auto col-md-3 col-lg-2  border-end">
-        <div className="d-flex flex-column align-items-center  pt-5 text-white min-vh-100 ">
+        <div className="d-flex flex-column align-items-center  pt-5 text-white min-vh-100 font-Quicksand-Bold">
           <div className="cloud d-grid text-dark align-items-center">
             <div className="div1">
-              <SidebarSVG id="cloud"></SidebarSVG>{" "}
+              <SidebarSVG id="cloud"></SidebarSVG>
             </div>
-            <div className="div2 d-none d-md-inline">FBA -</div>
-            <div className="div3 d-none d-md-inline ">
-              Financial Budgeting App{" "}
+            <div className="font-Quicksand-Bold div2 d-none d-md-inline">
+              FBA -
+            </div>
+            <div className="font-Quicksand-Bold div3 d-none d-md-inline ">
+              Financial Budgeting App
             </div>
           </div>
 
@@ -27,7 +29,7 @@ const DefaultSidebar = () => {
                   className="nav-link d-flex align-items-center px-0"
                 >
                   <SidebarSVG id="overview"></SidebarSVG>
-                  <span className="ms-3 d-none d-md-inline text-black-50 fs-5 ">
+                  <span className="font-Quicksand-Bold ms-3 d-none d-md-inline text-black-50 fs-5 ">
                     Home page
                   </span>
                 </Link>
@@ -40,7 +42,7 @@ const DefaultSidebar = () => {
                   className="nav-link d-flex align-items-center px-0"
                 >
                   <SidebarSVG id="transactions"></SidebarSVG>
-                  <span className="ms-3 d-none d-md-inline text-black-50 fs-5">
+                  <span className="font-Quicksand-Bold ms-3 d-none d-md-inline text-black-50 fs-5">
                     Transactions
                   </span>
                 </Link>
@@ -53,7 +55,7 @@ const DefaultSidebar = () => {
                   className="nav-link d-flex align-items-center px-0"
                 >
                   <SidebarSVG id="statistic"></SidebarSVG>
-                  <span className="ms-3 d-none d-md-inline text-black-50 fs-5">
+                  <span className="font-Quicksand-Bold ms-3 d-none d-md-inline text-black-50 fs-5">
                     Statistic
                   </span>
                 </Link>
@@ -66,7 +68,7 @@ const DefaultSidebar = () => {
                   className="nav-link d-flex align-items-center px-0"
                 >
                   <SidebarSVG id="settings"></SidebarSVG>
-                  <span className="ms-3 d-none d-md-inline text-black-50 fs-5">
+                  <span className="font-Quicksand-Bold ms-3 d-none d-md-inline text-black-50 fs-5">
                     Settings
                   </span>
                 </Link>

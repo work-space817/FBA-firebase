@@ -41,7 +41,7 @@ const ModalWindow: FC<IModalProps> = ({
           className="bg-custom rounded-4 p-2 text-white"
           onClick={showModal}
         >
-          <span>{buttonText}</span>
+          <span className="font-Quicksand-SemiBold fs--1">{buttonText}</span>
         </button>
       )}
 
