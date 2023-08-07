@@ -15,15 +15,10 @@ const Overview: FC = () => {
 
   return (
     <>
-      <div className="d-flex mb-5 gap-3">
+      <div className="col d-flex mb-5 gap-3 flex-column-lg ">
         <Card />
-        <div className="col-6 ">
+        <div className="col col-lg-6">
           <OperationMenu />
-
-          {/* <ModalWindow title="welcome" buttonText={"AuthModal"}>
-            <AuthModal />
-          </ModalWindow> */}
-          {/* <Goal /> */}
           <GoalSlider />
         </div>
       </div>

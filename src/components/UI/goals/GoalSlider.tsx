@@ -60,10 +60,12 @@ const GoalSlider: React.FC = () => {
     };
     window.addEventListener("resize", handleResize);
 
-    if (windowWidth > 1200) {
+    if (windowWidth > 1450) {
       setMinVisibleItem(3);
-    } else if (windowWidth < 1200 && windowWidth > 900) {
+    } else if (windowWidth < 1450 && windowWidth > 900) {
       setMinVisibleItem(2);
+    } else {
+      setMinVisibleItem(1);
     }
   }, [windowWidth]);
 
@@ -95,7 +97,6 @@ const GoalSlider: React.FC = () => {
       title={goal?.title}
       cost={goal?.cost}
       date={goal?.expireDate}
-      goalSVG={undefined}
     />
   ));
 

@@ -6,10 +6,9 @@ interface IGoal {
   cost: string;
   date: string;
   title: string;
-  goalSVG: React.ReactNode;
 }
 
-const Goal: FC<IGoal> = ({ cost, date, title, goalSVG }) => {
+const Goal: FC<IGoal> = ({ cost, date, title }) => {
   const navigate = useNavigate();
 
   const goalEdit = () => {
@@ -20,19 +19,21 @@ const Goal: FC<IGoal> = ({ cost, date, title, goalSVG }) => {
       <div
         className="col-3 d-flex flex-column rounded-5 shadow"
         onClick={goalEdit}
-        // style={{ width: "10rem" }}
+        style={{ width: "10rem" }}
       >
         <div className="p-3 position-relative">
           <span className="current-goal-index position-absolute translate-middle badge text-bg-warning  rounded-pill ">
             <GoalSVG id="Edit" />
           </span>
-          <h4>{cost}</h4>
-          <span>{date}</span>
+          <h4>{cost} UAH</h4>
+          <span>
+            {date}
+            <GoalSVG id="Clock" />
+          </span>
         </div>
         <div className="p-3 d-flex flex-column">
           <>
             <GoalSVG id="Holidays" />
-            {goalSVG}
           </>
           <span className="mt-1">{title}</span>
         </div>

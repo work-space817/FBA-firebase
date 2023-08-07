@@ -8,7 +8,7 @@ const Card = () => {
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
               {/* <CardSVG id="ArrowLeft" /> */}
               <div className="bg-custom shadow w-100 rounded-5 text-white">
-                <div className="p-1 p-sm-4 ">
+                <div className="p-4 p-sm-4 ">
                   <h5 className="font-Quicksand-SemiBold mb-0 ">cloudcash</h5>
 
                   <p className="fs--1 text-white-50">RPEMIUM ACCOUNT</p>

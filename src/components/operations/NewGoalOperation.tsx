@@ -4,6 +4,8 @@ import InputComponent from "../common/input/Input";
 import { auth, firestore } from "../../api/config";
 import { addDoc, collection, doc } from "firebase/firestore";
 import getUserId from "../../api/getUserId";
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
@@ -11,76 +13,59 @@ const NewGoalOperation = () => {
     cost: "",
     expireDate: "",
   };
-
-  const [data, setData] = useState<IGoalOperation>(init);
-  const [error, setError] = useState<IRegisterError>();
-
-  const onChangeHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-  ) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-  const onSubmitHandler = async (e: any) => {
-    e.preventDefault();
+  const onSubmitHandler = async (values: IGoalOperation, e: any) => {
     try {
       const userId = getUserId();
       const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
       await addDoc(collection(userGoalsRef, "goal"), {
-        ...data,
+        ...values,
       });
 
       console.log("Нова ціль успішно створена.");
-    } catch (err: any) {
-      console.log("Bad request", err);
+      //? window.location.reload();
+    } catch (error: any) {
+      console.log("Bad request", error);
     }
   };
-  // const checkUp = yup.object({
-  //   title: yup.string().required("indicate your target"),
-  //   cost: yup
-  //     .string()
-  //     .matches(/[0-9]/, "Only number")
-  //     .required("Поле не повинне бути пустим"),
-  //   expireDate: yup.string().required("Поле не повинне бути пустим"),
-  // });
-  // const formik = useFormik({
-  //   initialValues: init,
-  //   onSubmit: onSubmitHandler,
-  //   validationSchema: checkUp,
-  // });
-  // const { touched, errors } = formik;
+  const checkUpForm = yup.object({
+    title: yup.string().required("indicate your target"),
+    cost: yup
+      .string()
+      .matches(/[0-9]/, "Only number")
+      .required("Поле не повинне бути пустим"),
+    expireDate: yup.string().required("Поле не повинне бути пустим"),
+  });
+  const formik = useFormik({
+    initialValues: init,
+    onSubmit: onSubmitHandler,
+    validationSchema: checkUpForm,
+  });
+  const { values, touched, errors, handleSubmit, handleChange } = formik;
   return (
-    <form onSubmit={onSubmitHandler} className="col">
-      {/* {!!error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )} */}
+    <form onSubmit={handleSubmit} className="col">
       <InputComponent
         label="Enter your title"
         field="title"
-        value={data.title}
-        onChange={onChangeHandler}
-        // errors={error?.title}
-        // error={errors.title}
-        // touched={touched.title}
+        value={values.title}
+        onChange={handleChange}
+        error={errors.title}
+        touched={touched.title}
       />
       <InputComponent
         label="Enter goals' cost"
         field="cost"
-        value={data.cost}
-        onChange={onChangeHandler}
-        // errors={error?.cost}
-        // error={errors.cost}
-        // touched={touched.cost}
+        value={values.cost}
+        onChange={handleChange}
+        error={errors.cost}
+        touched={touched.cost}
       />
       <InputComponent
         label="Expire date (dd/mm/yyyy)"
         field="expireDate"
-        value={data.expireDate}
-        onChange={onChangeHandler}
-        // errors={error?.expireDate}
-        // error={errors.expireDate}
-        // touched={touched.expireDate}
+        value={values.expireDate}
+        onChange={handleChange}
+        error={errors.expireDate}
+        touched={touched.expireDate}
       />
 
       <button type="submit" className="btn btn-primary">
