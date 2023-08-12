@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import { useNavigate } from "react-router-dom";
 
@@ -6,11 +6,11 @@ interface IGoal {
   cost: string;
   date: string;
   title: string;
+  index?: any;
 }
 
-const Goal: FC<IGoal> = ({ cost, date, title }) => {
+const Goal: FC<IGoal> = ({ cost, date, title, index }) => {
   const navigate = useNavigate();
-
   const goalEdit = () => {
     navigate("/transactions");
   };
@@ -22,9 +22,27 @@ const Goal: FC<IGoal> = ({ cost, date, title }) => {
         style={{ width: "10rem" }}
       >
         <div className="p-3 position-relative">
-          <span className="current-goal-index position-absolute translate-middle badge text-bg-warning  rounded-pill ">
-            <GoalSVG id="Edit" />
-          </span>
+          <div
+            className="text-bg-secondary current-goal-index position-absolute translate-middle badge rounded-pill "
+            // onClick={toggleDropdown}
+          >
+            <div className="position-relative d-flex flex-column text-bg-secondary">
+              {/* <GoalSVG id="Edit" /> */}
+              {index}
+              {/* {isOpen && (
+                <div className="done-delete-items dropdown-content position-absolute d-flex flex-column text-bg-secondary p-1">
+                  <div className=""></div>
+                  <div className="">
+                    <GoalSVG id="Access" />
+                  </div>
+                  <div className="">
+                    <GoalSVG id="Delete" />
+                  </div>
+                </div> 
+              )}*/}
+            </div>
+          </div>
+
           <h4>{cost} UAH</h4>
           <span>
             {date}

@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import InputComponent from "../../common/input/Input";
 import { IGoalOperation } from "../../operations/types";
+import Goal from "./Goal";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const GoalEdit: React.FC = () => {
   const init: IGoalOperation = {
@@ -27,9 +29,23 @@ const GoalEdit: React.FC = () => {
   return (
     <>
       <div
-        className="col-6 d-flex rounded-5 shadow"
+        className="col-5 d-flex rounded-5 shadow align-items-center justify-content-evenly"
         // style={{ width: "10rem" }}
       >
+        <div className="">
+          <Goal
+            cost={"1499"}
+            date={"26.08.2024"}
+            title={"For gift"}
+            index={<GoalSVG id="Edit" />}
+          />
+          {/* <button type="submit" className="btn btn-success">
+            Update goal
+          </button>
+          <button type="submit" className="btn btn-danger">
+            Update goal
+          </button> */}
+        </div>
         <div className="">
           <form onSubmit={onSubmitHandler} className="col p-3">
             <InputComponent
@@ -63,6 +79,8 @@ const GoalEdit: React.FC = () => {
             <button type="submit" className="btn btn-primary">
               Update goal
             </button>
+            <GoalSVG id="Access" />
+            <GoalSVG id="Delete" />
           </form>
         </div>
       </div>

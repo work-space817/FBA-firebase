@@ -112,3 +112,6 @@ p {
   left: 95%;
   top: 10px;
 }
+.done-delete-items {
+  transform: translate(-25%, 40%);
+}

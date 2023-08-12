@@ -6,9 +6,11 @@ import GoalEdit from "../../components/UI/goals/GoalEdit";
 const Transaction = () => {
   return (
     <>
-      {/* <GoalSlider>
-        <GoalEdit/>
-      </GoalSlider> */}
+      <div className="d-flex align-items-center gap-3 pb-5">
+        <GoalSlider />
+        <GoalEdit />
+      </div>
+
       <TransactionHistory />
     </>
   );

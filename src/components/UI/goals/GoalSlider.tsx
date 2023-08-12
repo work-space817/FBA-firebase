@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 import { IGoalOperation } from "../../operations/types";
 import { getDocs, collection, doc } from "firebase/firestore";
@@ -13,11 +13,12 @@ import GoalEmpty from "./GoalEmpty";
 
 const GoalSlider: React.FC = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(1);
   const [loading, setLoading] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log("windowWidth: ", windowWidth);
-  const [minVisibleItem, setMinVisibleItem] = useState(3);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const goalWidth = 160;
+  const spacing = 15;
+  const [visibleGoals, setVisibleGoals] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const userId = getUserId();
@@ -32,7 +33,6 @@ const GoalSlider: React.FC = () => {
         );
         setGoalsList(goalsData);
         console.log("Цілі успішно отримані з Firestore:", goalsData);
-        getVisibleItems();
         setLoading(false);
       } catch (error) {
         console.error(
@@ -45,64 +45,48 @@ const GoalSlider: React.FC = () => {
     fetchUserGoals();
   }, []);
 
-  const handlePreviousGoal = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + goalsList.length) % goalsList.length
-    );
-  };
-  const handleNextGoal = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % goalsList.length);
-  };
-
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+    const sliderElement = sliderRef.current;
+    const updateVisibleGoals = () => {
+      if (sliderElement) {
+        const sliderWidth = sliderElement.offsetWidth;
+        const calculatedVisibleGoals = Math.floor(
+          sliderWidth / (goalWidth + spacing)
+        );
+        setVisibleGoals(calculatedVisibleGoals);
+      }
     };
-    window.addEventListener("resize", handleResize);
 
-    if (windowWidth > 1450) {
-      setMinVisibleItem(3);
-    } else if (windowWidth < 1450 && windowWidth > 900) {
-      setMinVisibleItem(2);
-    } else {
-      setMinVisibleItem(1);
+    updateVisibleGoals();
+
+    window.addEventListener("resize", updateVisibleGoals);
+  }, []);
+  const handleNextGoal = () => {
+    if (currentIndex + visibleGoals < goalsList.length) {
+      setCurrentIndex(currentIndex + 1);
     }
-  }, [windowWidth]);
+  };
 
-  // useEffect(() => {
-  //   if (windowWidth < 1200) {
-  //     alert("Ширина вікна менше 1200px");
-  //   }
-  // }, [windowWidth]);
-
-  function getVisibleItems() {
-    const visibleItems = [];
-    const itemsToShow = Math.min(goalsList.length, minVisibleItem);
-
-    for (let i = 0; i < itemsToShow; i++) {
-      const itemIndex =
-        currentIndex + i >= goalsList.length
-          ? currentIndex + i - goalsList.length
-          : currentIndex + i;
-
-      visibleItems.push(goalsList[itemIndex]);
+  const handlePreviousGoal = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
-
-    return visibleItems;
-  }
-
-  const goalViewList = getVisibleItems().map((goal, index) => (
-    <Goal
-      key={index}
-      title={goal?.title}
-      cost={goal?.cost}
-      date={goal?.expireDate}
-    />
-  ));
+  };
+  const visibleGoalsList = goalsList
+    .slice(currentIndex, currentIndex + visibleGoals)
+    .map((goal, index) => (
+      <Goal
+        key={index}
+        title={goal?.title}
+        cost={goal?.cost}
+        date={goal?.expireDate}
+        index={index + currentIndex + 1}
+      />
+    ));
 
   return (
-    <div className="col">
-      <div className="d-flex justify-content-evenly align-items-center pb-5">
+    <div className="col" ref={sliderRef}>
+      <div className="d-flex justify-content-evenly align-items-center ">
         {loading && <Loading />}
         <button
           onClick={handlePreviousGoal}
@@ -112,13 +96,13 @@ const GoalSlider: React.FC = () => {
         </button>
         {goalsList.length < 3 ? (
           <>
-            {goalViewList}
+            {visibleGoalsList}
             <GoalEmpty />
           </>
         ) : (
-          // <div className="d-flex px-3 gap-3">{goalViewList}</div>
-          <>{goalViewList}</>
+          <>{visibleGoalsList}</>
         )}
+
         <button onClick={handleNextGoal} className="bg-transparent border-0">
           <ArrowsSVG id="ArrowRight" />
         </button>

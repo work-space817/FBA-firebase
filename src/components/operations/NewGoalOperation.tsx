@@ -6,6 +6,7 @@ import { addDoc, collection, doc } from "firebase/firestore";
 import getUserId from "../../api/getUserId";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import "react-datepicker/dist/react-datepicker.css";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
@@ -60,16 +61,16 @@ const NewGoalOperation = () => {
         touched={touched.cost}
       />
       <InputComponent
-        label="Expire date (dd/mm/yyyy)"
+        label="Expire date"
+        type="date"
         field="expireDate"
         value={values.expireDate}
         onChange={handleChange}
         error={errors.expireDate}
         touched={touched.expireDate}
       />
-
       <button type="submit" className="btn btn-primary">
-        Вхід
+        Add goal
       </button>
     </form>
   );
