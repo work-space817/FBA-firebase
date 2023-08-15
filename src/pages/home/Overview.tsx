@@ -26,6 +26,7 @@ const Overview: FC = () => {
       <div>
         {isAuth ? (
           <>
+            {/* {user?.name} */}
             <button>
               <Link
                 to="/auth"

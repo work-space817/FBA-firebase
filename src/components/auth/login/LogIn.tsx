@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { ILogIn, IUser } from "./types";
+import { ILogIn } from "./types";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +17,6 @@ const LogIn = () => {
 
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<ILogIn>(init);
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {

@@ -6,7 +6,6 @@ const Card = () => {
           <h4 className="text-dark ms-3 mb-0">Cards</h4>
           <div className="row py-4">
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
-              {/* <CardSVG id="ArrowLeft" /> */}
               <div className="bg-custom shadow w-100 rounded-5 text-white">
                 <div className="p-4 p-sm-4 ">
                   <h5 className="font-Quicksand-SemiBold mb-0 ">cloudcash</h5>
@@ -26,13 +25,12 @@ const Card = () => {
                       <span className="">Name UserName</span>
                     </div>
                     <div className="d-flex flex-column">
-                      <span className="fs--2">Expire date</span>
+                      <span className="fs--2">Current date</span>
                       <span className="">06/23</span>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <CardSVG id="ArrowRight" /> */}
             </div>
             <div className="ps-0 col-4 text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">

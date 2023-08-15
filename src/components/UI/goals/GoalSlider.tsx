@@ -2,21 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 import { IGoalOperation } from "../../operations/types";
 import { getDocs, collection, doc } from "firebase/firestore";
-import { auth, firestore } from "../../../api/config";
-import { getAdditionalUserInfo } from "firebase/auth";
+import { firestore } from "../../../api/config";
 import Goal from "./Goal";
-import setAuthToken from "../../../api/setAuthToken";
 import getUserId from "../../../api/getUserId";
 import Loading from "../../common/loading/Loading";
-import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import GoalEmpty from "./GoalEmpty";
 
 const GoalSlider: React.FC = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const goalWidth = 160;
-  const spacing = 15;
   const [visibleGoals, setVisibleGoals] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -28,9 +23,10 @@ const GoalSlider: React.FC = () => {
         const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
 
         const querySnapshot = await getDocs(collection(userGoalsRef, "goal"));
-        const goalsData = querySnapshot.docs.map(
-          (doc) => doc.data() as IGoalOperation
-        );
+        const goalsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as IGoalOperation),
+        }));
         setGoalsList(goalsData);
         console.log("Цілі успішно отримані з Firestore:", goalsData);
         setLoading(false);
@@ -45,6 +41,8 @@ const GoalSlider: React.FC = () => {
     fetchUserGoals();
   }, []);
 
+  const goalWidth = 160;
+  const spacing = 15;
   useEffect(() => {
     const sliderElement = sliderRef.current;
     const updateVisibleGoals = () => {
@@ -86,7 +84,7 @@ const GoalSlider: React.FC = () => {
 
   return (
     <div className="col" ref={sliderRef}>
-      <div className="d-flex justify-content-evenly align-items-center ">
+      <div className="d-flex justify-content-around align-items-center ">
         {loading && <Loading />}
         <button
           onClick={handlePreviousGoal}

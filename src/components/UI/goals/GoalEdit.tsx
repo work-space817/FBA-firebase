@@ -1,9 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import InputComponent from "../../common/input/Input";
 import { IGoalOperation } from "../../operations/types";
 import Goal from "./Goal";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-
 const GoalEdit: React.FC = () => {
   const init: IGoalOperation = {
     title: "",
@@ -17,7 +16,6 @@ const GoalEdit: React.FC = () => {
   ) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
     try {
@@ -26,25 +24,34 @@ const GoalEdit: React.FC = () => {
       console.log("Bad request", err);
     }
   };
+
   return (
     <>
-      <div
-        className="col-5 d-flex rounded-5 shadow align-items-center justify-content-evenly"
-        // style={{ width: "10rem" }}
-      >
-        <div className="">
+      <div className="col-5 d-flex rounded-5 shadow align-items-center ">
+        <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
+          <h4 className=" me-xxl-5 me-0">Edit your goal</h4>
           <Goal
             cost={"1499"}
             date={"26.08.2024"}
             title={"For gift"}
             index={<GoalSVG id="Edit" />}
           />
-          {/* <button type="submit" className="btn btn-success">
-            Update goal
-          </button>
-          <button type="submit" className="btn btn-danger">
-            Update goal
-          </button> */}
+          <div className="d-flex justify-content-evenly col-12 mt-1">
+            <button
+              type="submit"
+              className="btn btn-secondary d-flex align-items-center gap-2"
+            >
+              <GoalSVG id="Success" />
+              {/* <p className="m-0 ">Done</p> */}
+            </button>
+            <button
+              type="submit"
+              className="btn btn-secondary d-flex align-items-center gap-2"
+            >
+              <GoalSVG id="Delete" />
+              {/* <p className="m-0 ">Delete</p> */}
+            </button>
+          </div>
         </div>
         <div className="">
           <form onSubmit={onSubmitHandler} className="col p-3">
@@ -76,11 +83,9 @@ const GoalEdit: React.FC = () => {
               // touched={touched.expireDate}
             />
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-warning">
               Update goal
             </button>
-            <GoalSVG id="Access" />
-            <GoalSVG id="Delete" />
           </form>
         </div>
       </div>

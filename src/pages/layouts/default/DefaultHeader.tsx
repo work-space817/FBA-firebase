@@ -15,15 +15,14 @@ const DefaultHeader = () => {
     splitCurrentPage = "Overview";
   }
 
-  const { isAuth, user } = useSelector((store: any) => store.auth as IAuthUser);
   return (
     <>
       <header>
         <nav className="navbar ">
           <div className="container-fluid">
             <p className="font-Quicksand-Bold fs-1 m-0">{splitCurrentPage}</p>
+
             <Link to="/settings" className="text-dark d-none d-md-inline">
-              {user?.name}
               <HeaderSVG id="defaultUserIcon" />
             </Link>
           </div>

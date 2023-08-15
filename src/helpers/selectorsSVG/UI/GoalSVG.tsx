@@ -20,7 +20,7 @@ const GoalSVG = ({ id }: Props) => {
         </svg>
       );
 
-    case "Access":
+    case "Success":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"

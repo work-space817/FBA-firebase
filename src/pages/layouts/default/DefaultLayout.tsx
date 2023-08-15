@@ -9,7 +9,7 @@ const DefaultLayout = () => {
         <div className="row flex-nowrap">
           <DefaultSidebar />
 
-          <div className="col p-3 p-md-4 p-sm-4  pt-4 border">
+          <div className="col p-3 pt-4 border">
             <DefaultHeader />
             {/* Сюди підставляється компонет один із групи комеонетів, які відносяться до даного Layout */}
             {<Outlet />}
