@@ -1,16 +1,17 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import InputComponent from "../../common/input/Input";
 import { IGoalOperation } from "../../operations/types";
-import Goal from "./Goal";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import { DocumentData, collection, doc, getDocs } from "firebase/firestore";
+import Goal from "./Goal";
+
 const GoalEdit: React.FC = () => {
-  const init: IGoalOperation = {
+  const GoalEditProps = {
     title: "",
     cost: "",
     expireDate: "",
   };
-  const [data, setData] = useState<IGoalOperation>(init);
-
+  const [data, setData] = useState<IGoalOperation>(GoalEditProps);
   const onChangeHandler = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => {
@@ -31,7 +32,7 @@ const GoalEdit: React.FC = () => {
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
           <h4 className=" me-xxl-5 me-0">Edit your goal</h4>
           <Goal
-            cost={"1499"}
+            cost={""}
             date={"26.08.2024"}
             title={"For gift"}
             index={<GoalSVG id="Edit" />}

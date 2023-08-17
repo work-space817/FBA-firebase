@@ -2,45 +2,37 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import getUserId from "../../../api/getUserId";
-import { collection, doc, getDocs } from "firebase/firestore";
-import { firestore } from "../../../api/config";
+import { DocumentData, collection, doc, getDocs } from "firebase/firestore";
+import getGoalsData from "../../../api/getGoalsData";
 
-interface IGoal {
+export interface IGoal {
   cost: string;
   date: string;
   title: string;
   index: any;
+  selectGoals?: (currentGoal: any) => void;
 }
 
-const Goal: FC<IGoal> = ({ cost, date, title, index }) => {
-  const goalRef = useRef<HTMLDivElement>(null);
-
+const Goal: FC<IGoal> = ({ cost, date, title, index, selectGoals }) => {
+  const dispatch = useDispatch();
+  const [currentGoal, setCurrentGoal] = useState<DocumentData>();
   const navigate = useNavigate();
-  const userId = getUserId();
-  const goalEdit = async () => {
-    try {
-      navigate("/transactions");
-      const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
-      const querySnapshot = await getDocs(collection(userGoalsRef, "goal"));
-      const goalsData = querySnapshot.docs.find((doc, docIndex) => {
-        if (docIndex + 1 == index) {
-          return doc.data();
-        }
-      });
-      console.log(goalsData?.data());
-    } catch (error) {
-      console.error("Сталася помилка при отриманні цілей користувача:", error);
-    }
+  selectGoals = async () => {
+    navigate("/transactions");
+    const fetchGoals = await getGoalsData();
+    const fetchCurrentGoal = fetchGoals.find((doc, docIndex) =>
+      docIndex + 1 == index ? doc.data() : null
+    );
+    const currentGoalData = fetchCurrentGoal?.data();
+    setCurrentGoal(currentGoalData);
   };
-
+  // console.log(currentGoal);
   return (
     <>
       <div
         className="col-3 d-flex flex-column rounded-5 shadow"
         style={{ width: "10rem" }}
-        onClick={goalEdit}
-        ref={goalRef}
+        onClick={selectGoals}
       >
         <div className="p-3 position-relative">
           <div className="text-bg-secondary current-goal-index position-absolute translate-middle badge rounded-pill ">

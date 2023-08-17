@@ -9,6 +9,7 @@ import Transaction from "./pages/transaction/Transaction";
 import Overview from "./pages/home/Overview";
 import { useSelector } from "react-redux";
 import { IAuthUser } from "./store/reducers/types";
+import "react-datepicker/dist/react-datepicker.css";
 
 //fonts
 import "./fonts/Quicksand-Light.ttf";

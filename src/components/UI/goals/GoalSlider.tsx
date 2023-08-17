@@ -7,8 +7,10 @@ import Goal from "./Goal";
 import getUserId from "../../../api/getUserId";
 import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
+import getGoalsData from "../../../api/getGoalsData";
 
-const GoalSlider: React.FC = () => {
+interface IGoalSlider {}
+const GoalSlider: React.FC<IGoalSlider> = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -16,19 +18,15 @@ const GoalSlider: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const userId = getUserId();
     const fetchUserGoals = async () => {
       setLoading(true);
       try {
-        const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
-
-        const querySnapshot = await getDocs(collection(userGoalsRef, "goal"));
-        const goalsData = querySnapshot.docs.map((doc) => ({
+        const fetchGoals = await getGoalsData();
+        const goalsData = fetchGoals.map((doc) => ({
           id: doc.id,
           ...(doc.data() as IGoalOperation),
         }));
         setGoalsList(goalsData);
-        console.log("Цілі успішно отримані з Firestore:", goalsData);
         setLoading(false);
       } catch (error) {
         console.error(

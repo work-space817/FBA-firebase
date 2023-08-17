@@ -6,7 +6,7 @@ import { addDoc, collection, doc } from "firebase/firestore";
 import getUserId from "../../api/getUserId";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
@@ -14,7 +14,7 @@ const NewGoalOperation = () => {
     cost: "",
     expireDate: "",
   };
-  const onSubmitHandler = async (values: IGoalOperation, e: any) => {
+  const onSubmitHandler = async (values: IGoalOperation) => {
     try {
       const userId = getUserId();
       const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
@@ -23,7 +23,8 @@ const NewGoalOperation = () => {
       });
 
       console.log("Нова ціль успішно створена.");
-      //? window.location.reload();
+      //?
+      window.location.reload();
     } catch (error: any) {
       console.log("Bad request", error);
     }
@@ -42,6 +43,7 @@ const NewGoalOperation = () => {
     validationSchema: checkUpForm,
   });
   const { values, touched, errors, handleSubmit, handleChange } = formik;
+
   return (
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
@@ -69,6 +71,7 @@ const NewGoalOperation = () => {
         error={errors.expireDate}
         touched={touched.expireDate}
       />
+
       <button type="submit" className="btn btn-primary">
         Add goal
       </button>

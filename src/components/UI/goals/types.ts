@@ -1,6 +1,7 @@
 export interface IGoal {
-  name: string,
-  text: string,
-  image: string,
-  dateTimePublish: string,
+  cost: string;
+  date: string;
+  title: string;
+  index: any;
+  selectGoals?: (currentGoal: any) => void;
 }

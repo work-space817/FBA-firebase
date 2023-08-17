@@ -1,23 +1,19 @@
+import { IGoal } from "./../../components/UI/goals/Goal";
 import { GoalEditActionType, IGoalSelect } from "./types";
 
 const initState: IGoalSelect = {
-  isGoalSelect: false,
+  selectGoal: null,
 };
 
 export const SelectGoalReducer = (state = initState, action: any) => {
   switch (action.type) {
-    case GoalEditActionType.GOAL_EDIT_OPEN: {
+    case "SELECT_GOAL": {
       return {
         ...state,
-        isGoalSelect: true,
+        selectGoal: action.payload,
       };
     }
-    case GoalEditActionType.GOAL_EDIT_CLOSE: {
-      return {
-        ...state,
-        isGoalSelect: false,
-      };
-    }
+    default:
+      return state;
   }
-  return state;
 };
