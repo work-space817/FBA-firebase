@@ -6,7 +6,11 @@ import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
 import getGoalsData from "../../../api/getGoalsData";
 
-const GoalSlider: React.FC = () => {
+interface IGoalSlider {
+  isSelect?: () => void;
+}
+
+const GoalSlider: React.FC<IGoalSlider> = ({ isSelect }) => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -20,8 +24,8 @@ const GoalSlider: React.FC = () => {
         const fetchGoals = await getGoalsData();
         const goalsData = fetchGoals.map((doc) => ({
           id: doc.id,
-          ...(doc.data() as IGoalOperation),
-        }));
+          ...doc.data(),
+        })) as IGoalOperation[];
         setGoalsList(goalsData);
         setLoading(false);
       } catch (error) {
@@ -69,11 +73,12 @@ const GoalSlider: React.FC = () => {
     .slice(currentIndex, currentIndex + visibleGoals)
     .map((goal, index) => (
       <Goal
-        key={index}
+        key={goal.id}
         title={goal?.title}
         cost={goal?.cost}
         expireDate={goal?.expireDate}
         index={index + currentIndex + 1}
+        id={goal.id}
       />
     ));
 

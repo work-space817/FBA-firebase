@@ -3,4 +3,5 @@ export interface IGoal {
   expireDate: string;
   title: string;
   index: any;
+  id: string;
 }

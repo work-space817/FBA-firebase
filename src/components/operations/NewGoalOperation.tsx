@@ -10,6 +10,7 @@ import DatePicker from "react-datepicker";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
+    id: "",
     title: "",
     cost: "",
     expireDate: "",

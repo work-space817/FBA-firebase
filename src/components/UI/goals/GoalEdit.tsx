@@ -8,6 +8,7 @@ import { IGoalSelect } from "../../../store/reducers/types";
 
 const GoalEdit: React.FC = () => {
   const GoalEditProps = {
+    id: "",
     title: "",
     cost: "",
     expireDate: "",
@@ -26,9 +27,11 @@ const GoalEdit: React.FC = () => {
       console.log("Bad request", err);
     }
   };
+
   const { selectedGoal } = useSelector(
     (store: any) => store.selectGoal as IGoalSelect
   );
+  console.log(selectedGoal);
 
   return (
     <>
@@ -37,6 +40,7 @@ const GoalEdit: React.FC = () => {
           <h4 className=" me-xxl-5 me-0">Edit your goal</h4>
           {selectedGoal ? (
             <Goal
+              id={selectedGoal.id}
               cost={selectedGoal.cost}
               expireDate={selectedGoal.expireDate}
               title={selectedGoal.title}
@@ -44,6 +48,7 @@ const GoalEdit: React.FC = () => {
             />
           ) : (
             <Goal
+              id={""}
               cost={"$$$"}
               expireDate={"Expire date"}
               title={"Your title"}
