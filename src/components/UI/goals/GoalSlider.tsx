@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 import { IGoalOperation } from "../../operations/types";
-import { getDocs, collection, doc } from "firebase/firestore";
-import { firestore } from "../../../api/config";
 import Goal from "./Goal";
-import getUserId from "../../../api/getUserId";
 import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
 import getGoalsData from "../../../api/getGoalsData";
 
-interface IGoalSlider {}
-const GoalSlider: React.FC<IGoalSlider> = () => {
+const GoalSlider: React.FC = () => {
   const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -68,6 +64,7 @@ const GoalSlider: React.FC<IGoalSlider> = () => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+
   const visibleGoalsList = goalsList
     .slice(currentIndex, currentIndex + visibleGoals)
     .map((goal, index) => (
@@ -75,7 +72,7 @@ const GoalSlider: React.FC<IGoalSlider> = () => {
         key={index}
         title={goal?.title}
         cost={goal?.cost}
-        date={goal?.expireDate}
+        expireDate={goal?.expireDate}
         index={index + currentIndex + 1}
       />
     ));

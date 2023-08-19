@@ -1,38 +1,33 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { DocumentData, collection, doc, getDocs } from "firebase/firestore";
 import getGoalsData from "../../../api/getGoalsData";
+import { GoalSelectActionType } from "../../../store/reducers/types";
+import { IGoal } from "./types";
 
-export interface IGoal {
-  cost: string;
-  date: string;
-  title: string;
-  index: any;
-  selectGoals?: (currentGoal: any) => void;
-}
-
-const Goal: FC<IGoal> = ({ cost, date, title, index, selectGoals }) => {
+const Goal: FC<IGoal> = ({ cost, expireDate, title, index }) => {
   const dispatch = useDispatch();
-  const [currentGoal, setCurrentGoal] = useState<DocumentData>();
   const navigate = useNavigate();
-  selectGoals = async () => {
+  const selectGoal = async () => {
     navigate("/transactions");
     const fetchGoals = await getGoalsData();
     const fetchCurrentGoal = fetchGoals.find((doc, docIndex) =>
-      docIndex + 1 == index ? doc.data() : null
+      docIndex + 1 === index ? doc.data() : null
     );
     const currentGoalData = fetchCurrentGoal?.data();
-    setCurrentGoal(currentGoalData);
+    dispatch({
+      type: GoalSelectActionType.GOAL_SELECT,
+      payload: currentGoalData,
+    });
   };
-  // console.log(currentGoal);
+
   return (
     <>
       <div
         className="col-3 d-flex flex-column rounded-5 shadow"
         style={{ width: "10rem" }}
-        onClick={selectGoals}
+        onClick={selectGoal}
       >
         <div className="p-3 position-relative">
           <div className="text-bg-secondary current-goal-index position-absolute translate-middle badge rounded-pill ">
@@ -54,7 +49,7 @@ const Goal: FC<IGoal> = ({ cost, date, title, index, selectGoals }) => {
 
           <h4>{cost} UAH</h4>
           <span>
-            {date}
+            {expireDate}
             <GoalSVG id="Clock" />
           </span>
         </div>

@@ -3,7 +3,7 @@ import TransactionHistory from "../../components/UI/TransactionHistory";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import GoalEdit from "../../components/UI/goals/GoalEdit";
 import { useDispatch, useSelector } from "react-redux";
-import { GoalEditActionType, IGoalSelect } from "../../store/reducers/types";
+import { IGoalSelect } from "../../store/reducers/types";
 
 const Transaction = () => {
   // const { isGoalSelect } = useSelector(

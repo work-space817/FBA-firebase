@@ -2,8 +2,9 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import InputComponent from "../../common/input/Input";
 import { IGoalOperation } from "../../operations/types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import { DocumentData, collection, doc, getDocs } from "firebase/firestore";
 import Goal from "./Goal";
+import { useSelector } from "react-redux";
+import { IGoalSelect } from "../../../store/reducers/types";
 
 const GoalEdit: React.FC = () => {
   const GoalEditProps = {
@@ -25,18 +26,30 @@ const GoalEdit: React.FC = () => {
       console.log("Bad request", err);
     }
   };
+  const { selectedGoal } = useSelector(
+    (store: any) => store.selectGoal as IGoalSelect
+  );
 
   return (
     <>
       <div className="col-5 d-flex rounded-5 shadow align-items-center ">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
           <h4 className=" me-xxl-5 me-0">Edit your goal</h4>
-          <Goal
-            cost={""}
-            date={"26.08.2024"}
-            title={"For gift"}
-            index={<GoalSVG id="Edit" />}
-          />
+          {selectedGoal ? (
+            <Goal
+              cost={selectedGoal.cost}
+              expireDate={selectedGoal.expireDate}
+              title={selectedGoal.title}
+              index={<GoalSVG id="Edit" />}
+            />
+          ) : (
+            <Goal
+              cost={"$$$"}
+              expireDate={"Expire date"}
+              title={"Your title"}
+              index={<GoalSVG id="Edit" />}
+            />
+          )}
           <div className="d-flex justify-content-evenly col-12 mt-1">
             <button
               type="submit"

@@ -1,7 +1,6 @@
 export interface IGoal {
   cost: string;
-  date: string;
+  expireDate: string;
   title: string;
   index: any;
-  selectGoals?: (currentGoal: any) => void;
 }

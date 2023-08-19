@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { IGoalOperation, IRegisterError } from "./types";
+import { IGoalOperation } from "./types";
 import InputComponent from "../common/input/Input";
 import { auth, firestore } from "../../api/config";
 import { addDoc, collection, doc } from "firebase/firestore";

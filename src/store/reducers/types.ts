@@ -1,3 +1,5 @@
+import { IGoal } from "../../components/UI/goals/types";
+
 export interface IAuthUser {
   isAuth: boolean;
 }
@@ -8,9 +10,8 @@ export enum AuthUserActionType {
 }
 
 export interface IGoalSelect {
-  selectGoal: null;
+  selectedGoal: IGoal | null;
 }
-export enum GoalEditActionType {
-  GOAL_EDIT_OPEN = "GOAL_EDIT_OPEN",
-  GOAL_EDIT_CLOSE = "GOAL_EDIT_CLOSE",
+export enum GoalSelectActionType {
+  GOAL_SELECT = "GOAL_SELECT",
 }
