@@ -1,4 +1,3 @@
-import React from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import ModalWindow from "../../modal/ModalWindow";
 import NewGoalOperation from "../../operations/NewGoalOperation";

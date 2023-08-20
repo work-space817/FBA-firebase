@@ -2,40 +2,31 @@ import { FC } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import getGoalsData from "../../../api/getGoalsData";
+import getGoalsData from "../../../api/goals/getGoalsData";
 import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
 
-const Goal: FC<IGoal> = ({ cost, expireDate, title, index }) => {
+const Goal: FC<IGoal> = ({ cost, expireDate, title, index, id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectGoal = async () => {
     navigate("/transactions");
     const fetchGoals = await getGoalsData();
     const fetchCurrentGoal = fetchGoals.find((doc, docIndex) =>
-      docIndex + 1 === index
-        ? {
-            id: doc.id,
-            ...doc.data(),
-          }
-        : null
+      docIndex + 1 == index ? doc.data() : null
     );
-    // const fetchCurrentGoal = fetchGoals.filter((x) => x.id !== id.id);
-    const currentGoalData = fetchCurrentGoal?.data();
-    console.log(fetchCurrentGoal?.id);
+    const currentGoalData = { ...fetchCurrentGoal?.data(), id };
     console.log("currentGoalData: ", currentGoalData);
     dispatch({
       type: GoalSelectActionType.GOAL_SELECT,
       payload: currentGoalData,
     });
   };
-
   return (
     <>
       <div
         className="col-3 d-flex flex-column rounded-5 shadow"
         style={{ width: "10rem" }}
-        // onClick={selectGoal}
         onClick={selectGoal}
       >
         <div className="p-3 position-relative">

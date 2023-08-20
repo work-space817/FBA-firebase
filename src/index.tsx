@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "./store/reducers/types";
-import setAuthToken from "./api/setAuthToken";
-import getUserId from "./api/getUserId";
+import setAuthToken from "./api/userInfo/setAuthToken";
+import getUserId from "./api/userInfo/getUserId";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token, localStorage.uid);

@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
-import { IGoalOperation } from "../../operations/types";
 import Goal from "./Goal";
 import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
-import getGoalsData from "../../../api/getGoalsData";
+import getGoalsData from "../../../api/goals/getGoalsData";
+import { IGoal } from "./types";
 
-interface IGoalSlider {
-  isSelect?: () => void;
-}
-
-const GoalSlider: React.FC<IGoalSlider> = ({ isSelect }) => {
-  const [goalsList, setGoalsList] = useState<IGoalOperation[]>([]);
+const GoalSlider: React.FC = () => {
+  const [goalsList, setGoalsList] = useState<IGoal[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [visibleGoals, setVisibleGoals] = useState(0);
@@ -25,8 +21,9 @@ const GoalSlider: React.FC<IGoalSlider> = ({ isSelect }) => {
         const goalsData = fetchGoals.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as IGoalOperation[];
+        })) as IGoal[];
         setGoalsList(goalsData);
+        console.log("goalsData: ", goalsData);
         setLoading(false);
       } catch (error) {
         console.error(
@@ -73,7 +70,7 @@ const GoalSlider: React.FC<IGoalSlider> = ({ isSelect }) => {
     .slice(currentIndex, currentIndex + visibleGoals)
     .map((goal, index) => (
       <Goal
-        key={goal.id}
+        key={index}
         title={goal?.title}
         cost={goal?.cost}
         expireDate={goal?.expireDate}

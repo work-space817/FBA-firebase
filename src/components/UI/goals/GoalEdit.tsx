@@ -1,44 +1,76 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import InputComponent from "../../common/input/Input";
-import { IGoalOperation } from "../../operations/types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import Goal from "./Goal";
 import { useSelector } from "react-redux";
 import { IGoalSelect } from "../../../store/reducers/types";
+import { deleteDoc, updateDoc } from "firebase/firestore";
+import getGoalsData from "../../../api/goals/getGoalsData";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { IGoalEdit } from "./types";
 
 const GoalEdit: React.FC = () => {
-  const GoalEditProps = {
-    id: "",
+  const { selectedGoal } = useSelector(
+    (store: any) => store.selectGoal as IGoalSelect
+  );
+  const init: IGoalEdit = {
     title: "",
     cost: "",
     expireDate: "",
   };
-  const [data, setData] = useState<IGoalOperation>(GoalEditProps);
-  const onChangeHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-  ) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-  const onSubmitHandler = async (e: any) => {
-    e.preventDefault();
+
+  const onSubmitHandler = async (values: any) => {
     try {
-      console.log("Нова ціль успішно створена.");
-    } catch (err: any) {
-      console.log("Bad request", err);
+      const fetchGoals = await getGoalsData();
+      const fetchCurrentGoal = fetchGoals.map((doc) =>
+        doc.id === selectedGoal?.id ? updateDoc(doc.ref, values) : null
+      );
+    } catch (error: any) {
+      console.log("Bad request", error);
     }
+    //!
+    window.location.reload();
   };
 
-  const { selectedGoal } = useSelector(
-    (store: any) => store.selectGoal as IGoalSelect
-  );
-  console.log(selectedGoal);
+  const goalDoneDelete = async () => {
+    try {
+      const fetchGoals = await getGoalsData();
+      const fetchCurrentGoal = fetchGoals.map((doc) =>
+        doc.id === selectedGoal?.id ? deleteDoc(doc.ref) : null
+      );
+      //!
+    } catch (error) {
+      console.error("Сталася помилка при видаленні цілі:", error);
+    }
+    window.location.reload();
+  };
+
+  // useEffect(() => {
+  //   goalDoneDelete();
+  // }, []);
+
+  const checkUpForm = yup.object({
+    title: yup.string().required("Field should not be empty"),
+    cost: yup
+      .string()
+      .matches(/[0-9]/, "Only number")
+      .required("Field should not be empty"),
+    expireDate: yup.string().required("Field should not be empty"),
+  });
+  const formik = useFormik({
+    initialValues: init,
+    onSubmit: onSubmitHandler,
+    validationSchema: checkUpForm,
+  });
+  const { values, touched, errors, handleSubmit, handleChange } = formik;
 
   return (
     <>
       <div className="col-5 d-flex rounded-5 shadow align-items-center ">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
-          <h4 className=" me-xxl-5 me-0">Edit your goal</h4>
-          {selectedGoal ? (
+          <h4 className="me-xxl-5 me-0">Edit your goal</h4>
+          {selectedGoal?.id ? (
             <Goal
               id={selectedGoal.id}
               cost={selectedGoal.cost}
@@ -59,50 +91,54 @@ const GoalEdit: React.FC = () => {
             <button
               type="submit"
               className="btn btn-secondary d-flex align-items-center gap-2"
+              onClick={goalDoneDelete}
             >
-              <GoalSVG id="Success" />
-              {/* <p className="m-0 ">Done</p> */}
+              {/* <GoalSVG id="Success" /> */}
+
+              <p className="m-0 ">Done</p>
             </button>
             <button
               type="submit"
               className="btn btn-secondary d-flex align-items-center gap-2"
+              onClick={goalDoneDelete}
             >
-              <GoalSVG id="Delete" />
-              {/* <p className="m-0 ">Delete</p> */}
+              {/* <GoalSVG id="Delete" /> */}
+
+              <p className="m-0 ">Delete</p>
             </button>
           </div>
         </div>
         <div className="">
-          <form onSubmit={onSubmitHandler} className="col p-3">
+          <form onSubmit={handleSubmit} className="col">
             <InputComponent
-              label="Change title"
+              label="Enter your title"
               field="title"
-              value={data.title}
-              onChange={onChangeHandler}
-              // errors={error?.title}
-              // error={errors.title}
-              // touched={touched.title}
+              value={values.title}
+              onChange={handleChange}
+              error={errors.title}
+              touched={touched.title}
             />
             <InputComponent
-              label="Change cost"
+              label="Enter goals' cost"
               field="cost"
-              value={data.cost}
-              onChange={onChangeHandler}
-              // errors={error?.cost}
-              // error={errors.cost}
-              // touched={touched.cost}
+              value={values.cost}
+              onChange={handleChange}
+              error={errors.cost}
+              touched={touched.cost}
             />
             <InputComponent
-              label="Change expire date"
+              label="Expire date"
+              type="date"
               field="expireDate"
-              value={data.expireDate}
-              onChange={onChangeHandler}
-              // errors={error?.expireDate}
-              // error={errors.expireDate}
-              // touched={touched.expireDate}
+              value={values.expireDate}
+              onChange={handleChange}
+              error={errors.expireDate}
+              touched={touched.expireDate}
             />
-
-            <button type="submit" className="btn btn-warning">
+            <button
+              type="submit"
+              className="btn btn-primary border-0 bg-custom"
+            >
               Update goal
             </button>
           </form>

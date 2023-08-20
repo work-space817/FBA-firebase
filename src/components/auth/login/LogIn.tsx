@@ -7,7 +7,7 @@ import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/Input";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/config";
-import setAuthToken from "../../../api/setAuthToken";
+import setAuthToken from "../../../api/userInfo/setAuthToken";
 
 const LogIn = () => {
   const init: ILogIn = {

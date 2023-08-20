@@ -1,42 +1,42 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
 import { IGoalOperation } from "./types";
 import InputComponent from "../common/input/Input";
-import { auth, firestore } from "../../api/config";
+import { firestore } from "../../api/config";
 import { addDoc, collection, doc } from "firebase/firestore";
-import getUserId from "../../api/getUserId";
+import getUserId from "../../api/userInfo/getUserId";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
+import setGoalsData from "../../api/goals/setGoalsData";
 
 const NewGoalOperation = () => {
   const init: IGoalOperation = {
-    id: "",
     title: "",
     cost: "",
     expireDate: "",
   };
   const onSubmitHandler = async (values: IGoalOperation) => {
     try {
-      const userId = getUserId();
-      const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
-      await addDoc(collection(userGoalsRef, "goal"), {
-        ...values,
-      });
+      // const userId = getUserId();
+      // const userGoalsRef = doc(collection(firestore, "goals"), `${userId}`);
+      // await addDoc(collection(userGoalsRef, "goal"), {
+      //   ...values,
+      // });
+      const goalData = setGoalsData(values);
 
       console.log("Нова ціль успішно створена.");
-      //?
-      window.location.reload();
     } catch (error: any) {
       console.log("Bad request", error);
     }
+    //!
+    window.location.reload();
   };
   const checkUpForm = yup.object({
-    title: yup.string().required("indicate your target"),
+    title: yup.string().required("Field should not be empty"),
     cost: yup
       .string()
       .matches(/[0-9]/, "Only number")
-      .required("Поле не повинне бути пустим"),
-    expireDate: yup.string().required("Поле не повинне бути пустим"),
+      .required("Field should not be empty"),
+    expireDate: yup.string().required("Field should not be empty"),
   });
   const formik = useFormik({
     initialValues: init,
@@ -73,7 +73,7 @@ const NewGoalOperation = () => {
         touched={touched.expireDate}
       />
 
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn text-white bg-custom">
         Add goal
       </button>
     </form>

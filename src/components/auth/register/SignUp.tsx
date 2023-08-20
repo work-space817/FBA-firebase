@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from "react";
 import { auth, firestore } from "../../../api/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/Input";
-import setAuthToken from "../../../api/setAuthToken";
+import setAuthToken from "../../../api/userInfo/setAuthToken";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 

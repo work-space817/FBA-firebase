@@ -1,7 +1,6 @@
 import { collection, doc, getDocs } from "firebase/firestore";
-import React from "react";
-import { firestore } from "./config";
-import getUserId from "./getUserId";
+import { firestore } from "../config";
+import getUserId from "../userInfo/getUserId";
 
 const getGoalsData = async () => {
   const userId = getUserId();

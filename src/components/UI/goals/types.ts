@@ -5,3 +5,8 @@ export interface IGoal {
   index: any;
   id: string;
 }
+export interface IGoalEdit {
+  title: string;
+  cost: string;
+  expireDate: string;
+}
