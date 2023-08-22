@@ -2,12 +2,13 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
-import ModalWindow from "../../components/modal/ModalWindow";
+import ModalWindow from "../../components/common/modal/ModalWindow";
 import AuthModal from "../../components/auth/AuthModal";
 import Card from "../../components/UI/Card";
 import TransactionHistory from "../../components/UI/TransactionHistory";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import OperationMenu from "../../components/UI/OperationMenu";
+import GoalSelectSVG from "../../helpers/selectorsSVG/UI/GoalSelectSVG";
 
 const Overview: FC = () => {
   const dispatch = useDispatch();

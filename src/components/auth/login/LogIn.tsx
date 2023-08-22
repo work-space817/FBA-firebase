@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
-import InputComponent from "../../common/input/Input";
+import InputComponent from "../../common/input/InputComponent";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/config";
 import setAuthToken from "../../../api/userInfo/setAuthToken";

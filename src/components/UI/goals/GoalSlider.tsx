@@ -59,7 +59,6 @@ const GoalSlider: React.FC = () => {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
   const handlePreviousGoal = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
@@ -71,11 +70,12 @@ const GoalSlider: React.FC = () => {
     .map((goal, index) => (
       <Goal
         key={index}
-        title={goal?.title}
-        cost={goal?.cost}
-        expireDate={goal?.expireDate}
+        title={goal.title}
+        cost={goal.cost}
+        expireDate={goal.expireDate}
         index={index + currentIndex + 1}
         id={goal.id}
+        selectedGoalCategories={goal.selectedGoalCategories}
       />
     ));
 

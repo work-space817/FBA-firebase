@@ -1,12 +1,21 @@
 import { FC } from "react";
-import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import getGoalsData from "../../../api/goals/getGoalsData";
 import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
+import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+// import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
-const Goal: FC<IGoal> = ({ cost, expireDate, title, index, id }) => {
+const Goal: FC<IGoal> = ({
+  cost,
+  expireDate,
+  title,
+  index,
+  selectedGoalCategories,
+  id,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectGoal = async () => {
@@ -22,6 +31,7 @@ const Goal: FC<IGoal> = ({ cost, expireDate, title, index, id }) => {
       payload: currentGoalData,
     });
   };
+  // console.log(selectedGoalCategories);
   return (
     <>
       <div
@@ -33,6 +43,7 @@ const Goal: FC<IGoal> = ({ cost, expireDate, title, index, id }) => {
           <div className="text-bg-secondary current-goal-index position-absolute translate-middle badge rounded-pill ">
             <div className="position-relative d-flex flex-column text-bg-secondary">
               {index}
+
               {/* {isOpen && (
                 <div className="done-delete-items dropdown-content position-absolute d-flex flex-column text-bg-secondary p-1">
                   <div className=""></div>
@@ -55,7 +66,7 @@ const Goal: FC<IGoal> = ({ cost, expireDate, title, index, id }) => {
         </div>
         <div className="p-3 d-flex flex-column">
           <>
-            <GoalSVG id="Holidays" />
+            <GoalSelectSVG id={selectedGoalCategories as string} />
           </>
           <span className="mt-1">{title}</span>
         </div>

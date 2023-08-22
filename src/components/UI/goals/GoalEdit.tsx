@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import InputComponent from "../../common/input/Input";
-import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import InputComponent from "../../common/input/InputComponent";
 import Goal from "./Goal";
 import { useSelector } from "react-redux";
 import { IGoalSelect } from "../../../store/reducers/types";
@@ -9,6 +8,7 @@ import getGoalsData from "../../../api/goals/getGoalsData";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { IGoalEdit } from "./types";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const GoalEdit: React.FC = () => {
   const { selectedGoal } = useSelector(
@@ -30,7 +30,7 @@ const GoalEdit: React.FC = () => {
       console.log("Bad request", error);
     }
     //!
-    window.location.reload();
+    // window.location.reload();
   };
 
   const goalDoneDelete = async () => {
@@ -43,7 +43,6 @@ const GoalEdit: React.FC = () => {
     } catch (error) {
       console.error("Сталася помилка при видаленні цілі:", error);
     }
-    window.location.reload();
   };
 
   // useEffect(() => {
@@ -64,7 +63,7 @@ const GoalEdit: React.FC = () => {
     validationSchema: checkUpForm,
   });
   const { values, touched, errors, handleSubmit, handleChange } = formik;
-
+  console.log(selectedGoal);
   return (
     <>
       <div className="col-5 d-flex rounded-5 shadow align-items-center ">
@@ -77,6 +76,7 @@ const GoalEdit: React.FC = () => {
               expireDate={selectedGoal.expireDate}
               title={selectedGoal.title}
               index={<GoalSVG id="Edit" />}
+              selectedGoalCategories={selectedGoal.selectedGoalCategories}
             />
           ) : (
             <Goal
@@ -85,6 +85,7 @@ const GoalEdit: React.FC = () => {
               expireDate={"Expire date"}
               title={"Your title"}
               index={<GoalSVG id="Edit" />}
+              selectedGoalCategories={<GoalSVG id="Edit" />}
             />
           )}
           <div className="d-flex justify-content-evenly col-12 mt-1">

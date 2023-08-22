@@ -1,6 +1,6 @@
 import { Modal } from "bootstrap";
-import ModalWindow from "../modal/ModalWindow";
-import NewGoalOperation from "../operations/NewGoalOperation";
+import ModalWindow from "../common/modal/ModalWindow";
+import GoalAdd from "./goals/GoalAdd";
 
 const OperationMenu = () => {
   return (
@@ -8,15 +8,15 @@ const OperationMenu = () => {
       <div className="d-flex gap-3 align-items-center">
         <h4 className="m-0">Goals</h4>
         <ModalWindow title={"New income"} buttonText={"New"}>
-          <NewGoalOperation />
+          <GoalAdd />
         </ModalWindow>
       </div>
       <div className="d-flex gap-3">
         <ModalWindow title={"New income"} buttonText={"Add  income"}>
-          <NewGoalOperation />
+          <GoalAdd />
         </ModalWindow>
         <ModalWindow title={"New income"} buttonText={"Add  outcome"}>
-          <NewGoalOperation />
+          <GoalAdd />
         </ModalWindow>
       </div>
     </div>
