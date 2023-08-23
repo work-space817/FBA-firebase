@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { IGoalEdit } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
 
 const GoalEdit: React.FC = () => {
   const { selectedGoal } = useSelector(
@@ -29,8 +30,6 @@ const GoalEdit: React.FC = () => {
     } catch (error: any) {
       console.log("Bad request", error);
     }
-    //!
-    // window.location.reload();
   };
 
   const goalDoneDelete = async () => {
@@ -85,7 +84,7 @@ const GoalEdit: React.FC = () => {
               expireDate={"Expire date"}
               title={"Your title"}
               index={<GoalSVG id="Edit" />}
-              selectedGoalCategories={<GoalSVG id="Edit" />}
+              selectedGoalCategories={<GoalSelectSVG id={""} />}
             />
           )}
           <div className="d-flex justify-content-evenly col-12 mt-1">

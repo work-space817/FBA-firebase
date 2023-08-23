@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { IGoalSelectCategories } from "../../../store/reducers/types";
 import { IGoalAdd } from "./types";
 import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
+import { useNavigate } from "react-router-dom";
 
 const GoalAdd = () => {
   const init: IGoalAdd = {
@@ -15,16 +16,17 @@ const GoalAdd = () => {
     cost: "",
     expireDate: "",
   };
-  const { selectedGoalCategories } = useSelector(
+  const { selectedGoalCategories, isSelectedGoalCategories } = useSelector(
     (store: any) => store.goalSelectCategories as IGoalSelectCategories
   );
+  const navigate = useNavigate();
   const onSubmitHandler = async (values: IGoalAdd) => {
     try {
-      const b = { ...values, selectedGoalCategories };
-      setGoalsData(b);
-      console.log("setGoalsData: ", b);
-
+      const currentGoalCategory = { ...values, selectedGoalCategories };
+      setGoalsData(currentGoalCategory);
+      // console.log("setGoalsData: ", currentGoalCategory);
       console.log("Нова ціль успішно створена.");
+      navigate("/transactions");
     } catch (error: any) {
       console.log("Bad request", error);
     }
@@ -50,7 +52,7 @@ const GoalAdd = () => {
   return (
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
-        label="Enter your title"
+        label="Enter your title*"
         field="title"
         value={values.title}
         onChange={handleChange}
@@ -58,61 +60,15 @@ const GoalAdd = () => {
         touched={touched.title}
       />
       <InputComponent
-        label="Enter goals' cost"
+        label="Enter goals' cost*"
         field="cost"
         value={values.cost}
         onChange={handleChange}
         error={errors.cost}
         touched={touched.cost}
       />
-      {/* <div className="d-flex">
-         <SelectComponent
-          label={"Choose theme of goal"}
-          title={""}
-          options={[
-            { value: "Renovation", name: "Renovation" },
-            {
-              value: "Products and supermarket",
-              name: "Products and supermarket",
-            },
-            {
-              value: "Entertainment",
-              name: "Entertainment",
-            },
-            {
-              value: "Cafe and restaurant",
-              name: "Cafe and restaurant",
-            },
-            {
-              value: "E-transaction",
-              name: "E-transaction",
-            },
-            {
-              value: "Komynalka",
-              name: "Komynalka",
-            },
-            {
-              value: "Sport",
-              name: "Sport",
-            },
-            {
-              value: "Taxi",
-              name: "Taxi",
-            },
-            {
-              value: "Medical",
-              name: "Medical",
-            },
-            {
-              value: "Cell phone replenishment",
-              name: "Cell phone replenishment",
-            },
-          ]}
-        /> 
-      </div> */}
-
       <InputComponent
-        label="Expire date"
+        label="Expire date*"
         type="date"
         field="expireDate"
         value={values.expireDate}
@@ -120,9 +76,8 @@ const GoalAdd = () => {
         error={errors.expireDate}
         touched={touched.expireDate}
       />
-
       <GoalSelectCategories
-        title="Select theme of goal"
+        title="Select category of goal"
         icons={[
           { item: <GoalSelectSVG id={"Transport"} />, id: "Transport" },
           { item: <GoalSelectSVG id={"Shopping"} />, id: "Shopping" },
@@ -133,8 +88,10 @@ const GoalAdd = () => {
             item: <GoalSelectSVG id={"Entertainment"} />,
             id: "Entertainment",
           },
+          { item: <GoalSelectSVG id={""} />, id: "Other" },
         ]}
       />
+
       <button type="submit" className="btn text-white bg-primary">
         Add goal
       </button>

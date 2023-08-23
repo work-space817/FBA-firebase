@@ -16,6 +16,7 @@ export enum GoalSelectActionType {
   GOAL_SELECT = "GOAL_SELECT",
 }
 export interface IGoalSelectCategories {
+  isSelectedGoalCategories: boolean;
   selectedGoalCategories: string | null;
 }
 export enum GoalSelectCategoriesActionType {

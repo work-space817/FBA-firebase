@@ -2,6 +2,7 @@ import { GoalSelectCategoriesActionType, IGoalSelectCategories } from "./types";
 
 const initState: IGoalSelectCategories = {
   selectedGoalCategories: null,
+  isSelectedGoalCategories: false,
 };
 export const GoalSelectCategoriesReducer = (
   state = initState,
@@ -11,6 +12,7 @@ export const GoalSelectCategoriesReducer = (
     case GoalSelectCategoriesActionType.GOAL_SELECT_CATEGORIES: {
       return {
         ...state,
+        isSelectedGoalCategories: true,
         selectedGoalCategories: action.payload,
       };
     }

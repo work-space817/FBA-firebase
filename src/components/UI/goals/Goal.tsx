@@ -6,7 +6,6 @@ import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
 import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-// import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const Goal: FC<IGoal> = ({
   cost,
@@ -31,7 +30,6 @@ const Goal: FC<IGoal> = ({
       payload: currentGoalData,
     });
   };
-  // console.log(selectedGoalCategories);
   return (
     <>
       <div
