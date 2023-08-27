@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InputComponent from "../../common/input/InputComponent";
 import Goal from "./Goal";
-import { useSelector } from "react-redux";
-import { IGoalSelect } from "../../../store/reducers/types";
+import { useDispatch, useSelector } from "react-redux";
+import { IGoalList, IGoalSelect } from "../../../store/reducers/types";
 import { deleteDoc, updateDoc } from "firebase/firestore";
 import getGoalsData from "../../../api/goals/getGoalsData";
 import * as yup from "yup";
@@ -10,11 +10,16 @@ import { useFormik } from "formik";
 import { IGoalEdit } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
+import GoalList from "./GoalList";
+import { setGoals } from "../../../store/reducers/actions";
 
 const GoalEdit: React.FC = () => {
   const { selectedGoal } = useSelector(
     (store: any) => store.selectGoal as IGoalSelect
   );
+  //! const dispatch = useDispatch();
+  //! const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
+
   const init: IGoalEdit = {
     title: "",
     cost: "",
@@ -33,20 +38,26 @@ const GoalEdit: React.FC = () => {
   };
 
   const goalDoneDelete = async () => {
+    //!і setLoading(true);
     try {
       const fetchGoals = await getGoalsData();
+      //! const fetchCurrentGoal = fetchGoals.find(
+      //   (doc) => doc.id === selectedGoal?.id
+      // );
+      // if (fetchCurrentGoal) {
+      //   await deleteDoc(fetchCurrentGoal.ref);
+      //   const updatedGoals = goalList.filter(
+      //     (goal) => goal.id !== selectedGoal?.id
+      //   );
+      //   // dispatch(setGoals(updatedGoals));
+      // }
       const fetchCurrentGoal = fetchGoals.map((doc) =>
         doc.id === selectedGoal?.id ? deleteDoc(doc.ref) : null
       );
-      //!
     } catch (error) {
       console.error("Сталася помилка при видаленні цілі:", error);
     }
   };
-
-  // useEffect(() => {
-  //   goalDoneDelete();
-  // }, []);
 
   const checkUpForm = yup.object({
     title: yup.string().required("Field should not be empty"),

@@ -26,7 +26,6 @@ const GoalAdd = () => {
       setGoalsData(currentGoalCategory);
       // console.log("setGoalsData: ", currentGoalCategory);
       console.log("Нова ціль успішно створена.");
-      navigate("/transactions");
     } catch (error: any) {
       console.log("Bad request", error);
     }
