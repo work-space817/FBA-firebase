@@ -4,8 +4,11 @@ import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import setGoalsData from "../../../api/goals/setGoalsData";
 import GoalSelectCategories from "./GoalSelectIcons";
-import { useSelector } from "react-redux";
-import { IGoalSelectCategories } from "../../../store/reducers/types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GoalListActionType,
+  IGoalSelectCategories,
+} from "../../../store/reducers/types";
 import { IGoalAdd } from "./types";
 import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
 import { useNavigate } from "react-router-dom";
@@ -20,17 +23,19 @@ const GoalAdd = () => {
     (store: any) => store.goalSelectCategories as IGoalSelectCategories
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onSubmitHandler = async (values: IGoalAdd) => {
     try {
       const currentGoalCategory = { ...values, selectedGoalCategories };
       setGoalsData(currentGoalCategory);
-      // console.log("setGoalsData: ", currentGoalCategory);
+      const updateGoalList = dispatch({
+        type: GoalListActionType.UPDATE_GOALS_LIST,
+      });
       console.log("Нова ціль успішно створена.");
     } catch (error: any) {
       console.log("Bad request", error);
     }
-    //!
-    // window.location.reload();
   };
 
   const checkUpForm = yup.object({

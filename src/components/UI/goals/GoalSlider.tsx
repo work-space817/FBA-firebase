@@ -3,13 +3,11 @@ import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 import Goal from "./Goal";
 import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
-import { IGoal } from "./types";
 import GoalList from "./GoalList";
 import { useSelector } from "react-redux";
 import { IGoalList } from "../../../store/reducers/types";
 
 const GoalSlider: React.FC = () => {
-  const [goalsList, setGoalsList] = useState<IGoal[]>([]);
   // const [loading, setLoading] = useState<boolean>(false)
   const sliderRef = useRef<HTMLDivElement>(null);
   const [visibleGoals, setVisibleGoals] = useState(0);
@@ -17,8 +15,9 @@ const GoalSlider: React.FC = () => {
 
   const fetchGoalData = GoalList();
 
-  const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
-  useEffect(() => {}, []);
+  const { goalList, isUpdatedGoaliList } = useSelector(
+    (store: any) => store.goalList as IGoalList
+  );
   console.log("goalList: ", goalList);
   // useEffect(() => {
   //   fetchUserGoals();
@@ -69,7 +68,7 @@ const GoalSlider: React.FC = () => {
   return (
     <div className="col" ref={sliderRef}>
       <div className="d-flex justify-content-around align-items-center ">
-        {/* {loading && <Loading />} */}
+        {fetchGoalData ? <>{<Loading />}</> : <></>}
         <button
           onClick={handlePreviousGoal}
           className="bg-transparent border-0"

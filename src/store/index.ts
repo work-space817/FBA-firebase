@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { AuthReducer } from "./reducers/AuthReducer";
-import { SelectGoalReducer } from "./reducers/SelectGoalReducer";
-import { GoalSelectCategoriesReducer } from "./reducers/GoalSelectCategoriesReducer";
-import { GoalListReducer } from "./reducers/GoalListReducer";
+import { SelectGoalReducer } from "./reducers/goalReducers/SelectGoalReducer";
+import { GoalSelectCategoriesReducer } from "./reducers/goalReducers/GoalSelectCategoriesReducer";
+import { GoalListReducer } from "./reducers/goalReducers/GoalListReducer";
 
 export const rootReducer = combineReducers({
   auth: AuthReducer,

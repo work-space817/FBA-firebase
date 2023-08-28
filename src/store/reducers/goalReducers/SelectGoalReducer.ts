@@ -1,4 +1,4 @@
-import { GoalSelectActionType, IGoalSelect } from "./types";
+import { GoalSelectActionType, IGoalSelect } from "../types";
 
 const initState: IGoalSelect = {
   selectedGoal: null,
