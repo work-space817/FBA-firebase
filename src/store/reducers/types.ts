@@ -8,8 +8,8 @@ export enum AuthUserActionType {
   LOGOUT_USER = "AUTH_LOGOUT_USER",
 }
 export interface IGoalList {
-  isUpdatedGoaliList: boolean;
   goalList: IGoal[];
+  isUpdatedGoaliList: boolean;
 }
 export enum GoalListActionType {
   GOAL_LIST = "GOAL_LIST",
@@ -26,4 +26,10 @@ export interface ISelectCategories {
 }
 export enum SelectCategoriesActionType {
   SELECT_CATEGORIES = "SELECT_CATEGORIES",
+}
+export interface IModalCloser {
+  isModalClose: boolean;
+}
+export enum ModalCloserActionType {
+  MODAL_CLOSE = "MODAL_CLOSE",
 }

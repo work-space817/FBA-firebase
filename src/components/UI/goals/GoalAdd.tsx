@@ -8,11 +8,11 @@ import setGoalsData from "../../../api/goals/setGoalsData";
 import {
   ISelectCategories,
   GoalListActionType,
+  ModalCloserActionType,
 } from "../../../store/reducers/types";
 import SelectCategories from "../../common/select/SelectCategories";
 import { IGoalAdd } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
-
 const GoalAdd = () => {
   const init: IGoalAdd = {
     title: "",
@@ -22,7 +22,6 @@ const GoalAdd = () => {
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
   );
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmitHandler = async (values: IGoalAdd) => {
@@ -32,6 +31,11 @@ const GoalAdd = () => {
       const updateGoalList = dispatch({
         type: GoalListActionType.UPDATE_GOALS_LIST,
       });
+      const modalCloser = dispatch({
+        type: ModalCloserActionType.MODAL_CLOSE,
+        payload: true,
+      });
+      // console.log("modalCloser: ", modalCloser);
       console.log("Нова ціль успішно створена.");
     } catch (error: any) {
       console.log("Bad request", error);

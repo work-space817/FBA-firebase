@@ -1,1 +1,3 @@
-export interface ITransactionAdd {}
+export interface ITransactionAdd {
+  income: string;
+}

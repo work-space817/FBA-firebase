@@ -1,6 +1,8 @@
 import { FC, useRef } from "react";
 import { Modal } from "bootstrap";
 import React from "react";
+import { useSelector } from "react-redux";
+import { IModalCloser } from "../../../store/reducers/types";
 interface IModalProps {
   children: React.ReactNode;
   title: string;
@@ -14,7 +16,11 @@ const ModalWindow: FC<IModalProps> = ({
   buttonText,
   customActive,
 }) => {
-  const modalRef = useRef(null);
+  const modalRef = useRef<any>(null);
+  const { isModalClose } = useSelector(
+    (store: any) => store.modalClose as IModalCloser
+  );
+  console.log(isModalClose);
 
   const showModal = () => {
     const modal = modalRef.current;
@@ -30,6 +36,12 @@ const ModalWindow: FC<IModalProps> = ({
       bsModal?.hide();
     }
   };
+
+  if (isModalClose) {
+    const modal = modalRef.current;
+    const bsModal = Modal.getInstance(modal);
+    bsModal?.hide();
+  }
   return (
     <>
       {customActive ? (
