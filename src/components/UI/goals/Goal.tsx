@@ -4,15 +4,15 @@ import { useDispatch } from "react-redux";
 import getGoalsData from "../../../api/goals/getGoalsData";
 import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
-import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 
 const Goal: FC<IGoal> = ({
   cost,
   expireDate,
   title,
   index,
-  selectedGoalCategories,
+  selectedCategories,
   id,
 }) => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const Goal: FC<IGoal> = ({
         </div>
         <div className="p-3 d-flex flex-column">
           <>
-            <GoalSelectSVG id={selectedGoalCategories as string} />
+            <SelectCategoriesSVG id={selectedCategories as string} />
           </>
           <span className="mt-1">{title}</span>
         </div>

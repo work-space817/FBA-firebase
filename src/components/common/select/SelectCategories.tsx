@@ -1,24 +1,21 @@
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
-import { GoalSelectCategoriesActionType } from "../../../store/reducers/types";
+import { SelectCategoriesActionType } from "../../../store/reducers/types";
 
-interface IGoalSelectCategoriesProps {
+interface ISelectCategoriesProps {
   icons: any[];
   title: string;
 }
 
-const GoalSelectCategories: FC<IGoalSelectCategoriesProps> = ({
-  icons,
-  title,
-}) => {
+const SelectCategories: FC<ISelectCategoriesProps> = ({ icons, title }) => {
   const [isActive, setisActive] = useState<number | null>(null);
   const dispatch = useDispatch();
   const selectIcon = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
     const seletedCategories = e.currentTarget.textContent;
+    console.log(seletedCategories);
     setisActive(index);
     dispatch({
-      type: GoalSelectCategoriesActionType.GOAL_SELECT_CATEGORIES,
-      isSelectedGoalCategories: true,
+      type: SelectCategoriesActionType.SELECT_CATEGORIES,
       payload: seletedCategories,
     });
   };
@@ -46,4 +43,4 @@ const GoalSelectCategories: FC<IGoalSelectCategoriesProps> = ({
   );
 };
 
-export default GoalSelectCategories;
+export default SelectCategories;

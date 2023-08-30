@@ -3,7 +3,7 @@ export interface IGoal {
   expireDate: string;
   title: string;
   index: any;
-  selectedGoalCategories: string | React.ReactNode;
+  selectedCategories: string | React.ReactNode;
   id: string;
 }
 export interface IGoalAdd {

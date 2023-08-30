@@ -8,20 +8,13 @@ import { useSelector } from "react-redux";
 import { IGoalList } from "../../../store/reducers/types";
 
 const GoalSlider: React.FC = () => {
-  // const [loading, setLoading] = useState<boolean>(false)
   const sliderRef = useRef<HTMLDivElement>(null);
   const [visibleGoals, setVisibleGoals] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const fetchGoalData = GoalList();
 
-  const { goalList, isUpdatedGoaliList } = useSelector(
-    (store: any) => store.goalList as IGoalList
-  );
-  console.log("goalList: ", goalList);
-  // useEffect(() => {
-  //   fetchUserGoals();
-  // }, []);
+  const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
   const goalWidth = 160;
   const spacing = 15;
   useEffect(() => {
@@ -61,7 +54,7 @@ const GoalSlider: React.FC = () => {
         expireDate={goal.expireDate}
         index={index + currentIndex + 1}
         id={goal.id}
-        selectedGoalCategories={goal.selectedGoalCategories}
+        selectedCategories={goal.selectedCategories}
       />
     ));
 

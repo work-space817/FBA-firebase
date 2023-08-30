@@ -3,13 +3,13 @@ import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { AuthReducer } from "./reducers/AuthReducer";
 import { SelectGoalReducer } from "./reducers/goalReducers/SelectGoalReducer";
-import { GoalSelectCategoriesReducer } from "./reducers/goalReducers/GoalSelectCategoriesReducer";
+import { SelectCategoriesReducer } from "./reducers/SelectCategoriesReducer";
 import { GoalListReducer } from "./reducers/goalReducers/GoalListReducer";
 
 export const rootReducer = combineReducers({
   auth: AuthReducer,
+  selectCategories: SelectCategoriesReducer,
   selectGoal: SelectGoalReducer,
-  goalSelectCategories: GoalSelectCategoriesReducer,
   goalList: GoalListReducer,
 });
 

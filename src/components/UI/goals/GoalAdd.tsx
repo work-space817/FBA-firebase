@@ -2,16 +2,16 @@ import InputComponent from "../../common/input/InputComponent";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
-import setGoalsData from "../../../api/goals/setGoalsData";
-import GoalSelectCategories from "./GoalSelectIcons";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  GoalListActionType,
-  IGoalSelectCategories,
-} from "../../../store/reducers/types";
-import { IGoalAdd } from "./types";
-import GoalSelectSVG from "../../../helpers/selectorsSVG/UI/GoalSelectSVG";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import setGoalsData from "../../../api/goals/setGoalsData";
+import {
+  ISelectCategories,
+  GoalListActionType,
+} from "../../../store/reducers/types";
+import SelectCategories from "../../common/select/SelectCategories";
+import { IGoalAdd } from "./types";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 
 const GoalAdd = () => {
   const init: IGoalAdd = {
@@ -19,16 +19,16 @@ const GoalAdd = () => {
     cost: "",
     expireDate: "",
   };
-  const { selectedGoalCategories, isSelectedGoalCategories } = useSelector(
-    (store: any) => store.goalSelectCategories as IGoalSelectCategories
+  const { selectedCategories } = useSelector(
+    (store: any) => store.selectCategories as ISelectCategories
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmitHandler = async (values: IGoalAdd) => {
     try {
-      const currentGoalCategory = { ...values, selectedGoalCategories };
-      setGoalsData(currentGoalCategory);
+      const currentCategory = { ...values, selectedCategories };
+      setGoalsData(currentCategory);
       const updateGoalList = dispatch({
         type: GoalListActionType.UPDATE_GOALS_LIST,
       });
@@ -80,19 +80,19 @@ const GoalAdd = () => {
         error={errors.expireDate}
         touched={touched.expireDate}
       />
-      <GoalSelectCategories
+      <SelectCategories
         title="Select category of goal"
         icons={[
-          { item: <GoalSelectSVG id={"Transport"} />, id: "Transport" },
-          { item: <GoalSelectSVG id={"Shopping"} />, id: "Shopping" },
-          { item: <GoalSelectSVG id={"Travels"} />, id: "Travels" },
-          { item: <GoalSelectSVG id={"Renovation"} />, id: "Renovation" },
-          { item: <GoalSelectSVG id={"Holidays"} />, id: "Holidays" },
+          { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
+          { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
+          { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
+          { item: <SelectCategoriesSVG id={"Renovation"} />, id: "Renovation" },
+          { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
           {
-            item: <GoalSelectSVG id={"Entertainment"} />,
+            item: <SelectCategoriesSVG id={"Entertainment"} />,
             id: "Entertainment",
           },
-          { item: <GoalSelectSVG id={""} />, id: "Other" },
+          { item: <SelectCategoriesSVG id={""} />, id: "Other" },
         ]}
       />
 

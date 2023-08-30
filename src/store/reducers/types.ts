@@ -15,17 +15,15 @@ export enum GoalListActionType {
   GOAL_LIST = "GOAL_LIST",
   UPDATE_GOALS_LIST = "UPDATE_GOALS_LIST",
 }
-
 export interface IGoalSelect {
   selectedGoal: IGoal | null;
 }
 export enum GoalSelectActionType {
   GOAL_SELECT = "GOAL_SELECT",
 }
-export interface IGoalSelectCategories {
-  isSelectedGoalCategories: boolean;
-  selectedGoalCategories: string | null;
+export interface ISelectCategories {
+  selectedCategories: string | null;
 }
-export enum GoalSelectCategoriesActionType {
-  GOAL_SELECT_CATEGORIES = "GOAL_SELECT_CATEGORIES",
+export enum SelectCategoriesActionType {
+  SELECT_CATEGORIES = "SELECT_CATEGORIES",
 }

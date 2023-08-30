@@ -1,8 +1,8 @@
-interface IGoalSelectSVGProps {
+interface ISelectCategoriesProps {
   id: string;
 }
 
-const GoalSelectSVG = ({ id }: IGoalSelectSVGProps) => {
+const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
   switch (id) {
     case "Shopping":
       return (
@@ -159,4 +159,4 @@ const GoalSelectSVG = ({ id }: IGoalSelectSVGProps) => {
       );
   }
 };
-export default GoalSelectSVG;
+export default SelectCategoriesSVG;
