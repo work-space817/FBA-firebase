@@ -20,7 +20,6 @@ const ModalWindow: FC<IModalProps> = ({
   const { isModalClose } = useSelector(
     (store: any) => store.modalClose as IModalCloser
   );
-  console.log(isModalClose);
 
   const showModal = () => {
     const modal = modalRef.current;

@@ -1,7 +1,11 @@
 import InputComponent from "../../common/input/InputComponent";
 import Goal from "./Goal";
 import { useDispatch, useSelector } from "react-redux";
-import { GoalListActionType, IGoalSelect } from "../../../store/reducers/types";
+import {
+  GoalListActionType,
+  GoalSelectActionType,
+  IGoalSelect,
+} from "../../../store/reducers/types";
 import { deleteDoc, updateDoc } from "firebase/firestore";
 import getGoalsData from "../../../api/goals/getGoalsData";
 import * as yup from "yup";
@@ -14,7 +18,6 @@ const GoalEdit: React.FC = () => {
   const { selectedGoal } = useSelector(
     (store: any) => store.selectGoal as IGoalSelect
   );
-
   const init: IGoalEdit = {
     title: "",
     cost: "",
@@ -27,10 +30,14 @@ const GoalEdit: React.FC = () => {
       const fetchCurrentGoal = fetchGoals.map((doc) =>
         doc.id === selectedGoal?.id ? updateDoc(doc.ref, values) : null
       );
+      handleReset(values);
       const updateGoalList = dispatch({
         type: GoalListActionType.UPDATE_GOALS_LIST,
       });
-      console.log("updateGoalList", updateGoalList);
+      dispatch({
+        type: GoalSelectActionType.GOAL_SELECT,
+        selectedGoal: null,
+      });
     } catch (error: any) {
       console.log("Bad request", error);
     }
@@ -44,6 +51,10 @@ const GoalEdit: React.FC = () => {
       );
       const updateGoalList = dispatch({
         type: GoalListActionType.UPDATE_GOALS_LIST,
+      });
+      dispatch({
+        type: GoalSelectActionType.GOAL_SELECT,
+        selectedGoal: null,
       });
     } catch (error) {
       console.error("Сталася помилка при видаленні цілі:", error);
@@ -63,13 +74,15 @@ const GoalEdit: React.FC = () => {
     onSubmit: onSubmitHandler,
     validationSchema: checkUpForm,
   });
-  const { values, touched, errors, handleSubmit, handleChange } = formik;
+  const { values, touched, errors, handleSubmit, handleChange, handleReset } =
+    formik;
+
   return (
     <>
       <div className="col-5 d-flex rounded-5 shadow align-items-center ">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
           <h4 className="me-xxl-5 me-0">Edit your goal</h4>
-          {selectedGoal?.id ? (
+          {selectedGoal != null ? (
             <Goal
               id={selectedGoal.id}
               cost={selectedGoal.cost}

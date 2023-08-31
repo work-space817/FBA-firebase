@@ -3,7 +3,6 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import setGoalsData from "../../../api/goals/setGoalsData";
 import {
   ISelectCategories,
@@ -28,6 +27,7 @@ const GoalAdd = () => {
     try {
       const currentCategory = { ...values, selectedCategories };
       setGoalsData(currentCategory);
+      handleReset(values);
       const updateGoalList = dispatch({
         type: GoalListActionType.UPDATE_GOALS_LIST,
       });
@@ -35,7 +35,7 @@ const GoalAdd = () => {
         type: ModalCloserActionType.MODAL_CLOSE,
         payload: true,
       });
-      // console.log("modalCloser: ", modalCloser);
+
       console.log("Нова ціль успішно створена.");
     } catch (error: any) {
       console.log("Bad request", error);
@@ -55,7 +55,8 @@ const GoalAdd = () => {
     onSubmit: onSubmitHandler,
     validationSchema: checkUpForm,
   });
-  const { values, touched, errors, handleSubmit, handleChange } = formik;
+  const { values, touched, errors, handleSubmit, handleChange, handleReset } =
+    formik;
 
   return (
     <form onSubmit={handleSubmit} className="col">
