@@ -1,19 +1,17 @@
-import React from "react";
-import TransactionHistory from "../../components/UI/TransactionHistory";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import GoalEdit from "../../components/UI/goals/GoalEdit";
+import TransactionTable from "../../components/UI/transactions/TransactionTable";
 
-const Transaction = () => {
+const TransactionPage = () => {
   return (
     <>
       <div className=" d-flex flex-row align-items-center gap-3 pb-5 ">
         <GoalSlider />
         <GoalEdit />
       </div>
-
-      <TransactionHistory />
+      <TransactionTable />
     </>
   );
 };
 
-export default Transaction;
+export default TransactionPage;

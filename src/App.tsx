@@ -5,7 +5,7 @@ import DefaultLayout from "./pages/layouts/default/DefaultLayout";
 import AuthLayout from "./pages/layouts/authLayout/AuthLayout";
 import WelcomePage from "./pages/welcome/WelcomePage";
 import SettingsPage from "./pages/settings/SettingsPage";
-import Transaction from "./pages/transaction/Transaction";
+import Transaction from "./pages/transaction/TransactionPage";
 import Overview from "./pages/home/Overview";
 import { useSelector } from "react-redux";
 import { IAuthUser } from "./store/reducers/types";
@@ -17,6 +17,7 @@ import "./fonts/Quicksand-Regular.ttf";
 import "./fonts/Quicksand-Medium.ttf";
 import "./fonts/Quicksand-SemiBold.ttf";
 import "./fonts/Quicksand-Bold.ttf";
+import TransactionPage from "./pages/transaction/TransactionPage";
 
 const App = () => {
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -28,7 +29,7 @@ const App = () => {
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<Overview />} />
           <Route path="settings" element={<SettingsPage />} />
-          <Route path="transactions" element={<Transaction />} />
+          <Route path="transactions" element={<TransactionPage />} />
           {/* модальне вікно з повідомленням що вже зареєстровані + редірект на головну */}
         </Route>
         {/* ) : ( */}

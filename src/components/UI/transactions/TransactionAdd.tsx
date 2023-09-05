@@ -8,6 +8,7 @@ import {
   ISelectCategories,
   GoalListActionType,
   ModalCloserActionType,
+  TransactionListActionType,
 } from "../../../store/reducers/types";
 import SelectCategories from "../../common/select/SelectCategories";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
@@ -32,11 +33,13 @@ const TransactionAdd = () => {
       handleReset(values);
       console.log("currentCategory: ", currentCategory);
       console.log("Нова транзакція успішно створена.");
+      const updateTransactionList = dispatch({
+        type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
+      });
       const modalCloser = dispatch({
         type: ModalCloserActionType.MODAL_CLOSE,
         payload: true,
       });
-      console.log(modalCloser);
     } catch (error: any) {
       console.log("Bad request", error);
     }

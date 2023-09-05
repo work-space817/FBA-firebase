@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IGoal } from "./types";
 import getGoalsData from "../../../api/goals/getGoalsData";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  GoalListActionType,
-  IGoalList,
-  IUserBalance,
-} from "../../../store/reducers/types";
+import { GoalListActionType, IGoalList } from "../../../store/reducers/types";
 
 const GoalList = () => {
   const [goalsList, setGoalsList] = useState<IGoal[]>([]);

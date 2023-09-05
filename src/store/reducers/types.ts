@@ -1,4 +1,5 @@
 import { IGoal } from "../../components/UI/goals/types";
+import { ITransaction } from "../../components/UI/transactions/types";
 import { ISignUp } from "../../components/auth/register/types";
 
 export interface IAuthUser {
@@ -41,4 +42,12 @@ export interface IUserBalance {
 }
 export enum UserBalanceActionType {
   SET_CURRENT_BALANCE = "SET_CURRENT_BALANCE",
+}
+export interface ITransactionList {
+  transactionList: ITransaction[];
+  isUpdatedList: boolean;
+}
+export enum TransactionListActionType {
+  TRANSACTION_LIST = "TRANSACTION_LIST",
+  UPDATE_TRANSACTION_LIST = "UPDATE_TRANSACTION_LIST",
 }
