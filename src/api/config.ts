@@ -15,11 +15,11 @@ const firebaseConfig = {
   storageBucket: "fba---financial-budgetin-9a135.appspot.com",
   messagingSenderId: "623754968538",
   appId: "1:623754968538:web:d4267003ad8736d24cd4e3",
-  measurementId: "G-53J1EWN5J1"
+  measurementId: "G-53J1EWN5J1",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export const firestore = getFirestore(app)
+export const firestore = getFirestore(app);

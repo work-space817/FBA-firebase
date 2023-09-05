@@ -119,3 +119,33 @@ p {
 .done-delete-items {
   transform: translate(-25%, 40%);
 }
+
+.reel-text-animation {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.reel-text-animation p {
+  display: inline-block;
+  transform-origin: center;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateX(0deg);
+  }
+  25% {
+    transform: rotateX(360deg);
+  }
+  50% {
+    transform: rotateX(720deg);
+  }
+  75% {
+    transform: rotateX(1080deg);
+  }
+  100% {
+    transform: rotateX(1440deg);
+  }
+}

@@ -5,7 +5,7 @@ import Loading from "../../common/loading/Loading";
 import GoalEmpty from "./GoalEmpty";
 import GoalList from "./GoalList";
 import { useSelector } from "react-redux";
-import { IGoalList } from "../../../store/reducers/types";
+import { IGoalList, IUserBalance } from "../../../store/reducers/types";
 
 const GoalSlider: React.FC = () => {
   const sliderRef = useRef<HTMLDivElement>(null);

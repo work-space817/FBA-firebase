@@ -6,10 +6,14 @@ import Card from "../../components/UI/Card";
 import TransactionHistory from "../../components/UI/TransactionHistory";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import OperationMenu from "../../components/UI/OperationMenu";
+import getUserInformation from "../../api/userInfo/getUserInformation";
+import { auth } from "../../api/config";
 
 const Overview: FC = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  const currentUser = auth.currentUser?.uid;
+  console.log("currentUser: ", currentUser);
 
   return (
     <>

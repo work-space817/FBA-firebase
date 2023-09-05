@@ -1,3 +1,5 @@
 export interface ITransactionAdd {
-  income: string;
+  incomeTitle: string;
+  incomeValue: number;
+  incomeDate: string;
 }
