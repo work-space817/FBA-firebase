@@ -25,7 +25,10 @@ const Overview: FC = () => {
           <GoalSlider />
         </div>
       </div>
-      <TransactionTable />
+      <div className="col-7">
+        <TransactionTable />
+      </div>
+
       <div>
         {isAuth ? (
           <>

@@ -1,8 +1,12 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ITransaction } from "./types";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import TransactionSVG from "../../../helpers/selectorsSVG/UI/TransactionSVG";
+import { TransactionListActionType } from "../../../store/reducers/types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
+import { deleteDoc } from "firebase/firestore";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const Transaction: FC<ITransaction> = ({
   incomeTitle,
@@ -10,30 +14,48 @@ const Transaction: FC<ITransaction> = ({
   incomeDate,
   index,
   selectedCategories,
+  transactionType,
   id,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // const selectTransaction = async () => {
-  //   navigate("/transactions");
-  //   const fetchTransactions = await getTransactionData();
-  //   const fetchCurrentGoal = fetchTransactions.find((doc, docIndex) =>
-  //     docIndex + 1 == index ? doc.data() : null
-  //   );
-  //   const currentGoalData = { ...fetchCurrentGoal?.data(), id };
-  //   console.log("currentGoalData: ", currentGoalData);
-  // dispatch({
-  //   type: GoalSelectActionType.GOAL_SELECT,
-  //   payload: currentGoalData,
-  // });
-  // };
+  const transactionDelete = async () => {
+    try {
+      const fetchTransactions = await getTransactionData();
+
+      const fetchCurrentTransaction = fetchTransactions.find((doc, docIndex) =>
+        docIndex + 1 == index ? doc.data() : null
+      );
+      const currentTransactionData = { ...fetchCurrentTransaction?.data(), id };
+
+      const currentTransactions = fetchTransactions.map((doc) =>
+        doc.id === currentTransactionData.id ? deleteDoc(doc.ref) : null
+      );
+
+      const updateTransactionList = dispatch({
+        type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
+      });
+    } catch (error) {
+      console.error("Сталася помилка при видаленні цілі:", error);
+    }
+  };
   return (
     <>
       <tr>
-        <th scope="row">{incomeTitle}</th>
-        <td>{incomeValue}</td>
-        <td>{incomeDate} </td>
-        <td>{selectedCategories}</td>
+        <td>
+          <TransactionSVG id={transactionType} />
+        </td>
+        <td>{index + 1}</td>
+        <td scope="row">{incomeTitle}</td>
+        <td className="text-black-50  d-flex gap-2">
+          <SelectCategoriesSVG id={selectedCategories as string} />
+          {selectedCategories}
+        </td>
+        <td className="text-black-50">{incomeDate} </td>
+
+        <td className="">{incomeValue} UAH</td>
+        <td onClick={transactionDelete}>
+          <GoalSVG id="Delete" />
+        </td>
       </tr>
     </>
   );

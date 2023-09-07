@@ -3,10 +3,8 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
-import setGoalsData from "../../../api/goals/setGoalsData";
 import {
   ISelectCategories,
-  GoalListActionType,
   ModalCloserActionType,
   TransactionListActionType,
 } from "../../../store/reducers/types";
@@ -26,11 +24,29 @@ const TransactionAdd = () => {
   );
   const dispatch = useDispatch();
 
+  const getCurrentDateTime = () => {
+    const now = new Date();
+
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const day = now.getDate().toString().padStart(2, "0");
+    const month = (now.getMonth() + 1).toString().padStart(2, "0");
+    const year = now.getFullYear();
+
+    const formattedDateTime = `${hours}:${minutes}, ${day}/${month}/${year}`;
+    return (values.incomeDate = formattedDateTime);
+  };
   const onSubmitHandler = async (values: ITransactionAdd) => {
     try {
-      const currentCategory = { ...values, selectedCategories };
+      const transactionType = "IncomeTransaction";
+      const currentCategory = {
+        ...values,
+        selectedCategories,
+        transactionType,
+      };
       setTransactionData(currentCategory);
       handleReset(values);
+      values.incomeDate = getCurrentDateTime();
       console.log("currentCategory: ", currentCategory);
       console.log("Нова транзакція успішно створена.");
       const updateTransactionList = dispatch({
@@ -60,7 +76,7 @@ const TransactionAdd = () => {
   });
   const { values, touched, errors, handleSubmit, handleChange, handleReset } =
     formik;
-
+  console.log(values);
   return (
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
@@ -79,15 +95,35 @@ const TransactionAdd = () => {
         error={errors.incomeValue}
         touched={touched.incomeValue}
       />
-      <InputComponent
-        label="Enter date, when it was*"
-        type="date"
-        field="incomeDate"
-        value={values.incomeDate}
-        onChange={handleChange}
-        error={errors.incomeDate}
-        touched={touched.incomeDate}
-      />
+      <div className="d-flex gap-2 align-items-center">
+        <InputComponent
+          label="Enter handle date*"
+          type="date"
+          field="incomeDate"
+          value={values.incomeDate}
+          onChange={handleChange}
+          error={errors.incomeDate}
+          touched={touched.incomeDate}
+        />
+        <InputComponent
+          label="Enter time*"
+          type="time"
+          field="incomeDate"
+          value={values.incomeDate}
+          onChange={handleChange}
+          error={errors.incomeDate}
+          touched={touched.incomeDate}
+        />
+
+        <button
+          type="button"
+          onClick={getCurrentDateTime}
+          className="btn text-white bg-primary h-25 mt-3"
+        >
+          Current time
+        </button>
+      </div>
+
       <SelectCategories
         title="Select category of goal"
         icons={[

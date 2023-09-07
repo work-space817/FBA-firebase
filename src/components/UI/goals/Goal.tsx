@@ -41,23 +41,11 @@ const Goal: FC<IGoal> = ({
           <div className="text-bg-secondary current-goal-index position-absolute translate-middle badge rounded-pill ">
             <div className="position-relative d-flex flex-column text-bg-secondary">
               {index}
-
-              {/* {isOpen && (
-                <div className="done-delete-items dropdown-content position-absolute d-flex flex-column text-bg-secondary p-1">
-                  <div className=""></div>
-                  <div className="">
-                    <GoalSVG id="Access" />
-                  </div>
-                  <div className="">
-                    <GoalSVG id="Delete" />
-                  </div>
-                </div> 
-              )}*/}
             </div>
           </div>
 
           <h4>{cost} UAH</h4>
-          <span>
+          <span className="text-black-50">
             {expireDate}
             <GoalSVG id="Clock" />
           </span>

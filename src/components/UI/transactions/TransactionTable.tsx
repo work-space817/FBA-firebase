@@ -3,6 +3,7 @@ import { ITransactionList } from "../../../store/reducers/types";
 import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
+import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const TransactionTable = () => {
   const fetchTransactionsData = TransactionList();
@@ -16,6 +17,7 @@ const TransactionTable = () => {
       incomeTitle={transaction.incomeTitle}
       incomeValue={transaction.incomeValue}
       incomeDate={transaction.incomeDate}
+      transactionType={transaction.transactionType}
       index={index}
       selectedCategories={transaction.selectedCategories}
       id={transaction.id}
@@ -23,17 +25,27 @@ const TransactionTable = () => {
   ));
   return (
     <>
-      <table className="table ">
-        <thead>
-          <tr>
-            <th scope="col">Reciever</th>
-            <th scope="col">Type</th>
-            <th scope="col">Date</th>
-            <th scope="col">Amount</th>
-          </tr>
-        </thead>
-        <tbody>{visibleTransactionList}</tbody>
-      </table>
+      <div className="col d-flex flex-column rounded-5 shadow">
+        <div className="p-3">
+          <h3 className="py-2">Transactions history</h3>
+          <table className="table w-100">
+            <thead>
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">№</th>
+                <th scope="col">Reciever</th>
+                <th scope="col">Type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">
+                  <GoalSVG id="Edit" />
+                </th>
+              </tr>
+            </thead>
+            <tbody>{visibleTransactionList}</tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };
