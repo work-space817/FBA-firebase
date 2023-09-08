@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import TransactionEmpty from "./TransactionEmpty";
 
 const TransactionTable = () => {
   const fetchTransactionsData = TransactionList();
@@ -16,6 +17,7 @@ const TransactionTable = () => {
       key={index}
       incomeTitle={transaction.incomeTitle}
       incomeValue={transaction.incomeValue}
+      incomeTime={transaction.incomeTime}
       incomeDate={transaction.incomeDate}
       transactionType={transaction.transactionType}
       index={index}
@@ -35,6 +37,7 @@ const TransactionTable = () => {
                 <th scope="col">№</th>
                 <th scope="col">Reciever</th>
                 <th scope="col">Type</th>
+                <th scope="col">Time</th>
                 <th scope="col">Date</th>
                 <th scope="col">Amount</th>
                 <th scope="col">
@@ -42,7 +45,13 @@ const TransactionTable = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>{visibleTransactionList}</tbody>
+            <tbody>
+              {transactionList.length > 0 ? (
+                <>{visibleTransactionList}</>
+              ) : (
+                <TransactionEmpty />
+              )}
+            </tbody>
           </table>
         </div>
       </div>

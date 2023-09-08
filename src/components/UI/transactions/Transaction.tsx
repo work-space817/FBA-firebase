@@ -11,6 +11,7 @@ import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 const Transaction: FC<ITransaction> = ({
   incomeTitle,
   incomeValue,
+  incomeTime,
   incomeDate,
   index,
   selectedCategories,
@@ -50,7 +51,8 @@ const Transaction: FC<ITransaction> = ({
           <SelectCategoriesSVG id={selectedCategories as string} />
           {selectedCategories}
         </td>
-        <td className="text-black-50">{incomeDate} </td>
+        <td className="text-black-50">{incomeTime}</td>
+        <td className="text-black-50">{incomeDate}</td>
 
         <td className="">{incomeValue} UAH</td>
         <td onClick={transactionDelete}>

@@ -17,6 +17,7 @@ const TransactionAdd = () => {
   const init: ITransactionAdd = {
     incomeTitle: "",
     incomeValue: 0,
+    incomeTime: "",
     incomeDate: "",
   };
   const { selectedCategories } = useSelector(
@@ -33,12 +34,17 @@ const TransactionAdd = () => {
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const year = now.getFullYear();
 
-    const formattedDateTime = `${hours}:${minutes}, ${day}/${month}/${year}`;
-    return (values.incomeDate = formattedDateTime);
+    const incomeTime = `${hours}:${minutes}`;
+    const incomeDate = `${day}/${month}/${year}`;
+    const valuesTimeDate = { incomeDate, incomeTime };
+    return (values.incomeDate = incomeDate) && (values.incomeTime = incomeTime);
   };
   const onSubmitHandler = async (values: ITransactionAdd) => {
     try {
       const transactionType = "IncomeTransaction";
+
+      values.incomeDate = getCurrentDateTime();
+      values.incomeTime = getCurrentDateTime();
       const currentCategory = {
         ...values,
         selectedCategories,
@@ -46,7 +52,7 @@ const TransactionAdd = () => {
       };
       setTransactionData(currentCategory);
       handleReset(values);
-      values.incomeDate = getCurrentDateTime();
+
       console.log("currentCategory: ", currentCategory);
       console.log("Нова транзакція успішно створена.");
       const updateTransactionList = dispatch({
@@ -95,7 +101,35 @@ const TransactionAdd = () => {
         error={errors.incomeValue}
         touched={touched.incomeValue}
       />
+      <label htmlFor="input">Choose the way</label>
+      <div className="d-flex justify-content-between align-items-center  mb-3 mt-1">
+        <button
+          type="button"
+          onClick={getCurrentDateTime}
+          className="btn text-white bg-primary h-25"
+        >
+          Current time and date
+        </button>
+        <h6 className="m-0">OR</h6>
+        <button
+          type="button"
+          onClick={getCurrentDateTime}
+          className="btn text-white bg-primary h-25"
+        >
+          Handle time and date
+        </button>
+      </div>
+
       <div className="d-flex gap-2 align-items-center">
+        <InputComponent
+          label="Enter handle time*"
+          type="time"
+          field="incomeTime"
+          value={values.incomeTime}
+          onChange={handleChange}
+          error={errors.incomeTime}
+          touched={touched.incomeTime}
+        />
         <InputComponent
           label="Enter handle date*"
           type="date"
@@ -105,23 +139,6 @@ const TransactionAdd = () => {
           error={errors.incomeDate}
           touched={touched.incomeDate}
         />
-        <InputComponent
-          label="Enter time*"
-          type="time"
-          field="incomeDate"
-          value={values.incomeDate}
-          onChange={handleChange}
-          error={errors.incomeDate}
-          touched={touched.incomeDate}
-        />
-
-        <button
-          type="button"
-          onClick={getCurrentDateTime}
-          className="btn text-white bg-primary h-25 mt-3"
-        >
-          Current time
-        </button>
       </div>
 
       <SelectCategories
@@ -136,7 +153,7 @@ const TransactionAdd = () => {
             item: <SelectCategoriesSVG id={"Entertainment"} />,
             id: "Entertainment",
           },
-          { item: <SelectCategoriesSVG id={""} />, id: "Other" },
+          { item: <SelectCategoriesSVG id={"Other"} />, id: "Other" },
         ]}
       />
       <button type="submit" className="btn text-white bg-primary">
