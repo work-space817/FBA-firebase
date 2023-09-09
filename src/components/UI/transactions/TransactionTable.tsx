@@ -15,10 +15,10 @@ const TransactionTable = () => {
   const visibleTransactionList = transactionList.map((transaction, index) => (
     <Transaction
       key={index}
-      incomeTitle={transaction.incomeTitle}
-      incomeValue={transaction.incomeValue}
-      incomeTime={transaction.incomeTime}
-      incomeDate={transaction.incomeDate}
+      transactionTitle={transaction.transactionTitle}
+      transactionValue={transaction.transactionValue}
+      transactionTime={transaction.transactionTime}
+      transactionDate={transaction.transactionDate}
       transactionType={transaction.transactionType}
       index={index}
       selectedCategories={transaction.selectedCategories}

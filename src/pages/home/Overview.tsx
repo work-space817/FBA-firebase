@@ -3,18 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
 import Card from "../../components/UI/Card";
-// import TransactionHistory from "../../components/UI/TransactionHistory";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
-import OperationMenu from "../../components/UI/OperationMenu";
 import getUserInformation from "../../api/userInfo/getUserInformation";
 import { auth } from "../../api/config";
 import TransactionTable from "../../components/UI/transactions/TransactionTable";
+import OperationMenu from "../../components/UI/OperationMenu";
 
 const Overview: FC = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-  const currentUser = auth.currentUser?.uid;
-  console.log("currentUser: ", currentUser);
 
   return (
     <>

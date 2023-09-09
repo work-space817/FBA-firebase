@@ -1,14 +1,15 @@
 export interface ITransactionAdd {
-  incomeTitle: string;
-  incomeValue: number;
-  incomeTime: string;
-  incomeDate: string;
+  transactionTitle: string;
+  transactionValue: number;
+  transactionTime: string;
+  transactionDate: string;
 }
+
 export interface ITransaction {
-  incomeTitle: string;
-  incomeValue: number;
-  incomeTime: string;
-  incomeDate: string;
+  transactionTitle: string;
+  transactionValue: number;
+  transactionTime: string;
+  transactionDate: string;
   transactionType: string;
   index: any;
   selectedCategories: string | React.ReactNode;

@@ -13,12 +13,12 @@ import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesS
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/transactions/setTransactionData";
 
-const TransactionAdd = () => {
+const TransactionAddIncome = () => {
   const init: ITransactionAdd = {
-    incomeTitle: "",
-    incomeValue: 0,
-    incomeTime: "",
-    incomeDate: "",
+    transactionTitle: "",
+    transactionValue: 0,
+    transactionTime: "",
+    transactionDate: "",
   };
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
@@ -34,17 +34,19 @@ const TransactionAdd = () => {
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const year = now.getFullYear();
 
-    const incomeTime = `${hours}:${minutes}`;
-    const incomeDate = `${day}/${month}/${year}`;
-    const valuesTimeDate = { incomeDate, incomeTime };
-    return (values.incomeDate = incomeDate) && (values.incomeTime = incomeTime);
+    const transactionTime = `${hours}:${minutes}`;
+    const transactionDate = `${day}/${month}/${year}`;
+    return (
+      (values.transactionDate = transactionDate) &&
+      (values.transactionTime = transactionTime)
+    );
   };
   const onSubmitHandler = async (values: ITransactionAdd) => {
     try {
       const transactionType = "IncomeTransaction";
 
-      values.incomeDate = getCurrentDateTime();
-      values.incomeTime = getCurrentDateTime();
+      values.transactionDate = getCurrentDateTime();
+      values.transactionTime = getCurrentDateTime();
       const currentCategory = {
         ...values,
         selectedCategories,
@@ -66,14 +68,13 @@ const TransactionAdd = () => {
       console.log("Bad request", error);
     }
   };
-
   const checkUpForm = yup.object({
-    incomeTitle: yup.string().required("Field should not be empty"),
-    incomeValue: yup
+    transactionTitle: yup.string().required("Field should not be empty"),
+    transactionValue: yup
       .string()
       .matches(/[0-9]/, "Only number")
       .required("Field should not be empty"),
-    incomeDate: yup.string().required("Field should not be empty"),
+    transactionDate: yup.string().required("Field should not be empty"),
   });
   const formik = useFormik({
     initialValues: init,
@@ -87,19 +88,19 @@ const TransactionAdd = () => {
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
         label="Enter your income title*"
-        field="incomeTitle"
-        value={values.incomeTitle}
+        field="transactionTitle"
+        value={values.transactionTitle}
         onChange={handleChange}
-        error={errors.incomeTitle}
-        touched={touched.incomeTitle}
+        error={errors.transactionTitle}
+        touched={touched.transactionTitle}
       />
       <InputComponent
         label="Enter your income value*"
-        field="incomeValue"
-        value={values.incomeValue}
+        field="transactionValue"
+        value={values.transactionValue}
         onChange={handleChange}
-        error={errors.incomeValue}
-        touched={touched.incomeValue}
+        error={errors.transactionValue}
+        touched={touched.transactionValue}
       />
       <label htmlFor="input">Choose the way</label>
       <div className="d-flex justify-content-between align-items-center  mb-3 mt-1">
@@ -124,36 +125,30 @@ const TransactionAdd = () => {
         <InputComponent
           label="Enter handle time*"
           type="time"
-          field="incomeTime"
-          value={values.incomeTime}
+          field="transactionTime"
+          value={values.transactionTime}
           onChange={handleChange}
-          error={errors.incomeTime}
-          touched={touched.incomeTime}
+          error={errors.transactionTime}
+          touched={touched.transactionTime}
         />
         <InputComponent
           label="Enter handle date*"
           type="date"
-          field="incomeDate"
-          value={values.incomeDate}
+          field="transactionDate"
+          value={values.transactionDate}
           onChange={handleChange}
-          error={errors.incomeDate}
-          touched={touched.incomeDate}
+          error={errors.transactionDate}
+          touched={touched.transactionDate}
         />
       </div>
 
       <SelectCategories
         title="Select category of goal"
         icons={[
-          { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
-          { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
-          { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
-          { item: <SelectCategoriesSVG id={"Renovation"} />, id: "Renovation" },
-          { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
-          {
-            item: <SelectCategoriesSVG id={"Entertainment"} />,
-            id: "Entertainment",
-          },
-          { item: <SelectCategoriesSVG id={"Other"} />, id: "Other" },
+          { item: <SelectCategoriesSVG id={""} />, id: "Salary" },
+          { item: <SelectCategoriesSVG id={""} />, id: "Scholarship" },
+          { item: <SelectCategoriesSVG id={""} />, id: "Social payment" },
+          { item: <SelectCategoriesSVG id={""} />, id: "Other" },
         ]}
       />
       <button type="submit" className="btn text-white bg-primary">
@@ -163,4 +158,4 @@ const TransactionAdd = () => {
   );
 };
 
-export default TransactionAdd;
+export default TransactionAddIncome;

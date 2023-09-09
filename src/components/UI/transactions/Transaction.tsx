@@ -9,10 +9,10 @@ import { deleteDoc } from "firebase/firestore";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 
 const Transaction: FC<ITransaction> = ({
-  incomeTitle,
-  incomeValue,
-  incomeTime,
-  incomeDate,
+  transactionTitle,
+  transactionValue,
+  transactionTime,
+  transactionDate,
   index,
   selectedCategories,
   transactionType,
@@ -46,15 +46,15 @@ const Transaction: FC<ITransaction> = ({
           <TransactionSVG id={transactionType} />
         </td>
         <td>{index + 1}</td>
-        <td scope="row">{incomeTitle}</td>
+        <td scope="row">{transactionTitle}</td>
         <td className="text-black-50  d-flex gap-2">
           <SelectCategoriesSVG id={selectedCategories as string} />
           {selectedCategories}
         </td>
-        <td className="text-black-50">{incomeTime}</td>
-        <td className="text-black-50">{incomeDate}</td>
+        <td className="text-black-50">{transactionTime}</td>
+        <td className="text-black-50">{transactionDate}</td>
 
-        <td className="">{incomeValue} UAH</td>
+        <td className="">{transactionValue} UAH</td>
         <td onClick={transactionDelete}>
           <GoalSVG id="Delete" />
         </td>
