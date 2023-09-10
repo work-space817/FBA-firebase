@@ -1,8 +1,7 @@
 import { Modal } from "bootstrap";
 import ModalWindow from "../common/modal/ModalWindow";
 import GoalAdd from "./goals/GoalAdd";
-import TransactionAddOutcome from "./transactions/TransactionAddOutcome";
-import TransactionAddIncome from "./transactions/TransactionAddIncome";
+import TransactionAdd from "./transactions/TransactionAdd";
 
 const OperationMenu = () => {
   return (
@@ -15,10 +14,10 @@ const OperationMenu = () => {
       </div>
       <div className="d-flex gap-3">
         <ModalWindow title={"New income"} buttonText={"Add  income"}>
-          <TransactionAddIncome />
+          <TransactionAdd transactionType={"Income transaction"} />
         </ModalWindow>
-        <ModalWindow title={"New income"} buttonText={"Add  outcome"}>
-          <TransactionAddOutcome />
+        <ModalWindow title={"New outcome"} buttonText={"Add  outcome"}>
+          <TransactionAdd transactionType={"Outcome transaction"} />
         </ModalWindow>
       </div>
     </div>

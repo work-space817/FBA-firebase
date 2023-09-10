@@ -23,13 +23,12 @@ const Overview: FC = () => {
         </div>
       </div>
       <div className="col-7">
-        <TransactionTable />
+        <TransactionTable maxCountTransaction={5} />
       </div>
 
       <div>
         {isAuth ? (
           <>
-            {/* {user?.name} */}
             <button>
               <Link
                 to="/auth"

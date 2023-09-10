@@ -16,6 +16,7 @@ const InputComponent: FC<InputGroupProps> = ({
   type = "text",
   field,
   value,
+  placeholder,
   onChange,
   errors,
   error,

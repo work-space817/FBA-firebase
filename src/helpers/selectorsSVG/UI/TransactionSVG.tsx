@@ -4,7 +4,7 @@ interface Props {
 
 const TransactionSVG = ({ id }: Props) => {
   switch (id) {
-    case "IncomeTransaction":
+    case "Income transaction":
       return (
         <svg
           width="17"
@@ -19,7 +19,7 @@ const TransactionSVG = ({ id }: Props) => {
           />
         </svg>
       );
-    case "OutcomeTransaction":
+    case "Outcome transaction":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"

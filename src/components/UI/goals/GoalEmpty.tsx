@@ -5,7 +5,7 @@ import GoalAdd from "./GoalAdd";
 const GoalEmpty = () => {
   return (
     <>
-      <div className="col-3 goal-item d-flex flex-column align-items-center justify-content-evenly rounded-5 shadow">
+      <div className="disabled col-3 goal-item d-flex flex-column align-items-center justify-content-evenly rounded-5 shadow">
         <div className="p-3">
           <ModalWindow title={"New Goal"} customActive={<GoalSVG id="Empty" />}>
             <GoalAdd />

@@ -87,6 +87,7 @@ const GoalAdd = () => {
       />
       <SelectCategories
         title="Select category of goal"
+        iconsHover={false}
         icons={[
           { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
           { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
