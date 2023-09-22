@@ -33,8 +33,8 @@ const Goal: FC<IGoal> = ({
   return (
     <>
       <div
-        className="col-3 d-flex flex-column rounded-5 shadow"
-        style={{ width: "10rem" }}
+        className="rounded-5 shadow"
+        style={{ width: "9rem" }}
         onClick={selectGoal}
       >
         <div className="p-3 position-relative">

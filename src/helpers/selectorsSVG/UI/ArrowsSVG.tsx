@@ -7,8 +7,8 @@ const ArrowsSVG = ({ id }: Props) => {
     case "ArrowLeft":
       return (
         <svg
-          width="13"
-          height="23"
+          width="1rem"
+          height="2rem"
           viewBox="0 0 13 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +25,8 @@ const ArrowsSVG = ({ id }: Props) => {
     case "ArrowRight":
       return (
         <svg
-          width="13"
-          height="23"
+          width="1rem"
+          height="2rem"
           viewBox="0 0 13 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IAuthUser } from "../../../store/reducers/types";
 import HeaderSVG from "../../../helpers/selectorsSVG/HeaderSVG";
+import SidebarSVG from "../../../helpers/selectorsSVG/SidebarSVG";
 
 const DefaultHeader = () => {
   const dispatch = useDispatch();
@@ -20,13 +21,16 @@ const DefaultHeader = () => {
       <header>
         <nav className="navbar ">
           <div className="container-fluid">
-            <p className="font-Quicksand-Bold fs-1 m-0">{splitCurrentPage}</p>
+            <div className="d-flex align-items-center gap-3">
+              <SidebarSVG id="cloud"></SidebarSVG>
+              <p className="font-Quicksand-Bold fs-1 m-0">{splitCurrentPage}</p>
+            </div>
 
             <Link to="/settings" className="text-dark d-none d-md-inline">
               <HeaderSVG id="defaultUserIcon" />
             </Link>
           </div>
-          <p className="font-Quicksand-SemiBold fs-5 text-black-50 ps-2 d-none d-sm-inline">
+          <p className="font-Quicksand-SemiBold fs-5 text-black-50 ps-2  d-sm-inline">
             Get summary of your weekly online transactions here.
           </p>
         </nav>

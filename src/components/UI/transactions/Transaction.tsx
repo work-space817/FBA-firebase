@@ -49,14 +49,19 @@ const Transaction: FC<ITransaction> = ({
         <td scope="row">{transactionTitle}</td>
         <td className="text-black-50  d-flex gap-2">
           <SelectCategoriesSVG id={selectedCategories as string} />
-          {selectedCategories}
+
+          <span className="d-none d-md-block">{selectedCategories}</span>
         </td>
-        <td className="text-black-50">{transactionTime}</td>
-        <td className="text-black-50">{transactionDate}</td>
+        <td className="text-black-50 d-none d-sm-table-cell">
+          {transactionTime}
+        </td>
+        <td className="text-black-50 d-none d-sm-table-cell">
+          {transactionDate}
+        </td>
 
         <td className="">{transactionValue} UAH</td>
         <td onClick={transactionDelete}>
-          <GoalSVG id="Delete" />
+          <TransactionSVG id="Delete" />
         </td>
       </tr>
     </>

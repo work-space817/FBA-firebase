@@ -6,7 +6,7 @@ import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
 const TransactionPage = () => {
   return (
     <>
-      <div className=" d-flex flex-row align-items-center gap-3 pb-5 ">
+      <div className=" d-flex flex-column flex-md-row  align-items-center gap-3 pb-5 ">
         <GoalSlider />
         <GoalEdit />
       </div>

@@ -1,18 +1,19 @@
 import { Outlet } from "react-router-dom";
-import DefaultSidebar from "./DefaultSIdebar";
+import DefaultSidebar from "./DefaultSidebar";
 import DefaultHeader from "./DefaultHeader";
 
 const DefaultLayout = () => {
   return (
     <>
-      <div className="custom-container-xxl  ">
+      <div className="container-xxl border">
         <div className="row flex-nowrap">
-          <DefaultSidebar />
+          <nav className="d-none d-sm-block sidebar-fonts col-auto col-lg-2">
+            <DefaultSidebar />
+          </nav>
 
           <div className="col p-3 pt-4 border">
             <DefaultHeader />
-            {/* Сюди підставляється компонет один із групи комеонетів, які відносяться до даного Layout */}
-            {<Outlet />}
+            <Outlet />
           </div>
         </div>
       </div>

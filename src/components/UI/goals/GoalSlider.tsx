@@ -15,7 +15,7 @@ const GoalSlider: React.FC = () => {
   const fetchGoalData = GoalList();
 
   const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
-  const goalWidth = 160;
+  const goalWidth = 150;
   const spacing = 15;
   useEffect(() => {
     const sliderElement = sliderRef.current;
@@ -59,7 +59,7 @@ const GoalSlider: React.FC = () => {
     ));
 
   return (
-    <div className="col" ref={sliderRef}>
+    <div className="col-12 col-sm" ref={sliderRef}>
       <div className="d-flex justify-content-around align-items-center ">
         {fetchGoalData ? <>{<Loading />}</> : <></>}
         <button

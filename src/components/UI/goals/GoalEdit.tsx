@@ -79,9 +79,9 @@ const GoalEdit: React.FC = () => {
 
   return (
     <>
-      <div className="col-5 d-flex rounded-5 shadow align-items-center ">
+      <div className="col-11 col-sm-8 col-md-5 d-flex rounded-5 shadow align-items-center ">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
-          <h4 className="me-xxl-5 me-0">Edit your goal</h4>
+          <h4 className="me-xxl-3 me-0">Edit your goal</h4>
           {selectedGoal != null ? (
             <Goal
               id={selectedGoal.id}

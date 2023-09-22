@@ -8,8 +8,8 @@ const HeaderSVG = ({ id }: Props) => {
       return (
         <svg
           className=" me-0 me-xxl-5 ms-2"
-          width="50"
-          height="50"
+          width="3rem"
+          height="3rem"
           viewBox="0 0 36 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

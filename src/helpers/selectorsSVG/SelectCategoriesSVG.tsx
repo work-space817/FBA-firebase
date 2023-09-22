@@ -1,5 +1,6 @@
 interface ISelectCategoriesProps {
   id: string;
+  // sizing: string;
 }
 
 const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
@@ -7,8 +8,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
     case "Shopping":
       return (
         <svg
-          width="30"
-          height="29"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 19 19"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +40,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
     case "Transport":
       return (
         <svg
-          width="30"
-          height="29"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 23 19"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +80,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
     case "Travels":
       return (
         <svg
-          width="25"
-          height="29"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 21 21"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +96,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="30"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 460.912 460.912"
         >
           <g>
@@ -127,8 +128,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 512 512"
         >
           <path
@@ -139,7 +140,7 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
       );
     case "Holidays":
       return (
-        <svg width="30px" height="30px" viewBox="0 0 15 15">
+        <svg width="2rem" height="2rem" viewBox="0 0 15 15">
           <path
             fill="#7CB4F9"
             d="M7.5,2C7.2,2,7.1,2.2,6.9,2.4&#xA;&#x9;l-5.8,9.5C1,12,1,12.2,1,12.3C1,12.8,1.4,13,1.7,13h11.6c0.4,0,0.7-0.2,0.7-0.7c0-0.2,0-0.2-0.1-0.4L8.2,2.4C8,2.2,7.8,2,7.5,2z&#xA;&#x9; M7.5,3.5L10.8,9H10L8.5,7.5L7.5,9l-1-1.5L5,9H4.1L7.5,3.5z"
@@ -149,8 +150,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
     case "Salary":
       return (
         <svg
-          width="31"
-          height="31"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 31 31"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -176,8 +177,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
           overflow="hidden"
           version="1.1"
           viewBox="0 0 96 96"
-          width="31"
-          height="31"
+          width="2rem"
+          height="2rem"
         >
           <g>
             <circle cx="24" cy="30.8" r="9" />
@@ -193,8 +194,8 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 24 24"
         >
           <path d="M12,1A11,11,0,1,0,23,12,11.013,11.013,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9.011,9.011,0,0,1,12,21Zm1-4.5v2H11v-2Zm3-7a3.984,3.984,0,0,1-1.5,3.122A3.862,3.862,0,0,0,13.063,15H11.031a5.813,5.813,0,0,1,2.219-3.936A2,2,0,0,0,13.1,7.832a2.057,2.057,0,0,0-2-.14A1.939,1.939,0,0,0,10,9.5,1,1,0,0,1,8,9.5V9.5a3.909,3.909,0,0,1,2.319-3.647,4.061,4.061,0,0,1,3.889.315A4,4,0,0,1,16,9.5Z" />

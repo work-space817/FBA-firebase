@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
 import getUserInformation from "../../api/userInfo/getUserInformation";
 import { ISignUp } from "../auth/register/types";
 import { useEffect, useState } from "react";
-import { IUserBalance } from "../../store/reducers/types";
 const Card = () => {
   const [userData, setUserData] = useState<ISignUp>();
   const [digits, setDigits] = useState<number[]>([0, 0, 0, 0]);
@@ -47,13 +45,13 @@ const Card = () => {
   }, []);
   return (
     <>
-      <div className="col col-xl-6 rounded-5 p-2 p-sm-3 shadow">
+      <div className="col col-lg-6 col-md-8 rounded-5 p-2 p-sm-3 shadow">
         <div className="">
           <h4 className="text-dark ms-3 mb-0">Cards</h4>
           <div className="row py-4">
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
               <div className="bg-custom shadow w-100 rounded-5 text-white">
-                <div className="p-4 p-sm-4 ">
+                <div className="p-3 p-sm-4">
                   <h5 className="font-Quicksand-SemiBold mb-0 ">cloudcash</h5>
 
                   <p className="fs--1 text-white-50">RPEMIUM ACCOUNT</p>
@@ -73,21 +71,29 @@ const Card = () => {
 
                   <div className="d-flex justify-content-between">
                     <div className="d-flex flex-column">
-                      <span className="fs--2">Card holder</span>
-                      <span className="">{userData?.email}</span>
+                      <span className="fs--2 text-white-50 font-Quicksand-Medium">
+                        Card holder
+                      </span>
+                      <span className="fs--1 font-Quicksand-Medium">
+                        {userData?.email}
+                      </span>
                     </div>
-                    <div className="d-flex flex-column">
-                      <span className="fs--2">Current date</span>
-                      <span className="">{formattedDate}</span>
+                    <div className="d-flex flex-column justify-content-evenly">
+                      <span className="fs--2 text-white-50 font-Quicksand-Medium">
+                        Current date
+                      </span>
+                      <span className="fs--2 font-Quicksand-Medium">
+                        {formattedDate}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="ps-0 col-4 text-end d-flex flex-column gap-3">
+            <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {}
+                  $ {78022}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -112,7 +118,7 @@ const Card = () => {
             </div>
           </div>
 
-          <div className="mt-2 ms-3 col-7 ">
+          <div className="mt-2 ms-3 col-auto col-xl-7">
             <div className=" progress " aria-valuemin={0} aria-valuemax={100}>
               <div
                 className="progress-bar"

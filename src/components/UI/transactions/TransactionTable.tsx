@@ -1,22 +1,31 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ITransactionList } from "../../../store/reducers/types";
 import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import TransactionEmpty from "./TransactionEmpty";
+import { ITransaction } from "./types";
 
 interface ITransactionTable {
   maxCountTransaction?: number;
 }
 
 const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
+  const [sortTransactionList, setSortTransactionList] = useState<
+    ITransaction[]
+  >([]);
+  console.log("sortTransactionList: ", sortTransactionList);
+  const [sorted, setSorted] = useState();
+  console.dir(sorted);
   const fetchTransactionsData = TransactionList();
+
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  const sortTransactionTable = (e: React.MouseEvent<HTMLElement>) => {
-    console.dir(e.target);
+
+  const sortTransactionTable = (sort: any) => {
+    setSorted(sort.target.innerText);
   };
   // console.log("transactionList", transactionList);
   const visibleTransactionList = transactionList
@@ -48,8 +57,12 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
                 <th scope="col">№</th>
                 <th scope="col">Reciever</th>
                 <th scope="col">Type</th>
-                <th scope="col">Time</th>
-                <th scope="col">Date</th>
+                <th scope="col" className="d-none d-sm-table-cell">
+                  Time
+                </th>
+                <th scope="col" className="d-none d-sm-table-cell">
+                  Date
+                </th>
                 <th scope="col">Amount</th>
                 <th scope="col">
                   <GoalSVG id="Edit" />
