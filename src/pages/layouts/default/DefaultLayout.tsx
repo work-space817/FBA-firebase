@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import DefaultSidebar from "./DefaultSidebar";
 import DefaultHeader from "./DefaultHeader";
+import DefaultNavbar from "./DefaultNavbar";
 
 const DefaultLayout = () => {
   return (
@@ -16,6 +17,9 @@ const DefaultLayout = () => {
             <Outlet />
           </div>
         </div>
+        <nav className="d-block d-sm-none border-top fixed-bottom bottom-navbar-custom-color">
+          <DefaultNavbar />
+        </nav>
       </div>
     </>
   );

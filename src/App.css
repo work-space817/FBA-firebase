@@ -135,8 +135,8 @@ p {
 .sidebar-item:hover {
   background-color: rgba(119, 36, 197, 0.324);
 }
-.sidebar-custom-color {
-  background-color: rgba(220, 220, 220, 0.2);
+.bottom-navbar-custom-color {
+  background-color: rgb(245, 245, 245);
 }
 .goal-item {
   height: 12rem;

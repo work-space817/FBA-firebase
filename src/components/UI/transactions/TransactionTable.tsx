@@ -46,9 +46,9 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
   return (
     <>
       <div className="col d-flex flex-column rounded-5 shadow">
-        <div className="p-3">
+        <div className="p-2 p-sm-3">
           <div className="d-flex justify-content-between align-items-center">
-            <h3 className="py-2">Transactions history</h3>
+            <h3 className="p-2">Transactions history</h3>
           </div>
           <table className="table w-100">
             <thead>

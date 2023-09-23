@@ -15,7 +15,7 @@ const Overview: FC = () => {
 
   return (
     <>
-      <div className="col d-flex mb-5 gap-3 flex-column-lg ">
+      <div className="col d-flex mb-5 gap-3 flex-column-lg">
         <Card />
         <div className="col col-lg-6">
           <OperationMenu />

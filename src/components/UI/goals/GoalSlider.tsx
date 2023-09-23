@@ -15,8 +15,8 @@ const GoalSlider: React.FC = () => {
   const fetchGoalData = GoalList();
 
   const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
-  const goalWidth = 150;
-  const spacing = 15;
+  const goalWidth = 135;
+  const spacing = 10;
   useEffect(() => {
     const sliderElement = sliderRef.current;
     const updateVisibleGoals = () => {

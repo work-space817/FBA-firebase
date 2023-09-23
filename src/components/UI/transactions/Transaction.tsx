@@ -7,6 +7,7 @@ import { TransactionListActionType } from "../../../store/reducers/types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
 import { deleteDoc } from "firebase/firestore";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import ModalWindow from "../../common/modal/ModalWindow";
 
 const Transaction: FC<ITransaction> = ({
   transactionTitle,
@@ -39,6 +40,7 @@ const Transaction: FC<ITransaction> = ({
       console.error("Сталася помилка при видаленні цілі:", error);
     }
   };
+
   return (
     <>
       <tr>
@@ -60,8 +62,48 @@ const Transaction: FC<ITransaction> = ({
         </td>
 
         <td className="">{transactionValue} UAH</td>
-        <td onClick={transactionDelete}>
-          <TransactionSVG id="Delete" />
+        <td>
+          <span onClick={transactionDelete} className="d-none d-sm-block">
+            <TransactionSVG id="Delete" />
+          </span>
+          <span className="d-sm-none">
+            <ModalWindow
+              title={"Transaction information"}
+              customActive={<TransactionSVG id="Information" />}
+            >
+              <table className="table w-100">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Reciever</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <TransactionSVG id={transactionType} />
+                    </td>
+                    <td scope="row">{transactionTitle}</td>
+                    <td className="text-black-50  d-flex gap-2">
+                      <SelectCategoriesSVG id={selectedCategories as string} />
+
+                      <span className="d-none d-md-block">
+                        {selectedCategories}
+                      </span>
+                    </td>
+                    <td className="text-black-50 ">{transactionTime}</td>
+                    <td className="text-black-50 ">{transactionDate}</td>
+
+                    <td className="">{transactionValue} UAH</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ModalWindow>
+          </span>
         </td>
       </tr>
     </>

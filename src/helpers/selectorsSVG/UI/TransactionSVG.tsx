@@ -39,14 +39,39 @@ const TransactionSVG = ({ id }: Props) => {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="1rem"
-          height="1rem"
+          width="1.2rem"
+          height="1.2rem"
           fill="currentColor"
           className="bi bi-x-circle"
           viewBox="0 0 16 16"
         >
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+        </svg>
+      );
+    case "Information":
+      return (
+        <svg
+          fill="none"
+          height="1.2rem"
+          width="1.2rem"
+          viewBox="0 0 26 26"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z"
+            stroke="#000000"
+            stroke-miterlimit="10"
+            stroke-width="2"
+          />
+          <path
+            d="M13 9.00003C13.718 9.00003 14.3 8.41801 14.3 7.70004C14.3 6.98207 13.718 6.40002 13 6.40002C12.282 6.40002 11.7 6.98207 11.7 7.70004C11.7 8.41801 12.282 9.00003 13 9.00003Z"
+            fill="#000000"
+          />
+          <path
+            d="M13 19.7C12.2 19.7 11.6 19.1 11.6 18.4V11.6C11.6 10.9 12.2 10.3 12.9 10.3H13C13.7 10.3 14.3 10.9 14.3 11.6V18.4C14.3 19.1 13.8 19.7 13 19.7Z"
+            fill="#000000"
+          />
         </svg>
       );
     default:
