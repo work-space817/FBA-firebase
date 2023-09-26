@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ITransaction } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
@@ -6,7 +6,6 @@ import TransactionSVG from "../../../helpers/selectorsSVG/UI/TransactionSVG";
 import { TransactionListActionType } from "../../../store/reducers/types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
 import { deleteDoc } from "firebase/firestore";
-import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import ModalWindow from "../../common/modal/ModalWindow";
 
 const Transaction: FC<ITransaction> = ({
@@ -36,6 +35,7 @@ const Transaction: FC<ITransaction> = ({
       const updateTransactionList = dispatch({
         type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
       });
+      console.log("updateTransactionList: ", updateTransactionList);
     } catch (error) {
       console.error("Сталася помилка при видаленні цілі:", error);
     }

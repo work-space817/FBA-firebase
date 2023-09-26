@@ -70,7 +70,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         transactionType,
       };
       setTransactionData(transactionData);
-      handleReset(values);
+
       console.log("transactionData: ", transactionData);
       console.log("Нова транзакція успішно створена.");
       const updateTransactionList = dispatch({
@@ -80,6 +80,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         type: ModalCloserActionType.MODAL_CLOSE,
         payload: true,
       });
+      handleReset(values);
     } catch (error: any) {
       console.log("Bad request", error);
     }

@@ -37,6 +37,7 @@ const InputComponent: FC<InputGroupProps> = ({
         value={value}
         onChange={onChange}
         aria-describedby="emailHelp"
+        placeholder={placeholder}
       />
       {errors && (
         <div id="validationServerUsernameFeedback" className="invalid-feedback">
