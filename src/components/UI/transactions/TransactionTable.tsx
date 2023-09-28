@@ -9,6 +9,7 @@ import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import TransactionEmpty from "./TransactionEmpty";
 import { useDispatch } from "react-redux";
+import { ITransaction } from "./types";
 
 interface ITransactionTable {
   maxCountTransaction?: number;
@@ -17,26 +18,33 @@ interface ITransactionTable {
 const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
   const dispatch = useDispatch();
   const [searchTransactionList, setSearchTransactionList] = useState("");
+  const [visibleList, setVisibleList] = useState<ITransaction[]>();
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-
+  // setVisibleList(transactionList);
   const sortTransactionTable = (currentTableHeader: string) => {
-    const sortedList = [...transactionList].sort((a: any, b: any) =>
-      a[currentTableHeader]?.localeCompare(b[currentTableHeader])
-    );
-    console.table(sortedList);
+    console.log("sotder funk");
+    const sortedList = [...transactionList].sort((a: any, b: any) => {
+      if (currentTableHeader == "transactionValue") {
+        return a.transactionValue - b.transactionValue;
+      } else {
+        return a[currentTableHeader]?.localeCompare(b[currentTableHeader]);
+      }
+    });
     const transactionSortedList = dispatch({
       type: TransactionListActionType.TRANSACTION_LIST,
       payload: sortedList,
     });
-    console.log("transactionSortedList: ", transactionSortedList);
   };
   const searchTransaction = useMemo(() => {
-    return transactionList.filter((transaction) =>
-      transaction.transactionTitle.includes(searchTransactionList)
+    const b = transactionList.filter((transaction) =>
+      transaction.transactionTitle
+        .toLowerCase()
+        .includes(searchTransactionList.toLowerCase())
     );
+    return b;
   }, [searchTransactionList]);
 
   console.log(searchTransaction);

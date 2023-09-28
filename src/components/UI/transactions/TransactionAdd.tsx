@@ -72,6 +72,8 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       setTransactionData(transactionData);
 
       console.log("transactionData: ", transactionData);
+      console.log(typeof values.transactionValue);
+      console.log(typeof transactionData.transactionValue);
       console.log("Нова транзакція успішно створена.");
       const updateTransactionList = dispatch({
         type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
@@ -113,6 +115,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       />
       <InputComponent
         label="Enter your value*"
+        type="number"
         field="transactionValue"
         value={values.transactionValue}
         onChange={handleChange}
