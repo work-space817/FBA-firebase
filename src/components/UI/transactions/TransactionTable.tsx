@@ -7,51 +7,43 @@ import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import TransactionEmpty from "./TransactionEmpty";
-import { useDispatch } from "react-redux";
-import { ITransaction } from "./types";
 
 interface ITransactionTable {
   maxCountTransaction?: number;
 }
 
 const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
-  const dispatch = useDispatch();
   const [searchTransactionList, setSearchTransactionList] = useState("");
-  const [visibleList, setVisibleList] = useState<ITransaction[]>();
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  // setVisibleList(transactionList);
+  const [sortedList, setSortedList] = useState([...transactionList]);
+
   const sortTransactionTable = (currentTableHeader: string) => {
-    console.log("sotder funk");
-    const sortedList = [...transactionList].sort((a: any, b: any) => {
-      if (currentTableHeader == "transactionValue") {
+    const sortedData = [...sortedList].sort((a: any, b: any) => {
+      if (currentTableHeader === "transactionValue") {
         return a.transactionValue - b.transactionValue;
       } else {
         return a[currentTableHeader]?.localeCompare(b[currentTableHeader]);
       }
     });
-    const transactionSortedList = dispatch({
-      type: TransactionListActionType.TRANSACTION_LIST,
-      payload: sortedList,
-    });
+    setSortedList(sortedData);
   };
+
   const searchTransaction = useMemo(() => {
-    const b = transactionList.filter((transaction) =>
+    return sortedList.filter((transaction) =>
       transaction.transactionTitle
         .toLowerCase()
         .includes(searchTransactionList.toLowerCase())
     );
-    return b;
-  }, [searchTransactionList]);
+  }, [searchTransactionList, sortedList]);
 
-  console.log(searchTransaction);
+  useEffect(() => {
+    setSortedList(transactionList);
+  }, [transactionList]);
 
-  const visibleTransactionList = (
-    searchTransaction.length > 0 ? searchTransaction : transactionList
-  )
+  const visibleTransactionList = searchTransaction
     .slice(0, maxCountTransaction)
     .map((transaction, index) => (
       <Transaction
@@ -132,7 +124,11 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
               {visibleTransactionList.length > 0 ? (
                 <>{visibleTransactionList}</>
               ) : (
-                <TransactionEmpty />
+                <tr>
+                  <td colSpan={100} className="text-center">
+                    No one transaction was exist
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
