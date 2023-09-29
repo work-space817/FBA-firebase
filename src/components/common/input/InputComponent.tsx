@@ -4,8 +4,9 @@ import { FC, InputHTMLAttributes } from "react";
 interface InputGroupProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   type?: "text" | "password" | "email" | "number" | "date" | "time"; //може не передаватися у пропсах для компонента(| - один із можливих варіатнів, які можуть буть)
-  field: string;
+  field?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   errors?: string[];
   error?: string | undefined;
   touched?: boolean | undefined;
@@ -21,6 +22,7 @@ const InputComponent: FC<InputGroupProps> = ({
   errors,
   error,
   touched,
+  onFocus,
 }) => {
   return (
     <div className="mb-3 col">
@@ -38,6 +40,7 @@ const InputComponent: FC<InputGroupProps> = ({
         onChange={onChange}
         aria-describedby="emailHelp"
         placeholder={placeholder}
+        onFocus={onFocus}
       />
       {errors && (
         <div id="validationServerUsernameFeedback" className="invalid-feedback">

@@ -1,8 +1,11 @@
 import { FC, useRef } from "react";
 import { Modal } from "bootstrap";
 import React from "react";
-import { useSelector } from "react-redux";
-import { IModalCloser } from "../../../store/reducers/types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  IModalCloser,
+  SelectCategoriesActionType,
+} from "../../../store/reducers/types";
 interface IModalProps {
   children: React.ReactNode;
   title: string;
@@ -16,6 +19,7 @@ const ModalWindow: FC<IModalProps> = ({
   buttonText,
   customActive,
 }) => {
+  const dispatch = useDispatch();
   const modalRef = useRef<any>(null);
   const { isModalClose } = useSelector(
     (store: any) => store.modalClose as IModalCloser
@@ -27,6 +31,9 @@ const ModalWindow: FC<IModalProps> = ({
       const bsModal = new Modal(modal, {});
       bsModal.show();
     }
+    const unselectedCategory = dispatch({
+      type: SelectCategoriesActionType.UNSELECT_CATEGORIES,
+    });
   };
   const closeModal = () => {
     const modal = modalRef.current;

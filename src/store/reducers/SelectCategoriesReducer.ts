@@ -2,6 +2,7 @@ import { SelectCategoriesActionType, ISelectCategories } from "./types";
 
 const initState: ISelectCategories = {
   selectedCategories: null,
+  isSelected: false,
 };
 export const SelectCategoriesReducer = (
   state = initState,
@@ -12,6 +13,13 @@ export const SelectCategoriesReducer = (
       return {
         ...state,
         selectedCategories: action.payload,
+        isSelected: true,
+      };
+    }
+    case SelectCategoriesActionType.UNSELECT_CATEGORIES: {
+      return {
+        ...state,
+        isSelected: false,
       };
     }
     default:

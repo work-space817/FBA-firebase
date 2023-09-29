@@ -47,13 +47,15 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     const year = now.getFullYear();
 
     const formattedTime = `${hours}:${minutes}`;
-    const formattedDate = `${day}/${month}/${year}`;
+    const formattedDate = `${day}.${month}.${year}`;
     setCurrentDate(formattedDate);
     setCurrentTime(formattedTime);
     values.transactionDate = formattedDate;
     values.transactionTime = formattedTime;
   };
   const handleDateTime = () => {
+    // const convertDate = values.transactionDate.split("-").reverse().join("/");
+    // console.log("convertDate: ", convertDate);
     setCurrentDateTimeState(false);
     setHandleDateTimeState(true);
   };
@@ -63,7 +65,8 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       setCurrentDateTimeState(false);
       setHandleDateTimeState(false);
       setIconsHover(false);
-
+      const convertDate = values.transactionDate.split("-").reverse().join(".");
+      values.transactionDate = convertDate;
       const transactionData = {
         ...values,
         selectedCategories,
@@ -72,8 +75,6 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       setTransactionData(transactionData);
 
       console.log("transactionData: ", transactionData);
-      console.log(typeof values.transactionValue);
-      console.log(typeof transactionData.transactionValue);
       console.log("Нова транзакція успішно створена.");
       const updateTransactionList = dispatch({
         type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
@@ -101,8 +102,15 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     onSubmit: onSubmitHandler,
     validationSchema: checkUpForm,
   });
-  const { values, touched, errors, handleSubmit, handleChange, handleReset } =
-    formik;
+  const {
+    values,
+    touched,
+    errors,
+    handleSubmit,
+    handleChange,
+    handleReset,
+    setFieldValue,
+  } = formik;
   return (
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
@@ -115,9 +123,12 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       />
       <InputComponent
         label="Enter your value*"
-        type="number"
+        type={"number"}
         field="transactionValue"
         value={values.transactionValue}
+        onFocus={() => {
+          setFieldValue("transactionValue", "");
+        }}
         onChange={handleChange}
         error={errors.transactionValue}
         touched={touched.transactionValue}

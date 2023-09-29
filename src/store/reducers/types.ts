@@ -25,9 +25,11 @@ export enum GoalSelectActionType {
 }
 export interface ISelectCategories {
   selectedCategories: string | null;
+  isSelected: boolean;
 }
 export enum SelectCategoriesActionType {
   SELECT_CATEGORIES = "SELECT_CATEGORIES",
+  UNSELECT_CATEGORIES = "UNSELECT_CATEGORIES",
 }
 export interface IModalCloser {
   isModalClose: boolean;

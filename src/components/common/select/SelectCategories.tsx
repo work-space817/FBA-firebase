@@ -1,6 +1,9 @@
 import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { SelectCategoriesActionType } from "../../../store/reducers/types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ISelectCategories,
+  SelectCategoriesActionType,
+} from "../../../store/reducers/types";
 
 interface ISelectCategoriesProps {
   icons: any[];
@@ -8,29 +11,27 @@ interface ISelectCategoriesProps {
   iconsHover: boolean;
 }
 
-const SelectCategories: FC<ISelectCategoriesProps> = ({
-  icons,
-  title,
-  // iconsHover,
-}) => {
-  const [isActive, setisActive] = useState<any | null>(null);
+const SelectCategories: FC<ISelectCategoriesProps> = ({ icons, title }) => {
+  const { isSelected } = useSelector(
+    (store: any) => store.selectCategories as ISelectCategories
+  );
+  const [isActive, setisActive] = useState<number | null>(null);
   const dispatch = useDispatch();
-  const selectIcon = (
-    e: React.MouseEvent<HTMLDivElement>,
-    index: number,
-    iconHover: boolean
-  ) => {
+
+  const selectIcon = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
     const seletedCategories = e.currentTarget.textContent;
-    iconHover = true;
-    // console.log("iconsHover = true: ", (iconsHover = true));
-    console.log(seletedCategories);
+    // console.log(seletedCategories);
+
     setisActive(index);
-    dispatch({
+
+    console.log(isActive);
+    const selectedCategory = dispatch({
       type: SelectCategoriesActionType.SELECT_CATEGORIES,
       payload: seletedCategories,
     });
   };
 
+  console.log(isSelected);
   return (
     <>
       <label className="form-label">{title}</label>
@@ -38,9 +39,11 @@ const SelectCategories: FC<ISelectCategoriesProps> = ({
         {icons.map((icon, index) => (
           <div
             key={index}
-            onClick={(e) => selectIcon(e, index, true)}
+            onClick={(e) => selectIcon(e, index)}
             className={`rounded-3 shadow ${
-              isActive == index ? "bg-custom-hover text-white" : ""
+              isActive == index && isSelected
+                ? "bg-custom-hover text-white"
+                : ""
             }`}
           >
             <div className="d-flex align-items-center gap-2 p-2">

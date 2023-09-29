@@ -55,8 +55,15 @@ const GoalAdd = () => {
     onSubmit: onSubmitHandler,
     validationSchema: checkUpForm,
   });
-  const { values, touched, errors, handleSubmit, handleChange, handleReset } =
-    formik;
+  const {
+    values,
+    touched,
+    errors,
+    handleSubmit,
+    handleChange,
+    handleReset,
+    setFieldValue,
+  } = formik;
 
   return (
     <form onSubmit={handleSubmit} className="col">
@@ -71,10 +78,14 @@ const GoalAdd = () => {
       <InputComponent
         label="Enter goals' cost*"
         field="cost"
+        type={"number"}
         value={values.cost}
         onChange={handleChange}
         error={errors.cost}
         touched={touched.cost}
+        // onFocus={() => {
+        //   setFieldValue("transactionValue", "");
+        // }}
       />
       <InputComponent
         label="Expire date*"
