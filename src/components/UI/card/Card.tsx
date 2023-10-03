@@ -1,27 +1,39 @@
-import getUserInformation from "../../api/userInfo/getUserInformation";
-import { ISignUp } from "../auth/register/types";
+import { useDispatch, useSelector } from "react-redux";
+import getUserInformation from "../../../api/userInfo/getUserInformation";
+import { ISignUp } from "../../auth/register/types";
 import { useEffect, useState } from "react";
+import {
+  IUserBalance,
+  UserBalanceActionType,
+} from "../../../store/reducers/types";
+import { IGetUserBalance } from "../../../api/userBalance/types";
+import UserBalance from "./UserBalance";
+
 const Card = () => {
   const [userData, setUserData] = useState<ISignUp>();
   const [digits, setDigits] = useState<number[]>([0, 0, 0, 0]);
-
   const userInfo = async () => {
-    const getUserInfo = await getUserInformation();
-    setUserData(getUserInfo);
+    const fetchUserInfo = await getUserInformation();
+    setUserData(fetchUserInfo);
   };
+  const balancess = UserBalance();
+  console.log("balancess: ", balancess);
+  const { currentBalance, totalIncomingBalance, totalOutcomingBalance } =
+    useSelector((store: any) => store.userBalance as IUserBalance);
 
-  const currentDate = new Date();
-  const day = currentDate.getDate().toString().padStart(2, "0");
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-  const year = currentDate.getFullYear().toString();
-  const formattedDate = `${day}/${month}/${year}`;
+  const currentDate = () => {
+    const date = new Date();
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString();
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  };
 
   useEffect(() => {
     const animationDuration = 1500; // Довжина анімації в мілісекундах
     const updateInterval = 100; // Інтервал оновлення значень цифр
-
     const getRandomDigit = () => Math.floor(Math.random() * 10); // Генерувати рандомну цифру від 0 до 9
-
     const animationInterval = setInterval(() => {
       // Оновлюємо значення цифр рандомними числами
       setDigits([
@@ -47,7 +59,7 @@ const Card = () => {
     <>
       <div className="col col-lg-6 col-md-8 rounded-5 p-2 p-sm-3 shadow">
         <div className="">
-          <h4 className="text-dark ms-3 mb-0">Cards</h4>
+          <h4 className="text-dark ms-3 mb-0">Card</h4>
           <div className="row py-4">
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
               <div className="bg-custom shadow w-100 rounded-5 text-white">
@@ -83,7 +95,7 @@ const Card = () => {
                         Current date
                       </span>
                       <span className="fs--2 font-Quicksand-Medium">
-                        {formattedDate}
+                        {currentDate()}
                       </span>
                     </div>
                   </div>
@@ -93,7 +105,7 @@ const Card = () => {
             <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {78022}
+                  $ {currentBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -101,7 +113,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-success">
-                  $ 1500.50
+                  $ {totalIncomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Income balance
@@ -109,7 +121,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-danger">
-                  $ 350
+                  ${totalOutcomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Outcome balance

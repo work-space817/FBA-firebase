@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
+import Loading from "../../common/loading/Loading";
 
 interface ITransactionTable {
   maxCountTransaction?: number;
@@ -43,6 +44,10 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
     setSortedList(transactionList);
   }, [transactionList]);
 
+  useEffect(() => {
+    sortTransactionTable("transactionDate");
+  }, [fetchTransactionsData]);
+
   const visibleTransactionList = searchTransaction
     .slice(0, maxCountTransaction)
     .map((transaction, index) => (
@@ -63,6 +68,7 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
     <>
       <div className="col d-flex flex-column rounded-5 shadow">
         <div className="p-2 p-sm-3">
+          {fetchTransactionsData ? <>{<Loading />}</> : <></>}
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="p-2">Transactions history</h3>
             <input

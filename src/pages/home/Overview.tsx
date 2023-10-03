@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
-import Card from "../../components/UI/Card";
+import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import getUserInformation from "../../api/userInfo/getUserInformation";
 import { auth } from "../../api/config";

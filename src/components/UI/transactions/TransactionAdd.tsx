@@ -5,14 +5,19 @@ import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ISelectCategories,
+  IUserBalance,
   ModalCloserActionType,
   TransactionListActionType,
+  UserBalanceActionType,
 } from "../../../store/reducers/types";
 import SelectCategories from "../../common/select/SelectCategories";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/transactions/setTransactionData";
 import { FC, useState } from "react";
+import setUserBalance from "../../../api/userBalance/setUserBalance";
+import { ISetUserBalance } from "../../../api/userBalance/types";
+import getUserBalance from "../../../api/userBalance/getUserBalance";
 
 interface ITransactionType {
   transactionType: string;
@@ -33,6 +38,10 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
   );
+  const { currentBalance, totalIncomingBalance, totalOutcomingBalance } =
+    useSelector((store: any) => store.userBalance as IUserBalance);
+  console.log(currentBalance);
+
   const dispatch = useDispatch();
 
   const getCurrentDateTime = () => {
@@ -60,13 +69,46 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     setHandleDateTimeState(true);
   };
 
+  const userBalance = () => {
+    if (transactionType == "Income transaction") {
+      console.log("updated");
+      dispatch({ type: UserBalanceActionType.UPDATE_BALANCE });
+      const b = dispatch({
+        type: UserBalanceActionType.SET_INCOME_BALANCE,
+        payload: values.transactionValue,
+      });
+      console.log(b);
+      const a: ISetUserBalance = {
+        currentBalance: currentBalance,
+        incomingBalance: b.payload,
+        outcomingBalance: totalOutcomingBalance,
+      };
+      setUserBalance(a);
+    } else {
+      dispatch({ type: UserBalanceActionType.UPDATE_BALANCE });
+      const b = dispatch({
+        type: UserBalanceActionType.SET_OUTCOME_BALANCE,
+        payload: values.transactionValue,
+      });
+      console.log(b);
+      const a: ISetUserBalance = {
+        currentBalance: currentBalance,
+        incomingBalance: totalIncomingBalance,
+        outcomingBalance: b.payload,
+      };
+      setUserBalance(a);
+    }
+  };
+
   const onSubmitHandler = async (values: ITransactionAdd) => {
     try {
       setCurrentDateTimeState(false);
       setHandleDateTimeState(false);
       setIconsHover(false);
+      userBalance();
       const convertDate = values.transactionDate.split("-").reverse().join(".");
       values.transactionDate = convertDate;
+
       const transactionData = {
         ...values,
         selectedCategories,

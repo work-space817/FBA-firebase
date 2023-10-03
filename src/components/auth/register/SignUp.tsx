@@ -7,9 +7,10 @@ import InputComponent from "../../common/input/InputComponent";
 import setAuthToken from "../../../api/userInfo/setAuthToken";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import setUserBalance from "../../../api/userBalance/setUserBalance";
 import { useDispatch } from "react-redux";
 import { UserBalanceActionType } from "../../../store/reducers/types";
+import { ISetUserBalance } from "../../../api/userBalance/types";
+import setUserBalance from "../../../api/userBalance/setUserBalance";
 
 const SignUp = () => {
   const init: ISignUp = {
@@ -19,7 +20,7 @@ const SignUp = () => {
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onSubmitHandler = async (values: any) => {
+  const onSubmitHandler = async (values: ISignUp) => {
     try {
       const SignUpResult = await createUserWithEmailAndPassword(
         auth,
@@ -37,19 +38,14 @@ const SignUp = () => {
         ...values,
       });
 
-      const currentBalance = dispatch({
-        type: UserBalanceActionType.SET_CURRENT_BALANCE,
-        payload: values.currentBalance,
-      });
-      await setUserBalance(currentBalance.payload);
-      console.log(currentBalance);
-      console.log("Новий користувач створений", values);
-      // navigate("/");
+      const userBalance: ISetUserBalance = {
+        currentBalance: values.currentBalance,
+      };
+      setUserBalance(userBalance);
     } catch (error: any) {
       console.log("Bad request", error);
     }
   };
-
   const checkUpForm = yup.object({
     email: yup.string().required("Field should not be empty"),
     password: yup.string().required("Field should not be empty"),

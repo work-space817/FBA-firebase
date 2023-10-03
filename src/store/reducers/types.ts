@@ -38,12 +38,19 @@ export enum ModalCloserActionType {
   MODAL_CLOSE = "MODAL_CLOSE",
 }
 export interface IUserBalance {
-  currentBalance: ISignUp | null;
-  incomingBalance: number;
-  outcomingBalance: number;
+  isUpdatedBalance: boolean;
+  currentBalance: number;
+  incomingBalance?: number;
+  outcomingBalance?: number;
+  totalIncomingBalance?: number;
+  totalOutcomingBalance?: number;
 }
 export enum UserBalanceActionType {
+  SET_BALANCE = "SET_BALANCE",
   SET_CURRENT_BALANCE = "SET_CURRENT_BALANCE",
+  SET_INCOME_BALANCE = "SET_INCOME_BALANCE",
+  SET_OUTCOME_BALANCE = "SET_OUTCOME_BALANCE",
+  UPDATE_BALANCE = "UPDATE_BALANCE",
 }
 export interface ITransactionList {
   transactionList: ITransaction[];

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { GoalListActionType, IGoalList } from "../../../store/reducers/types";
 
 const GoalList = () => {
-  const [goalsList, setGoalsList] = useState<IGoal[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { isUpdatedGoaliList } = useSelector(
@@ -20,8 +19,7 @@ const GoalList = () => {
         id: doc.id,
         ...doc.data(),
       })) as IGoal[];
-      setGoalsList(goalsData);
-      console.log("goalsData: ", goalsData);
+      // console.log("goalsData: ", goalsData);
       const setGoalList = dispatch({
         type: GoalListActionType.GOAL_LIST,
         payload: goalsData,

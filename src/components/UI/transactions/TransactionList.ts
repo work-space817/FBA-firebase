@@ -8,8 +8,8 @@ import { ITransaction } from "./types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
 
 const TransactionList = () => {
-  const [transactionList, setTransactionList] = useState<ITransaction[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
   const dispatch = useDispatch();
   const { isUpdatedList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
@@ -23,15 +23,17 @@ const TransactionList = () => {
         id: doc.id,
         ...doc.data(),
       })) as ITransaction[];
-      setTransactionList(transactionData);
-      console.log("transactionData: ", transactionData);
+      // console.log("transactionData: ", transactionData);
       const transactionList = dispatch({
         type: TransactionListActionType.TRANSACTION_LIST,
         payload: transactionData,
       });
       setLoading(false);
     } catch (error) {
-      console.error("Сталася помилка при отриманні цілей користувача:", error);
+      console.error(
+        "Сталася помилка при отриманні транзакцій користувача:",
+        error
+      );
     }
   };
   useEffect(() => {

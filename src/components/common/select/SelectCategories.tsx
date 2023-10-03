@@ -24,14 +24,13 @@ const SelectCategories: FC<ISelectCategoriesProps> = ({ icons, title }) => {
 
     setisActive(index);
 
-    console.log(isActive);
+    // console.log(isActive);
     const selectedCategory = dispatch({
       type: SelectCategoriesActionType.SELECT_CATEGORIES,
       payload: seletedCategories,
     });
   };
 
-  console.log(isSelected);
   return (
     <>
       <label className="form-label">{title}</label>
