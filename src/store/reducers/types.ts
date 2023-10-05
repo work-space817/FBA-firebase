@@ -1,6 +1,6 @@
+import { IBalance } from "../../api/userBalance/types";
 import { IGoal } from "../../components/UI/goals/types";
 import { ITransaction } from "../../components/UI/transactions/types";
-import { ISignUp } from "../../components/auth/register/types";
 
 export interface IAuthUser {
   isAuth: boolean;
@@ -38,12 +38,8 @@ export enum ModalCloserActionType {
   MODAL_CLOSE = "MODAL_CLOSE",
 }
 export interface IUserBalance {
+  balance: IBalance;
   isUpdatedBalance: boolean;
-  currentBalance: number;
-  incomingBalance?: number;
-  outcomingBalance?: number;
-  totalIncomingBalance?: number;
-  totalOutcomingBalance?: number;
 }
 export enum UserBalanceActionType {
   SET_BALANCE = "SET_BALANCE",

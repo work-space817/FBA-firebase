@@ -7,9 +7,7 @@ import InputComponent from "../../common/input/InputComponent";
 import setAuthToken from "../../../api/userInfo/setAuthToken";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { useDispatch } from "react-redux";
-import { UserBalanceActionType } from "../../../store/reducers/types";
-import { ISetUserBalance } from "../../../api/userBalance/types";
+import { IBalance } from "../../../api/userBalance/types";
 import setUserBalance from "../../../api/userBalance/setUserBalance";
 
 const SignUp = () => {
@@ -19,7 +17,6 @@ const SignUp = () => {
     currentBalance: 0,
   };
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const onSubmitHandler = async (values: ISignUp) => {
     try {
       const SignUpResult = await createUserWithEmailAndPassword(
@@ -38,7 +35,7 @@ const SignUp = () => {
         ...values,
       });
 
-      const userBalance: ISetUserBalance = {
+      const userBalance: IBalance = {
         currentBalance: values.currentBalance,
       };
       setUserBalance(userBalance);
@@ -57,8 +54,7 @@ const SignUp = () => {
     validationSchema: checkUpForm,
   });
 
-  const { values, touched, errors, handleSubmit, handleChange, setFieldValue } =
-    formik;
+  const { values, handleSubmit, handleChange, setFieldValue } = formik;
 
   return (
     <>
@@ -83,6 +79,9 @@ const SignUp = () => {
           field="currentBalance"
           value={values.currentBalance}
           onChange={handleChange}
+          onFocus={() => {
+            setFieldValue("transactionValue", "");
+          }}
         />
         <button type="submit" className="btn btn-primary">
           Sign up

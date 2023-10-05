@@ -1,7 +1,6 @@
 import InputComponent from "../../common/input/InputComponent";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ISelectCategories,
@@ -16,8 +15,6 @@ import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/transactions/setTransactionData";
 import { FC, useState } from "react";
 import setUserBalance from "../../../api/userBalance/setUserBalance";
-import { ISetUserBalance } from "../../../api/userBalance/types";
-import getUserBalance from "../../../api/userBalance/getUserBalance";
 
 interface ITransactionType {
   transactionType: string;
@@ -38,9 +35,9 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
   );
-  const { currentBalance, totalIncomingBalance, totalOutcomingBalance } =
-    useSelector((store: any) => store.userBalance as IUserBalance);
-  console.log(currentBalance);
+  const { balance } = useSelector(
+    (store: any) => store.userBalance as IUserBalance
+  );
 
   const dispatch = useDispatch();
 
@@ -68,35 +65,24 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     setCurrentDateTimeState(false);
     setHandleDateTimeState(true);
   };
-
   const userBalance = () => {
-    if (transactionType == "Income transaction") {
+    if (transactionType == "Income transaction" && balance.incomingBalance) {
       console.log("updated");
-      dispatch({ type: UserBalanceActionType.UPDATE_BALANCE });
-      const b = dispatch({
-        type: UserBalanceActionType.SET_INCOME_BALANCE,
-        payload: values.transactionValue,
-      });
-      console.log(b);
-      const a: ISetUserBalance = {
-        currentBalance: currentBalance,
-        incomingBalance: b.payload,
-        outcomingBalance: totalOutcomingBalance,
+      const changedBalance = {
+        currentBalance: balance.currentBalance + values.transactionValue,
+        incomingBalance: balance.incomingBalance + values.transactionValue,
+        outcomingBalance: balance.outcomingBalance,
       };
-      setUserBalance(a);
-    } else {
-      dispatch({ type: UserBalanceActionType.UPDATE_BALANCE });
-      const b = dispatch({
-        type: UserBalanceActionType.SET_OUTCOME_BALANCE,
-        payload: values.transactionValue,
-      });
-      console.log(b);
-      const a: ISetUserBalance = {
-        currentBalance: currentBalance,
-        incomingBalance: totalIncomingBalance,
-        outcomingBalance: b.payload,
+      setUserBalance(changedBalance);
+    }
+    if (transactionType == "Outcome transaction" && balance.outcomingBalance) {
+      console.log("updated");
+      const changedBalance = {
+        currentBalance: balance.currentBalance - values.transactionValue,
+        incomingBalance: balance.incomingBalance,
+        outcomingBalance: balance.outcomingBalance + values.transactionValue,
       };
-      setUserBalance(a);
+      setUserBalance(changedBalance);
     }
   };
 
@@ -121,10 +107,15 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       const updateTransactionList = dispatch({
         type: TransactionListActionType.UPDATE_TRANSACTION_LIST,
       });
+      const updateBalance = dispatch({
+        type: UserBalanceActionType.UPDATE_BALANCE,
+      });
+
       const modalCloser = dispatch({
         type: ModalCloserActionType.MODAL_CLOSE,
         payload: true,
       });
+
       handleReset(values);
     } catch (error: any) {
       console.log("Bad request", error);

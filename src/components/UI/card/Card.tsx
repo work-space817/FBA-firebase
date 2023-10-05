@@ -1,25 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import getUserInformation from "../../../api/userInfo/getUserInformation";
 import { ISignUp } from "../../auth/register/types";
 import { useEffect, useState } from "react";
-import {
-  IUserBalance,
-  UserBalanceActionType,
-} from "../../../store/reducers/types";
-import { IGetUserBalance } from "../../../api/userBalance/types";
+import { IUserBalance } from "../../../store/reducers/types";
 import UserBalance from "./UserBalance";
+import Loading from "../../common/loading/Loading";
 
 const Card = () => {
   const [userData, setUserData] = useState<ISignUp>();
   const [digits, setDigits] = useState<number[]>([0, 0, 0, 0]);
+  const fetchUserBalanceData = UserBalance();
   const userInfo = async () => {
     const fetchUserInfo = await getUserInformation();
     setUserData(fetchUserInfo);
   };
-  const balancess = UserBalance();
-  console.log("balancess: ", balancess);
-  const { currentBalance, totalIncomingBalance, totalOutcomingBalance } =
-    useSelector((store: any) => store.userBalance as IUserBalance);
+  const { balance } = useSelector(
+    (store: any) => store.userBalance as IUserBalance
+  );
 
   const currentDate = () => {
     const date = new Date();
@@ -29,7 +26,6 @@ const Card = () => {
     const formattedDate = `${day}/${month}/${year}`;
     return formattedDate;
   };
-
   useEffect(() => {
     const animationDuration = 1500; // Довжина анімації в мілісекундах
     const updateInterval = 100; // Інтервал оновлення значень цифр
@@ -59,6 +55,7 @@ const Card = () => {
     <>
       <div className="col col-lg-6 col-md-8 rounded-5 p-2 p-sm-3 shadow">
         <div className="">
+          {fetchUserBalanceData ? <>{<Loading />}</> : <></>}
           <h4 className="text-dark ms-3 mb-0">Card</h4>
           <div className="row py-4">
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
@@ -105,7 +102,7 @@ const Card = () => {
             <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {currentBalance}
+                  $ {balance?.currentBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -113,7 +110,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-success">
-                  $ {totalIncomingBalance}
+                  $ {balance?.incomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Income balance
@@ -121,7 +118,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-danger">
-                  ${totalOutcomingBalance}
+                  ${balance?.outcomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Outcome balance

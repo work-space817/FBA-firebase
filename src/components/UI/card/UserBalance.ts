@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { IGetUserBalance } from "../../../api/userBalance/types";
-import { ISignUp } from "../../auth/register/types";
 import { useDispatch, useSelector } from "react-redux";
 import getUserBalance from "../../../api/userBalance/getUserBalance";
 import {
@@ -9,7 +7,6 @@ import {
 } from "../../../store/reducers/types";
 
 const UserBalance = () => {
-  const [a, seta] = useState<IGetUserBalance>();
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { isUpdatedBalance } = useSelector(
@@ -17,14 +14,14 @@ const UserBalance = () => {
   );
   const fetchUserBalances = async () => {
     try {
+      setLoading(true);
       const fetchUserBalance = await getUserBalance();
-      console.log(fetchUserBalance);
-      seta(fetchUserBalance);
-      // const b = dispatch({
-      //   type: UserBalanceActionType.SET_BALANCE,
-      //   payload: fetchUserBalance.currentBalance,
-      // });
-      // console.log("b", b);
+      console.log("fetchUserBalance", fetchUserBalance);
+      dispatch({
+        type: UserBalanceActionType.SET_BALANCE,
+        payload: fetchUserBalance,
+      });
+      setLoading(false);
     } catch (error) {
       console.error(
         "Сталася помилка при отриманні балансу користувача:",
@@ -35,8 +32,7 @@ const UserBalance = () => {
   useEffect(() => {
     fetchUserBalances();
   }, [isUpdatedBalance]);
-  // return loading;
-  return a;
+  return loading;
 };
 
 export default UserBalance;

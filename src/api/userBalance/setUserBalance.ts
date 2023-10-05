@@ -1,18 +1,14 @@
-import { ISetUserBalance } from "./types";
+import { IBalance } from "./types";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import getUserId from "../userInfo/getUserId";
 import { firestore } from "../config";
-import getUserInformation from "../userInfo/getUserInformation";
-import { useDispatch } from "react-redux";
 
-const setUserBalance = async (values: ISetUserBalance) => {
+const setUserBalance = async (values: IBalance) => {
   const userId = getUserId();
-  console.log(values);
-  const getUserBalance = (await getUserInformation()).currentBalance;
 
   const userBalanceRef = doc(collection(firestore, "userBalance"), `${userId}`);
   const balanceData = setDoc(userBalanceRef, values);
-  console.log(values);
+  console.log("db values", values);
   return balanceData;
 };
 
