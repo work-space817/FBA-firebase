@@ -9,11 +9,9 @@ const getTransactionData = async () => {
     collection(firestore, "transactions"),
     `${userId}`
   );
-  const querySnapshot = await getDocs(
+  const transactionsData = await getDocs(
     collection(userTransactionsRef, "transaction")
   );
-  const transactionsData = querySnapshot.docs;
-
   return transactionsData;
 };
 

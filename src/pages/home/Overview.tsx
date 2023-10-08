@@ -22,9 +22,9 @@ const Overview: FC = () => {
           <GoalSlider />
         </div>
       </div>
-      <div className="col">
+      {/* <div className="col-6">
         <TransactionTable maxCountTransaction={5} />
-      </div>
+      </div> */}
 
       <div>
         {isAuth ? (

@@ -23,12 +23,12 @@ const Transaction: FC<ITransaction> = ({
     try {
       const fetchTransactions = await getTransactionData();
 
-      const fetchCurrentTransaction = fetchTransactions.find((doc, docIndex) =>
-        docIndex + 1 == index ? doc.data() : null
+      const fetchCurrentTransaction = fetchTransactions.docs.find(
+        (doc, docIndex) => (docIndex + 1 == index ? doc.data() : null)
       );
       const currentTransactionData = { ...fetchCurrentTransaction?.data(), id };
 
-      const currentTransactions = fetchTransactions.map((doc) =>
+      const currentTransactions = fetchTransactions.docs.map((doc) =>
         doc.id === currentTransactionData.id ? deleteDoc(doc.ref) : null
       );
 

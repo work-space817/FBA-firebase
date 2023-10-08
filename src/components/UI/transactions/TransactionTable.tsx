@@ -1,26 +1,34 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import {
-  ITransactionList,
-  TransactionListActionType,
-} from "../../../store/reducers/types";
+import { ITransactionList } from "../../../store/reducers/types";
 import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import Loading from "../../common/loading/Loading";
-
+import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 interface ITransactionTable {
   maxCountTransaction?: number;
 }
 
 const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
   const [searchTransactionList, setSearchTransactionList] = useState("");
-  const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortedList, setSortedList] = useState([...transactionList]);
+  const fetchTransactionsData = TransactionList(currentPage);
 
+  const changeCurrentPage = (type: string) => {
+    switch (type) {
+      case "previous":
+        setCurrentPage(currentPage - 1);
+        break;
+      case "next":
+        setCurrentPage(currentPage + 1);
+        break;
+    }
+  };
   const sortTransactionTable = (currentTableHeader: string) => {
     const sortedData = [...sortedList].sort((a: any, b: any) => {
       if (currentTableHeader === "transactionValue") {
@@ -138,6 +146,39 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
               )}
             </tbody>
           </table>
+        </div>
+      </div>
+      <div className="d-flex justify-content-end align-items-center gap-3 pe-4 pt-4">
+        <div
+          className={`d-flex align-items-center rounded-4 shadow ${
+            currentPage == 1 ? "d-none" : ""
+          }`}
+        >
+          <div
+            className={`p-2`}
+            onClick={() => {
+              changeCurrentPage("previous");
+            }}
+          >
+            <ArrowsSVG id="ArrowLeft" width={"1rem"} height={"1rem"} />
+            <span className="px-2">Previous</span>
+          </div>
+        </div>
+        <div className="rounded-circle border px-2">{currentPage}</div>
+        <div
+          className={`d-flex align-items-center rounded-4 shadow ${
+            transactionList.length < 10 ? "d-none" : ""
+          }`}
+        >
+          <div
+            className="p-2"
+            onClick={() => {
+              changeCurrentPage("next");
+            }}
+          >
+            <span className="px-2">Next</span>
+            <ArrowsSVG id="ArrowRight" width={"1rem"} height={"1rem"} />
+          </div>
         </div>
       </div>
     </>

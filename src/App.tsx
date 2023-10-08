@@ -18,6 +18,7 @@ import "./fonts/Quicksand-Medium.ttf";
 import "./fonts/Quicksand-SemiBold.ttf";
 import "./fonts/Quicksand-Bold.ttf";
 import TransactionPage from "./pages/transaction/TransactionPage";
+import StatisticPage from "./pages/statistic/StatisticPage";
 
 const App = () => {
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -30,6 +31,7 @@ const App = () => {
           <Route index element={<Overview />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="transactions" element={<TransactionPage />} />
+          <Route path="statistic" element={<StatisticPage />} />
           {/* модальне вікно з повідомленням що вже зареєстровані + редірект на головну */}
         </Route>
         {/* ) : ( */}

@@ -66,7 +66,7 @@ const GoalSlider: React.FC = () => {
           onClick={handlePreviousGoal}
           className="bg-transparent border-0"
         >
-          <ArrowsSVG id="ArrowLeft" />
+          <ArrowsSVG id="ArrowLeft" width={"1rem"} height={"2rem"} />
         </button>
         {goalList.length < 3 ? (
           <>
@@ -78,7 +78,7 @@ const GoalSlider: React.FC = () => {
         )}
 
         <button onClick={handleNextGoal} className="bg-transparent border-0">
-          <ArrowsSVG id="ArrowRight" />
+          <ArrowsSVG id="ArrowRight" width={"1rem"} height={"2rem"} />
         </button>
       </div>
     </div>

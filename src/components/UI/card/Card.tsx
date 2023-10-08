@@ -8,7 +8,6 @@ import Loading from "../../common/loading/Loading";
 
 const Card = () => {
   const [userData, setUserData] = useState<ISignUp>();
-  const [digits, setDigits] = useState<number[]>([0, 0, 0, 0]);
   const fetchUserBalanceData = UserBalance();
   const userInfo = async () => {
     const fetchUserInfo = await getUserInformation();
@@ -26,28 +25,18 @@ const Card = () => {
     const formattedDate = `${day}/${month}/${year}`;
     return formattedDate;
   };
-  useEffect(() => {
-    const animationDuration = 1500; // Довжина анімації в мілісекундах
-    const updateInterval = 100; // Інтервал оновлення значень цифр
-    const getRandomDigit = () => Math.floor(Math.random() * 10); // Генерувати рандомну цифру від 0 до 9
-    const animationInterval = setInterval(() => {
-      // Оновлюємо значення цифр рандомними числами
-      setDigits([
-        getRandomDigit(),
-        getRandomDigit(),
-        getRandomDigit(),
-        getRandomDigit(),
-      ]);
-    }, updateInterval);
 
-    // Зупиняємо анімацію після animationDuration мілісекунд
-    setTimeout(() => {
-      clearInterval(animationInterval);
-    }, animationDuration);
-
-    // Очистка інтервалу при розміщенні компоненту
-    return () => clearInterval(animationInterval);
-  }, []);
+  const randomDigit = () => {
+    let digitArray = [];
+    for (let i = 0; i < 16; i++) {
+      const getRandomDigit = Math.floor(Math.random() * 10);
+      digitArray.push(getRandomDigit);
+      if ((i + 1) % 4 === 0) {
+        digitArray.push(" ");
+      }
+    }
+    return digitArray;
+  };
   useEffect(() => {
     userInfo();
   }, []);
@@ -65,17 +54,8 @@ const Card = () => {
 
                   <p className="fs--1 text-white-50">RPEMIUM ACCOUNT</p>
 
-                  <div className="w-100 d-flex justify-content-around">
-                    <span className="d-flex ">
-                      {digits.map((digit, index) => (
-                        <p className="fs-5 py-3" key={index}>
-                          {digit}
-                        </p>
-                      ))}
-                    </span>
-                    <p className="fs-5 py-3"> * * * * </p>
-                    <p className="fs-5 py-3"> * * * * </p>
-                    <p className="fs-5 py-3">2857</p>
+                  <div className="w-100 d-flex justify-content-center ">
+                    <div className="typing-demo fs-5 py-3">{randomDigit()}</div>
                   </div>
 
                   <div className="d-flex justify-content-between">
