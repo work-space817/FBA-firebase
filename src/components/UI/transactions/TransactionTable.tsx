@@ -78,7 +78,7 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
         <div className="p-2 p-sm-3">
           {fetchTransactionsData ? <>{<Loading />}</> : <></>}
           <div className="d-flex justify-content-between align-items-center">
-            <h3 className="p-2">Transactions history</h3>
+            <h4 className="p-2">Transactions history</h4>
             <input
               className="w-25 form-control"
               aria-describedby="emailHelp"

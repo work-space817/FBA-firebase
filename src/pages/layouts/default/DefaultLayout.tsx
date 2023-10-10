@@ -6,7 +6,7 @@ import DefaultNavbar from "./DefaultNavbar";
 const DefaultLayout = () => {
   return (
     <>
-      <div className="container-xxl">
+      <div className="container-xxl border">
         <div className="row flex-nowrap">
           <nav className="d-none d-sm-block sidebar-fonts col-auto col-lg-2">
             <DefaultSidebar />

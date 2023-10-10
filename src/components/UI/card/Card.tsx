@@ -46,7 +46,7 @@ const Card = () => {
         <div className="">
           {fetchUserBalanceData ? <>{<Loading />}</> : <></>}
           <h4 className="text-dark ms-3 mb-0">Card</h4>
-          <div className="row py-4">
+          <div className="row py-3">
             <div className="col-8 border-end d-flex justify-content-center align-items-center px-4">
               <div className="bg-custom shadow w-100 rounded-5 text-white">
                 <div className="p-3 p-sm-4">
@@ -82,7 +82,7 @@ const Card = () => {
             <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {balance?.currentBalance}
+                  $ {balance?.currentBalance ? balance.currentBalance : 0}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -90,7 +90,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-success">
-                  $ {balance?.incomingBalance}
+                  $ {balance?.incomingBalance ? balance.incomingBalance : 0}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Income balance
@@ -98,7 +98,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-danger">
-                  ${balance?.outcomingBalance}
+                  ${balance?.outcomingBalance ? balance.outcomingBalance : 0}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Outcome balance
