@@ -7,7 +7,7 @@ import {
 import { ITransaction } from "./types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
 
-const TransactionList = (currentPage: number) => {
+const TransactionList = (currentPage: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
   const itemsPerPage = 10; // Кількість елементів на сторінці
 
@@ -24,7 +24,7 @@ const TransactionList = (currentPage: number) => {
         id: doc.id,
         ...doc.data(),
       })) as ITransaction[];
-      console.log("transactionData: ", transactionData);
+      // console.log("transactionData: ", transactionData);
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       const slicedData = transactionData.slice(startIndex, endIndex);

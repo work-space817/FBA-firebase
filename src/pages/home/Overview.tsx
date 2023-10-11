@@ -17,7 +17,7 @@ const Overview: FC = () => {
 
   return (
     <>
-      <div className="col d-flex mb-5 gap-3 flex-column-lg border">
+      <div className="col d-flex mb-5 gap-3 flex-column-lg">
         <Card />
         <div className="col col-lg-6">
           <OperationMenu />
@@ -28,10 +28,17 @@ const Overview: FC = () => {
         <TransactionTable maxCountTransaction={5} />
       </div> */}
 
-      <div className="col-6 rounded-5 shadow">
-        <div className="p-3">
-          <h4 className="ms-3 mb-3">Line Diagram</h4>
-          <LineDiagram />
+      <div className="d-flex gap-3">
+        <div className="col-6 rounded-5 shadow">
+          <div className="p-3">
+            <h4 className="ms-3 mb-3">Line Diagram</h4>
+            <LineDiagram />
+          </div>
+        </div>
+        <div className="col-6 rounded-5 shadow">
+          <div className="p-3">
+            <h4 className="ms-3 mb-3">User Info</h4>
+          </div>
         </div>
       </div>
 

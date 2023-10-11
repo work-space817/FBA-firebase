@@ -3,9 +3,11 @@ import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
 import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
 import AreaDiagram from "../../components/UI/diagrams/areDiagram/AreaDiagram";
 import BrushBarDiagram from "../../components/UI/diagrams/brushBarDiagram/BrushBarDiagram";
-import CircleDiagram from "../../components/UI/diagrams/circleDiagram/CircleDiagram";
+import CircleDiagram from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
 import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
 import CircleDiagramList from "../../components/UI/diagrams/circleDiagram/CircleDiagramList";
+import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
+import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
 const StatisticPage = () => {
   const datesLoop = () => {
     let dates = [];
@@ -33,10 +35,8 @@ const StatisticPage = () => {
           <div className="p-3 pb-0">
             <h4 className="ms-2 mb-3">Circle Diagram</h4>
 
-            <CircleDiagram />
-            <CircleDiagramList />
-            <CircleDiagramList />
-            <CircleDiagramList />
+            <CircleDiagramComponent />
+
             <button className="bg-transparent w-100 d-flex justify-content-center align-items-center my-2">
               <ArrowsSVG id={"ArrowDown"} width={"1rem"} height={"2rem"} />
             </button>
@@ -60,6 +60,7 @@ const StatisticPage = () => {
           <AreaDiagram />
         </div>
       </div>
+      {/* <RadarDiagram /> */}
     </>
   );
 };
