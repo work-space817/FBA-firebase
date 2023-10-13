@@ -5,10 +5,7 @@ import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
 import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import getUserInformation from "../../api/userInfo/getUserInformation";
-import { auth } from "../../api/config";
-import TransactionTable from "../../components/UI/transactions/TransactionTable";
 import OperationMenu from "../../components/UI/OperationMenu";
-import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
 import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
 
 const Overview: FC = () => {

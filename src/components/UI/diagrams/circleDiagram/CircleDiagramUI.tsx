@@ -5,37 +5,27 @@ import { useSelector } from "react-redux";
 import { ITransactionList } from "../../../../store/reducers/types";
 import { ITransaction } from "../../transactions/types";
 import Transaction from "../../transactions/Transaction";
+import { ICircleDiagramComponent } from "./CircleDiagramComponent";
 
-interface Iloh {
-  id: string;
+interface ICircleDiagramUI {
+  // outcomingList: ICircleDiagramComponent[];
+  getPercent: (percent: number) => void;
 }
 
-const CircleDiagramUI = () => {
+const CircleDiagramUI: FC<ICircleDiagramUI> = ({
+  // outcomingList,
+  getPercent,
+}) => {
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  const sumOfTransaction = () => {
-    // const getTransactionInfo = transactionList.map((transaction, index) => ({
-    //   transactionCategory: transaction.selectedCategories,
-    //   transactionValue: transaction.transactionValue,
-    //   count: transaction,
-    // }));
-    // const sum = getTransactionInfo.reduce(
-    //   (accumulator, currentValue) => accumulator + currentValue,
-    //   0
-    // );
-    // console.log(sum);
-    // console.log(getTransactionInfo);
-    // return sum;
-  };
-  const getTransactionInfo = transactionList
-    .map((transaction) => transaction)
-    .filter(
-      (transaction) => transaction.transactionType === "Outcome transaction"
-    );
-  console.log(getTransactionInfo);
-  sumOfTransaction();
+  const getTransactionInfo = transactionList.filter(
+    (transaction) => transaction.transactionType === "Outcome transaction"
+  );
+  // console.log(getTransactionInfo);
+  // const b = outcomingList;
+  // console.log(b);
 
   const COLORS = [
     "#0088FE",
@@ -56,6 +46,8 @@ const CircleDiagramUI = () => {
     outerRadius,
     percent,
   }: any) => {
+    const formatedPercent = +(percent * 100).toFixed(0);
+    getPercent(formatedPercent);
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -68,10 +60,14 @@ const CircleDiagramUI = () => {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {`${(percent * 100).toFixed(0)}%`}
+        {formatedPercent}%
       </text>
     );
   };
+
+  const visiblePieChartList = getTransactionInfo.map((entry, index) => (
+    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+  ));
   return (
     <ResponsiveContainer width="100%" height={175} className="">
       <PieChart width={400} height={400}>
@@ -85,9 +81,7 @@ const CircleDiagramUI = () => {
           fill="#8884d8"
           dataKey="transactionValue"
         >
-          {getTransactionInfo.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+          {visiblePieChartList}
         </Pie>
       </PieChart>
     </ResponsiveContainer>

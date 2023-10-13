@@ -48,7 +48,7 @@ const StatisticPage = () => {
           </div>
         </div> */}
       </div>
-      <div className="rounded-5 shadow mb-5">
+      {/* <div className="rounded-5 shadow mb-5">
         <div className="py-3 px-2">
           <h4 className="ms-3 mb-3">Circle Diagram</h4>
           <BrushBarDiagram />
@@ -59,7 +59,7 @@ const StatisticPage = () => {
           <h4 className="ms-3 mb-3">Area Diagram</h4>
           <AreaDiagram />
         </div>
-      </div>
+      </div> */}
       {/* <RadarDiagram /> */}
     </>
   );

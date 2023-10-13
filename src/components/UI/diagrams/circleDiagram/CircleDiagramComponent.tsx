@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CircleDiagramList from "./CircleDiagramList";
 import CircleDiagramUI from "./CircleDiagramUI";
 import CircleDiagramItem from "./CircleDiagramList";
@@ -7,9 +7,10 @@ import { ITransactionList } from "../../../../store/reducers/types";
 import TransactionList from "../../transactions/TransactionList";
 import { ITransaction } from "../../transactions/types";
 
-interface Iw {
+export interface ICircleDiagramComponent {
   value: number;
   category: string | React.ReactNode;
+  count: number;
 }
 
 const CircleDiagramComponent = () => {
@@ -17,49 +18,44 @@ const CircleDiagramComponent = () => {
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  const getTransactionInfo = transactionList
-    .map((transaction) => transaction)
-    .filter(
-      (transaction) => transaction.transactionType === "Outcome transaction"
-    );
-
-  const sumOfTransaction = () => {
-    const sum: Iw[] = getTransactionInfo.map((transaction) => ({
-      value: transaction.transactionValue,
-      category: transaction.selectedCategories,
-    }));
-    const result: Iw[] = sum.reduce((accumulator: Iw[], current) => {
+  const getTransactionInfo = transactionList.filter(
+    (transaction) => transaction.transactionType === "Outcome transaction"
+  );
+  const sumOfTransaction = getTransactionInfo.reduce(
+    (accumulator: ITransaction[], current) => {
       const existingItem = accumulator.find(
-        (item) => item.category === current.category
+        (item) => item.selectedCategories === current.selectedCategories
       );
       if (existingItem) {
-        existingItem.value += current.value;
+        existingItem.transactionValue += current.transactionValue;
+        // existingItem.count++;
       } else {
         accumulator.push(current);
       }
       return accumulator;
-    }, []);
-    console.log("result", result);
-
-    // .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    console.log("sum", sum);
-    return result;
-  };
-  sumOfTransaction();
-
-  const visibleTransactionList = sumOfTransaction().map(
-    (transaction, index) => (
-      <CircleDiagramItem
-        key={index}
-        categoryId={transaction.category as string}
-        countOfTransaction={0}
-        valueOfTransaction={transaction.value}
-      />
-    )
+    },
+    []
   );
+
+  const getPercent = (percent: number) => {
+    console.log(percent);
+  };
+
+  const visibleTransactionList = sumOfTransaction.map((transaction, index) => (
+    <CircleDiagramItem
+      key={index}
+      categoryId={transaction.selectedCategories as string}
+      countOfTransaction={0}
+      valueOfTransaction={transaction.transactionValue}
+      percentOfTransaction={0}
+    />
+  ));
   return (
     <>
-      <CircleDiagramUI />
+      <CircleDiagramUI
+        getPercent={getPercent}
+        // outcomingList={sumOfTransaction}
+      />
       <div>{visibleTransactionList}</div>
     </>
   );
