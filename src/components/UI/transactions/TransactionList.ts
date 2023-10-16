@@ -25,14 +25,14 @@ const TransactionList = (currentPage: number = 1) => {
         ...doc.data(),
       })) as ITransaction[];
       // console.log("transactionData: ", transactionData);
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const slicedData = transactionData.slice(startIndex, endIndex);
+      // const startIndex = (currentPage - 1) * itemsPerPage;
+      // const endIndex = startIndex + itemsPerPage;
+      // const slicedData = transactionData.slice(startIndex, endIndex);
 
-      console.log("slicedData: ", slicedData);
+      // console.log("slicedData: ", slicedData);
       const transactionList = dispatch({
         type: TransactionListActionType.TRANSACTION_LIST,
-        payload: slicedData,
+        payload: transactionData,
       });
       setLoading(false);
     } catch (error) {

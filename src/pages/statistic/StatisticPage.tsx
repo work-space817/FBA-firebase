@@ -5,7 +5,6 @@ import AreaDiagram from "../../components/UI/diagrams/areDiagram/AreaDiagram";
 import BrushBarDiagram from "../../components/UI/diagrams/brushBarDiagram/BrushBarDiagram";
 import CircleDiagram from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
 import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
-import CircleDiagramList from "../../components/UI/diagrams/circleDiagram/CircleDiagramList";
 import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
 import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
 const StatisticPage = () => {

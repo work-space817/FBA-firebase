@@ -13,7 +13,7 @@ const Overview: FC = () => {
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
   return (
-    <>
+    <div className="mb-5">
       <div className="col d-flex mb-5 gap-3 flex-column-lg">
         <Card />
         <div className="col col-lg-6">
@@ -59,7 +59,7 @@ const Overview: FC = () => {
           <></>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

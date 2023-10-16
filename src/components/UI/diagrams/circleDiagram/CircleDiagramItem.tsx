@@ -9,11 +9,12 @@ const CircleDiagramItem: FC<ICircleDiagramItem> = ({
   categoryId,
   countOfTransaction,
   valueOfTransaction,
+  percentOfTransaction,
 }) => {
   return (
     <div className="d-flex justify-content-between align-items-center border-bottom  pt-2 pb-2">
       <div className="d-flex align-items-center gap-2 ">
-        <SelectCategoriesSVG id={categoryId} />
+        <SelectCategoriesSVG id={categoryId[0]} />
 
         <div className="d-flex flex-column">
           <span className="fs--1">{categoryId}</span>
@@ -22,7 +23,7 @@ const CircleDiagramItem: FC<ICircleDiagramItem> = ({
       </div>
       <div className="text-end d-flex flex-column">
         <span className="fs--1">{valueOfTransaction} $</span>
-        <span className="fs--1">0%</span>
+        <span className="fs--1">{percentOfTransaction}%</span>
       </div>
     </div>
   );

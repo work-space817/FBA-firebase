@@ -82,7 +82,7 @@ const Card = () => {
             <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {balance?.currentBalance ? balance.currentBalance : 0}
+                  $ {balance?.currentBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -90,7 +90,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-success">
-                  $ {balance?.incomingBalance ? balance.incomingBalance : 0}
+                  $ {balance?.incomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Income balance
@@ -98,7 +98,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-danger">
-                  ${balance?.outcomingBalance ? balance.outcomingBalance : 0}
+                  ${balance?.outcomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Outcome balance

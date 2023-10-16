@@ -1,61 +1,29 @@
 import React, { useState } from "react";
-import CircleDiagramList from "./CircleDiagramList";
 import CircleDiagramUI from "./CircleDiagramUI";
-import CircleDiagramItem from "./CircleDiagramList";
-import { useSelector } from "react-redux";
-import { ITransactionList } from "../../../../store/reducers/types";
-import TransactionList from "../../transactions/TransactionList";
-import { ITransaction } from "../../transactions/types";
-
-export interface ICircleDiagramComponent {
-  value: number;
-  category: string | React.ReactNode;
-  count: number;
-}
+import CircleDiagramItem from "./CircleDiagramItem";
+import OutcomingList from "./OutcomingList";
 
 const CircleDiagramComponent = () => {
-  const fetchTransactionsData = TransactionList();
-  const { transactionList } = useSelector(
-    (store: any) => store.transactionList as ITransactionList
-  );
-  const getTransactionInfo = transactionList.filter(
-    (transaction) => transaction.transactionType === "Outcome transaction"
-  );
-  const sumOfTransaction = getTransactionInfo.reduce(
-    (accumulator: ITransaction[], current) => {
-      const existingItem = accumulator.find(
-        (item) => item.selectedCategories === current.selectedCategories
-      );
-      if (existingItem) {
-        existingItem.transactionValue += current.transactionValue;
-        // existingItem.count++;
-      } else {
-        accumulator.push(current);
-      }
-      return accumulator;
-    },
-    []
-  );
+  const transactionList = OutcomingList();
+
+  console.log("transactionList: ", transactionList);
 
   const getPercent = (percent: number) => {
-    console.log(percent);
+    // console.log(percent);
   };
 
-  const visibleTransactionList = sumOfTransaction.map((transaction, index) => (
+  const visibleTransactionList = transactionList.map((transaction, index) => (
     <CircleDiagramItem
       key={index}
-      categoryId={transaction.selectedCategories as string}
-      countOfTransaction={0}
-      valueOfTransaction={transaction.transactionValue}
+      categoryId={transaction.map((doc: any) => doc.category)}
+      countOfTransaction={transaction.length - 1}
+      valueOfTransaction={transaction.map((doc: any) => doc.summaryValue)}
       percentOfTransaction={0}
     />
   ));
   return (
     <>
-      <CircleDiagramUI
-        getPercent={getPercent}
-        // outcomingList={sumOfTransaction}
-      />
+      <CircleDiagramUI getPercent={getPercent} />
       <div>{visibleTransactionList}</div>
     </>
   );

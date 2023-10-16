@@ -36,9 +36,12 @@ const SignUp = () => {
       });
 
       const userBalance: IBalance = {
-        currentBalance: values.currentBalance,
+        currentBalance: +values.currentBalance,
+        incomingBalance: 0,
+        outcomingBalance: 0,
       };
       setUserBalance(userBalance);
+      navigate("/");
     } catch (error: any) {
       console.log("Bad request", error);
     }
@@ -46,7 +49,10 @@ const SignUp = () => {
   const checkUpForm = yup.object({
     email: yup.string().required("Field should not be empty"),
     password: yup.string().required("Field should not be empty"),
-    currentBalance: yup.number().required("Field should not be empty"),
+    currentBalance: yup
+      .number()
+      .positive("Value can not be less than 0")
+      .required("Field should not be empty"),
   });
   const formik = useFormik({
     initialValues: init,
@@ -80,7 +86,7 @@ const SignUp = () => {
           value={values.currentBalance}
           onChange={handleChange}
           onFocus={() => {
-            setFieldValue("transactionValue", "");
+            setFieldValue("currentBalance", "");
           }}
         />
         <button type="submit" className="btn btn-primary">

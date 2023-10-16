@@ -12,6 +12,6 @@ export interface ITransaction {
   transactionDate: string;
   transactionType: string;
   index: any;
-  selectedCategories: string | React.ReactNode;
+  selectedCategories: string;
   id: string;
 }

@@ -66,7 +66,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     setHandleDateTimeState(true);
   };
   const userBalance = () => {
-    if (transactionType == "Income transaction" && balance.incomingBalance) {
+    if (transactionType == "Income transaction") {
       console.log("updated");
       const changedBalance = {
         currentBalance: balance.currentBalance + values.transactionValue,
@@ -75,7 +75,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       };
       setUserBalance(changedBalance);
     }
-    if (transactionType == "Outcome transaction" && balance.outcomingBalance) {
+    if (transactionType == "Outcome transaction") {
       console.log("updated");
       const changedBalance = {
         currentBalance: balance.currentBalance - values.transactionValue,

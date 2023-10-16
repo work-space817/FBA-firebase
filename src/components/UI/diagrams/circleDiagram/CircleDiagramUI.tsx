@@ -1,32 +1,12 @@
 import React, { FC, PureComponent, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import TransactionList from "../../transactions/TransactionList";
-import { useSelector } from "react-redux";
-import { ITransactionList } from "../../../../store/reducers/types";
-import { ITransaction } from "../../transactions/types";
-import Transaction from "../../transactions/Transaction";
-import { ICircleDiagramComponent } from "./CircleDiagramComponent";
+import OutcomingList from "./OutcomingList";
 
 interface ICircleDiagramUI {
-  // outcomingList: ICircleDiagramComponent[];
   getPercent: (percent: number) => void;
 }
 
-const CircleDiagramUI: FC<ICircleDiagramUI> = ({
-  // outcomingList,
-  getPercent,
-}) => {
-  const fetchTransactionsData = TransactionList();
-  const { transactionList } = useSelector(
-    (store: any) => store.transactionList as ITransactionList
-  );
-  const getTransactionInfo = transactionList.filter(
-    (transaction) => transaction.transactionType === "Outcome transaction"
-  );
-  // console.log(getTransactionInfo);
-  // const b = outcomingList;
-  // console.log(b);
-
+const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
   const COLORS = [
     "#0088FE",
     "#00C49F",
@@ -64,22 +44,23 @@ const CircleDiagramUI: FC<ICircleDiagramUI> = ({
       </text>
     );
   };
-
-  const visiblePieChartList = getTransactionInfo.map((entry, index) => (
-    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-  ));
+  const transactionList = OutcomingList();
+  const visiblePieChartList = transactionList.map((entry: any[], index) => {
+    console.log(entry[0], index);
+    return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
+  });
   return (
     <ResponsiveContainer width="100%" height={175} className="">
       <PieChart width={400} height={400}>
         <Pie
-          data={getTransactionInfo}
+          data={transactionList.map((doc) => doc[0])}
           cx="50%"
           cy="50%"
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={80}
           fill="#8884d8"
-          dataKey="transactionValue"
+          dataKey="summaryValue"
         >
           {visiblePieChartList}
         </Pie>
