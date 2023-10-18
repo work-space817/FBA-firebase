@@ -6,7 +6,7 @@ import { ITransactionList } from "../../../../store/reducers/types";
 import TransactionList from "../../transactions/TransactionList";
 
 const CircleDiagramItem: FC<ICircleDiagramItem> = ({
-  categoryId,
+  category,
   countOfTransaction,
   valueOfTransaction,
   percentOfTransaction,
@@ -14,10 +14,10 @@ const CircleDiagramItem: FC<ICircleDiagramItem> = ({
   return (
     <div className="d-flex justify-content-between align-items-center border-bottom  pt-2 pb-2">
       <div className="d-flex align-items-center gap-2 ">
-        <SelectCategoriesSVG id={categoryId[0]} />
+        <SelectCategoriesSVG id={category} />
 
         <div className="d-flex flex-column">
-          <span className="fs--1">{categoryId}</span>
+          <span className="fs--1">{category}</span>
           <span className="fs--1">{countOfTransaction} transaction</span>
         </div>
       </div>
