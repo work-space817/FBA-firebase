@@ -1,6 +1,6 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import OutcomingList from "./OutcomingList";
+import OutcomingList from "../OutcomingList";
 
 interface ICircleDiagramUI {
   getPercent: (percent: number) => void;
@@ -49,7 +49,7 @@ const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
   };
   const transactionList = OutcomingList();
   const visiblePieChartList = transactionList.map((entry, index) => {
-    console.log(entry);
+    // console.log(entry);
     return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
   });
   return (

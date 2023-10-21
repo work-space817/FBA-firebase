@@ -19,6 +19,7 @@ import "./fonts/Quicksand-SemiBold.ttf";
 import "./fonts/Quicksand-Bold.ttf";
 import TransactionPage from "./pages/transaction/TransactionPage";
 import StatisticPage from "./pages/statistic/StatisticPage";
+import "react-day-picker/dist/style.css";
 
 const App = () => {
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);

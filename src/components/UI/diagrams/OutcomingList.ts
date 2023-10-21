@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ITransactionList } from "../../../../store/reducers/types";
-import TransactionList from "../../transactions/TransactionList";
-import { ITransaction } from "../../transactions/types";
-import { IOutcomingList } from "./types";
+import { ITransactionList } from "../../../store/reducers/types";
+import TransactionList from "../transactions/TransactionList";
+import { ITransaction } from "../transactions/types";
+import { IOutcomingList } from "./circleDiagram/types";
 
 const OutcomingList = () => {
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
+  //! selector ranges
   const getOutcomingList = transactionList.filter(
-    (transaction) => transaction.transactionType === "Outcome transaction"
+    (transaction) => transaction.transactionType === "Outcome transaction" // && range.from <= transaction.transactionDate in ms >= range.to
   );
   const mergedTransactions = getOutcomingList.reduce(
     (result: IOutcomingList[], transaction) => {

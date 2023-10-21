@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CircleDiagramUI from "./CircleDiagramUI";
 import CircleDiagramItem from "./CircleDiagramItem";
-import OutcomingList from "./OutcomingList";
+import OutcomingList from "../OutcomingList";
 import { ITransaction } from "../../transactions/types";
 import { IOutcomingList } from "./types";
 

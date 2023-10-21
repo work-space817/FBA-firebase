@@ -1,4 +1,3 @@
-import React from "react";
 import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
 import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
 import AreaDiagram from "../../components/UI/diagrams/areDiagram/AreaDiagram";
@@ -7,24 +6,13 @@ import CircleDiagram from "../../components/UI/diagrams/circleDiagram/CircleDiag
 import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
 import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
 import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
-const StatisticPage = () => {
-  const datesLoop = () => {
-    let dates = [];
-    for (let i = 0; i <= 31; i++) {
-      dates.push(i);
-    }
-    return dates;
-  };
+import RangeCalendar from "../../components/common/inputDate/RangeCalendar";
+import DateSelector from "../../components/UI/DateSelector";
 
+const StatisticPage = () => {
   return (
     <>
-      <button className="w-100 d-flex justify-content-center align-items-center gap-2 mb-3 bg-transparent">
-        <ArrowsSVG id={"ArrowLeft"} width={"1rem"} height={"1rem"} />
-        <span className="rounded-pill border p-1 px-2">
-          01.09.2023 - 08.10.2023
-        </span>
-        <ArrowsSVG id={"ArrowRight"} width={"1rem"} height={"1rem"} />
-      </button>
+      <DateSelector />
       {/* <LineDiagram /> */}
       {/* <AreaDiagram />
           <BrushBarDiagram />
