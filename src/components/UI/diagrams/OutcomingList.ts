@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ITransactionList } from "../../../store/reducers/types";
+import { IDatesRange, ITransactionList } from "../../../store/reducers/types";
 import TransactionList from "../transactions/TransactionList";
 import { ITransaction } from "../transactions/types";
 import { IOutcomingList } from "./circleDiagram/types";
+import { parse } from "date-fns";
 
 const OutcomingList = () => {
   const fetchTransactionsData = TransactionList();
@@ -11,8 +12,22 @@ const OutcomingList = () => {
     (store: any) => store.transactionList as ITransactionList
   );
   //! selector ranges
+  const dateFormater = (transactionDate: string) => {
+    const dateInMilliseconds = parse(
+      transactionDate,
+      "dd.MM.yyyy",
+      new Date()
+    ).getTime();
+    return dateInMilliseconds;
+  };
+  const { ranges } = useSelector(
+    (store: any) => store.datesRange as IDatesRange
+  );
   const getOutcomingList = transactionList.filter(
-    (transaction) => transaction.transactionType === "Outcome transaction" // && range.from <= transaction.transactionDate in ms >= range.to
+    (transaction) =>
+      // transaction.transactionType === "Outcome transaction" &&
+      ranges.from <= dateFormater(transaction.transactionDate) &&
+      dateFormater(transaction.transactionDate) <= ranges.to
   );
   const mergedTransactions = getOutcomingList.reduce(
     (result: IOutcomingList[], transaction) => {

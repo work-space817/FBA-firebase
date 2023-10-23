@@ -23,6 +23,7 @@ const BrushBarDiagram = () => {
     { name: "8", uv: 252, pv: -378 },
     { name: "9", uv: 79, pv: -210 },
     { name: "10", uv: 294, pv: -23 },
+    { name: "11", uv: 294, pv: -23 },
     { name: "12", uv: 43, pv: 45 },
     { name: "13", uv: -74, pv: 90 },
     { name: "14", uv: -71, pv: 130 },
@@ -45,7 +46,7 @@ const BrushBarDiagram = () => {
     { name: "31", uv: -52, pv: 246 },
   ];
   return (
-    <ResponsiveContainer width="100%" height={600} className="">
+    <ResponsiveContainer width="100%" height={400} className="">
       <BarChart
         data={data}
         margin={{

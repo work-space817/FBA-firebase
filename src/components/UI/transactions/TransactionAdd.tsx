@@ -9,7 +9,7 @@ import {
   TransactionListActionType,
   UserBalanceActionType,
 } from "../../../store/reducers/types";
-import SelectCategories from "../../common/select/SelectCategories";
+import SelectCategories from "../../common/selectCategories/SelectCategories";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/transactions/setTransactionData";

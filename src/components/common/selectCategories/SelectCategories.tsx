@@ -10,7 +10,6 @@ interface ISelectCategoriesProps {
   title: string;
   iconsHover: boolean;
 }
-
 const SelectCategories: FC<ISelectCategoriesProps> = ({ icons, title }) => {
   const { isSelected } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories

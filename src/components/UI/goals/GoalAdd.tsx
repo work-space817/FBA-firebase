@@ -1,7 +1,6 @@
 import InputComponent from "../../common/input/InputComponent";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import setGoalsData from "../../../api/goals/setGoalsData";
 import {
@@ -9,7 +8,7 @@ import {
   GoalListActionType,
   ModalCloserActionType,
 } from "../../../store/reducers/types";
-import SelectCategories from "../../common/select/SelectCategories";
+import SelectCategories from "../../common/selectCategories/SelectCategories";
 import { IGoalAdd } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 const GoalAdd = () => {

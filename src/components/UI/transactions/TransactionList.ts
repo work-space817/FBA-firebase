@@ -9,7 +9,7 @@ import getTransactionData from "../../../api/transactions/getTransactionData";
 
 const TransactionList = (currentPage: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const itemsPerPage = 10; // Кількість елементів на сторінці
+  // const itemsPerPage = 10;
 
   const dispatch = useDispatch();
   const { isUpdatedList } = useSelector(

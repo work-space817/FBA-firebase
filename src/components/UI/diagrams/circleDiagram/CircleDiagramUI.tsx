@@ -49,7 +49,7 @@ const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
   };
   const transactionList = OutcomingList();
   const visiblePieChartList = transactionList.map((entry, index) => {
-    // console.log(entry);
+    // console.log(entry);ц
     return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
   });
   return (

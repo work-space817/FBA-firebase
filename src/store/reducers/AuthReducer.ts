@@ -1,25 +1,23 @@
 import { AuthUserActionType, IAuthUser } from "./types";
 
 const initState: IAuthUser = {
-    isAuth: false,
-}
+  isAuth: false,
+};
 
-export const AuthReducer = (state = initState, action: any) =>{
-    switch(action.type){
-        case AuthUserActionType.LOGIN_USER:{
-            return {
-                ...state,
-                isAuth: true,
-                user: action.payload
-            };
-        }
-        case AuthUserActionType.LOGOUT_USER:{
-            return {
-                ...state,
-                isAuth: false,
-                user: undefined
-            };
-        }
+export const AuthReducer = (state = initState, action: any) => {
+  switch (action.type) {
+    case AuthUserActionType.LOGIN_USER: {
+      return {
+        ...state,
+        isAuth: true,
+      };
     }
-    return state
-}
+    case AuthUserActionType.LOGOUT_USER: {
+      return {
+        ...state,
+        isAuth: false,
+      };
+    }
+  }
+  return state;
+};

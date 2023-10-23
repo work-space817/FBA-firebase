@@ -1,27 +1,51 @@
+import { addDays, format } from "date-fns";
+import { DateRange, DayPicker } from "react-day-picker";
 import React, { useState } from "react";
-import RangeCalendar from "../common/inputDate/RangeCalendar";
-import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
+import { useDispatch } from "react-redux";
+import { DatesRangeActionType } from "../../store/reducers/types";
+const RangeCalendar = () => {
+  const dispatch = useDispatch();
 
-const DateSelector = () => {
-  const [calendarVisible, setCalendarVisible] = useState(false);
-  console.log(calendarVisible);
-  const calendar = RangeCalendar();
+  const date = new Date();
+  const pastMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  const defaultSelected: DateRange = {
+    from: pastMonth,
+    to: addDays(pastMonth, date.getDate() - 1),
+  };
+  const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
 
+  let footer = <p>Please pick the first day.</p>;
+  if (range?.from) {
+    if (!range.to) {
+      footer = <p>{format(range.from, "PPP")}</p>;
+    } else if (range.to) {
+      footer = (
+        <p>
+          {format(range.from, "PPP")} - {format(range.to, "PPP")}
+        </p>
+      );
+    }
+  }
+  const b = dispatch({
+    type: DatesRangeActionType.SET_DATES_RANGE,
+    payload: {
+      ...range,
+      from: range?.from?.getTime(),
+      to: range?.to?.getTime() || range?.from?.getTime(),
+    },
+  });
+  console.log(b);
   return (
-    <>
-      <button
-        className="w-100 d-flex justify-content-center align-items-center gap-2 mb-3 bg-transparent border"
-        onClick={() => setCalendarVisible(true)}
-      >
-        <ArrowsSVG id={"ArrowLeft"} width={"1rem"} height={"1rem"} />
-        <span className="rounded-pill border p-1 px-2">
-          01.09.2023 - 08.10.2023
-        </span>
-        <ArrowsSVG id={"ArrowRight"} width={"1rem"} height={"1rem"} />
-      </button>
-      {calendar}
-    </>
+    <DayPicker
+      showOutsideDays
+      ISOWeek
+      mode="range"
+      defaultMonth={pastMonth}
+      selected={range}
+      footer={footer}
+      onSelect={setRange}
+      className="border shadow p-3 m-0 rounded-5"
+    />
   );
 };
-
-export default DateSelector;
+export default RangeCalendar;

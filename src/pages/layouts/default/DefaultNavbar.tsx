@@ -5,7 +5,7 @@ import SidebarSVG from "../../../helpers/selectorsSVG/SidebarSVG";
 const DefaultNavbar = () => {
   return (
     <ul
-      className="nav flex-nowrap flex-sm-wrap flex-sm-column  align-items-center align-items-sm-start "
+      className="nav flex-nowrap flex-sm-wrap flex-sm-column  align-items-center align-items-sm-start"
       id="menu"
     >
       <div className="sidebar-item p-2 rounded-3 w-100">

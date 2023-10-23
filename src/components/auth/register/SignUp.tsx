@@ -5,10 +5,12 @@ import { auth, firestore } from "../../../api/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/InputComponent";
 import setAuthToken from "../../../api/userInfo/setAuthToken";
-import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { IBalance } from "../../../api/userBalance/types";
 import setUserBalance from "../../../api/userBalance/setUserBalance";
+import { useNavigate } from "react-router-dom";
+import { AuthUserActionType } from "../../../store/reducers/types";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const init: ISignUp = {
@@ -17,6 +19,7 @@ const SignUp = () => {
     currentBalance: 0,
   };
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onSubmitHandler = async (values: ISignUp) => {
     try {
       const SignUpResult = await createUserWithEmailAndPassword(
@@ -28,7 +31,11 @@ const SignUp = () => {
       const userToken = (await getIdToken(user)) as string;
       const uid = auth.currentUser?.uid as string;
       setAuthToken(userToken, uid);
+      dispatch({ type: AuthUserActionType.LOGIN_USER });
 
+      console.log("first");
+      navigate("/");
+      console.log("second");
       const userId = user.uid;
       const additionalUserInformation = doc(firestore, "users", userId);
       await setDoc(additionalUserInformation, {
@@ -41,7 +48,6 @@ const SignUp = () => {
         outcomingBalance: 0,
       };
       setUserBalance(userBalance);
-      navigate("/");
     } catch (error: any) {
       console.log("Bad request", error);
     }

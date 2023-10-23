@@ -56,3 +56,9 @@ export enum TransactionListActionType {
   TRANSACTION_LIST = "TRANSACTION_LIST",
   UPDATE_TRANSACTION_LIST = "UPDATE_TRANSACTION_LIST",
 }
+export interface IDatesRange {
+  ranges: { from: number; to: number };
+}
+export enum DatesRangeActionType {
+  SET_DATES_RANGE = "SET_DATES_RANGE",
+}

@@ -18,7 +18,7 @@ const LogIn = () => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<ILogIn>(init);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

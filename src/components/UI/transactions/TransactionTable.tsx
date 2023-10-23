@@ -12,12 +12,16 @@ interface ITransactionTable {
 
 const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
   const [searchTransactionList, setSearchTransactionList] = useState("");
+  const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
+  const paginationList = transactionList;
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const endIndex = startIndex + itemsPerPage;
+  // const slicedData = transactionData.slice(startIndex, endIndex);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedList, setSortedList] = useState([...transactionList]);
-  const fetchTransactionsData = TransactionList(currentPage);
 
   const changeCurrentPage = (type: string) => {
     switch (type) {
@@ -51,7 +55,6 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
   useEffect(() => {
     setSortedList(transactionList);
   }, [transactionList]);
-
   useEffect(() => {
     sortTransactionTable("transactionDate");
   }, [fetchTransactionsData]);
@@ -148,7 +151,7 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
           </table>
         </div>
       </div>
-      <div className="d-flex justify-content-end align-items-center gap-3 pe-4 pt-4">
+      <div className="d-flex justify-content-end align-items-center gap-3 p-4 ps-0">
         <div
           className={`d-flex align-items-center rounded-4 shadow ${
             currentPage == 1 ? "d-none" : ""
