@@ -1,9 +1,6 @@
 import React, { FC } from "react";
 import SelectCategoriesSVG from "../../../../helpers/selectorsSVG/SelectCategoriesSVG";
 import { ICircleDiagramItem } from "./types";
-import { useSelector } from "react-redux";
-import { ITransactionList } from "../../../../store/reducers/types";
-import TransactionList from "../../transactions/TransactionList";
 
 const CircleDiagramItem: FC<ICircleDiagramItem> = ({
   category,

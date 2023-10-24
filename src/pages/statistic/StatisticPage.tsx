@@ -2,9 +2,9 @@ import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
 import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
 import AreaDiagram from "../../components/UI/diagrams/areaDiagram/AreaDiagram";
 import BrushBarDiagram from "../../components/UI/diagrams/brushBarDiagram/BrushBarDiagram";
-import CircleDiagram from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
+import CircleDiagram from "../../components/UI/diagrams/circleDiagram/DefaultCircleDiagramUI";
 import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
-import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/CircleDiagramUI";
+import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/DefaultCircleDiagramUI";
 import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
 import DateSelector from "../../components/UI/DateSelector";
 import DefaultSelect from "../../components/common/select/DefaultSelect";
@@ -15,6 +15,7 @@ const StatisticPage = () => {
       <div className="mb-5">
         <div className="d-flex gap-5 flex-column-lg align-items-center">
           <div className="">
+            <h4 className="ms-2 mb-3">Select date's</h4>
             <DateSelector />
           </div>
           <div className="rounded-5 shadow col-12 col-lg-4">

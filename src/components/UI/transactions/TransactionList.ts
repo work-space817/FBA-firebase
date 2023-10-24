@@ -7,9 +7,8 @@ import {
 import { ITransaction } from "./types";
 import getTransactionData from "../../../api/transactions/getTransactionData";
 
-const TransactionList = (currentPage: number = 1) => {
+const TransactionList = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  // const itemsPerPage = 10;
 
   const dispatch = useDispatch();
   const { isUpdatedList } = useSelector(
@@ -24,12 +23,6 @@ const TransactionList = (currentPage: number = 1) => {
         id: doc.id,
         ...doc.data(),
       })) as ITransaction[];
-      // console.log("transactionData: ", transactionData);
-      // const startIndex = (currentPage - 1) * itemsPerPage;
-      // const endIndex = startIndex + itemsPerPage;
-      // const slicedData = transactionData.slice(startIndex, endIndex);
-
-      // console.log("slicedData: ", slicedData);
       const transactionList = dispatch({
         type: TransactionListActionType.TRANSACTION_LIST,
         payload: transactionData,
@@ -45,7 +38,7 @@ const TransactionList = (currentPage: number = 1) => {
 
   useEffect(() => {
     fetchUserTransactions();
-  }, [isUpdatedList, currentPage]);
+  }, [isUpdatedList]);
 
   return loading;
 };

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { useSelector } from "react-redux";
 import {
   AreaChart,
   Area,
@@ -8,80 +8,70 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { ITransactionList } from "../../../../store/reducers/types";
+import TransactionList from "../../transactions/TransactionList";
 
 const AreaDiagram = () => {
   const data = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: "Січень",
+      incoming: 4000,
+      outcoming: 2400,
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: "Лютий",
+      incoming: 3000,
+      outcoming: 1398,
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: "Березень",
+      incoming: 2000,
+      outcoming: 9800,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: "Квітень",
+      incoming: 2780,
+      outcoming: 3908,
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: "Травень",
+      incoming: 1890,
+      outcoming: 4800,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: "Червень",
+      incoming: 2390,
+      outcoming: 3800,
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: "Липень",
+      incoming: 3490,
+      outcoming: 4300,
     },
     {
-      name: "Page a",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: "Серпень",
+      incoming: 3000,
+      outcoming: 1398,
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: "Вересень",
+      incoming: 2000,
+      outcoming: 9800,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: "Жовтень",
+      incoming: 2780,
+      outcoming: 3908,
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: "Листопад",
+      incoming: 1890,
+      outcoming: 4800,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: "Грудень",
+      incoming: 2390,
+      outcoming: 3800,
     },
   ];
 
@@ -104,7 +94,12 @@ const AreaDiagram = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+          <Area
+            type="monotone"
+            dataKey="incoming"
+            stroke="#8884d8"
+            fill="#8884d8"
+          />
         </AreaChart>
       </ResponsiveContainer>
       <p>Maybe some other content</p>
@@ -126,7 +121,12 @@ const AreaDiagram = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
+          <Area
+            type="monotone"
+            dataKey="outcoming"
+            stroke="#82ca9d"
+            fill="#82ca9d"
+          />
         </AreaChart>
       </ResponsiveContainer>
     </>

@@ -26,7 +26,7 @@ const RangeCalendar = () => {
       );
     }
   }
-  const b = dispatch({
+  dispatch({
     type: DatesRangeActionType.SET_DATES_RANGE,
     payload: {
       ...range,
@@ -34,7 +34,7 @@ const RangeCalendar = () => {
       to: range?.to?.getTime() || range?.from?.getTime(),
     },
   });
-  console.log(b);
+  // console.log(b);
   return (
     <DayPicker
       showOutsideDays

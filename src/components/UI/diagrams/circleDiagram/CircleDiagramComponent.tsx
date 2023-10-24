@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import CircleDiagramUI from "./CircleDiagramUI";
+import CircleDiagramUI from "./DefaultCircleDiagramUI";
 import CircleDiagramItem from "./CircleDiagramItem";
 import OutcomingList from "../OutcomingList";
 import { ITransaction } from "../../transactions/types";
 import { IOutcomingList } from "./types";
+import DefaultCircleDiagramUI from "./DefaultCircleDiagramUI";
 
 const CircleDiagramComponent = () => {
   const transactionList = OutcomingList();
@@ -28,7 +29,7 @@ const CircleDiagramComponent = () => {
   );
   return (
     <>
-      <CircleDiagramUI getPercent={getPercent} />
+      <DefaultCircleDiagramUI getPercent={getPercent} />
       <div>{visibleTransactionList}</div>
     </>
   );

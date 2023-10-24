@@ -2,11 +2,13 @@ import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import OutcomingList from "../OutcomingList";
 
-interface ICircleDiagramUI {
+interface IDefaultCircleDiagramUI {
   getPercent: (percent: number) => void;
 }
 
-const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
+const DefaultCircleDiagramUI: FC<IDefaultCircleDiagramUI> = ({
+  getPercent,
+}) => {
   const COLORS = [
     "#0088FE",
     "#00C49F",
@@ -49,7 +51,6 @@ const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
   };
   const transactionList = OutcomingList();
   const visiblePieChartList = transactionList.map((entry, index) => {
-    // console.log(entry);ц
     return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
   });
   return (
@@ -72,4 +73,4 @@ const CircleDiagramUI: FC<ICircleDiagramUI> = ({ getPercent }) => {
   );
 };
 
-export default CircleDiagramUI;
+export default DefaultCircleDiagramUI;

@@ -6,33 +6,19 @@ import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import Loading from "../../common/loading/Loading";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
-interface ITransactionTable {
-  maxCountTransaction?: number;
-}
 
-const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
+const TransactionTable = () => {
   const [searchTransactionList, setSearchTransactionList] = useState("");
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  const paginationList = transactionList;
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
-  // const slicedData = transactionData.slice(startIndex, endIndex);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedList, setSortedList] = useState([...transactionList]);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-  const changeCurrentPage = (type: string) => {
-    switch (type) {
-      case "previous":
-        setCurrentPage(currentPage - 1);
-        break;
-      case "next":
-        setCurrentPage(currentPage + 1);
-        break;
-    }
-  };
   const sortTransactionTable = (currentTableHeader: string) => {
     const sortedData = [...sortedList].sort((a: any, b: any) => {
       if (currentTableHeader === "transactionValue") {
@@ -43,7 +29,6 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
     });
     setSortedList(sortedData);
   };
-
   const searchTransaction = useMemo(() => {
     return sortedList.filter((transaction) =>
       transaction.transactionTitle
@@ -51,7 +36,6 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
         .includes(searchTransactionList.toLowerCase())
     );
   }, [searchTransactionList, sortedList]);
-
   useEffect(() => {
     setSortedList(transactionList);
   }, [transactionList]);
@@ -59,21 +43,21 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
     sortTransactionTable("transactionDate");
   }, [fetchTransactionsData]);
 
-  const visibleTransactionList = searchTransaction
-    .slice(0, maxCountTransaction)
-    .map((transaction, index) => (
-      <Transaction
-        key={index}
-        transactionTitle={transaction.transactionTitle}
-        transactionValue={transaction.transactionValue}
-        transactionTime={transaction.transactionTime}
-        transactionDate={transaction.transactionDate}
-        transactionType={transaction.transactionType}
-        index={index}
-        selectedCategories={transaction.selectedCategories}
-        id={transaction.id}
-      />
-    ));
+  const slicedData = searchTransaction.slice(startIndex, endIndex);
+
+  const visibleTransactionList = slicedData.map((transaction, index) => (
+    <Transaction
+      key={index}
+      transactionTitle={transaction.transactionTitle}
+      transactionValue={transaction.transactionValue}
+      transactionTime={transaction.transactionTime}
+      transactionDate={transaction.transactionDate}
+      transactionType={transaction.transactionType}
+      index={index}
+      selectedCategories={transaction.selectedCategories}
+      id={transaction.id}
+    />
+  ));
 
   return (
     <>
@@ -159,9 +143,7 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
         >
           <div
             className={`p-2`}
-            onClick={() => {
-              changeCurrentPage("previous");
-            }}
+            onClick={() => setCurrentPage(currentPage - 1)}
           >
             <ArrowsSVG id="ArrowLeft" width={"1rem"} height={"1rem"} />
             <span className="px-2">Previous</span>
@@ -170,15 +152,10 @@ const TransactionTable: FC<ITransactionTable> = ({ maxCountTransaction }) => {
         <div className="rounded-circle border px-2">{currentPage}</div>
         <div
           className={`d-flex align-items-center rounded-4 shadow ${
-            transactionList.length < 10 ? "d-none" : ""
+            slicedData.length < itemsPerPage ? "d-none" : ""
           }`}
         >
-          <div
-            className="p-2"
-            onClick={() => {
-              changeCurrentPage("next");
-            }}
-          >
+          <div className="p-2" onClick={() => setCurrentPage(currentPage + 1)}>
             <span className="px-2">Next</span>
             <ArrowsSVG id="ArrowRight" width={"1rem"} height={"1rem"} />
           </div>
