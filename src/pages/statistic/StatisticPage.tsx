@@ -8,25 +8,30 @@ import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/DefaultC
 import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
 import DateSelector from "../../components/UI/DateSelector";
 import DefaultSelect from "../../components/common/select/DefaultSelect";
+import CustomActiveShapePieDiagram from "../../components/UI/diagrams/circleDiagram/CustomActiveShapePieDiagram";
+import TransactionCircleDiagram from "../../components/UI/diagramComponents/TransactionCircleDiagram";
 
 const StatisticPage = () => {
   return (
     <>
-      <div className="mb-5">
-        <div className="d-flex gap-5 flex-column-lg align-items-center">
-          <div className="">
-            <h4 className="ms-2 mb-3">Select date's</h4>
-            <DateSelector />
+      <div className="d-flex gap-4 flex-column flex-lg-row align-items-center align-items-sm-end mb-4">
+        <div className="col-10 col-sm">
+          <h4 className="ms-2 mb-3">Select date's</h4>
+          <DateSelector />
+        </div>
+        <div className="rounded-5 shadow col-10 col-lg-4">
+          <div className="py-3">
+            <h4 className="ms-3 mb-3">Transaction diagrams</h4>
+            <TransactionCircleDiagram />
           </div>
-          <div className="rounded-5 shadow col-12 col-lg-4">
-            <div className="p-3 pb-0">
-              <h4 className="ms-2 mb-3">Circle Diagram</h4>
-              <RadarDiagram />
-            </div>
+        </div>
+        <div className="rounded-5 shadow col-10 col-lg-4">
+          <div className="py-3">
+            <h4 className="ms-3 mb-3">Transaction diagrams</h4>
+            <TransactionCircleDiagram />
           </div>
         </div>
       </div>
-
       {/* <LineDiagram /> */}
       {/* <AreaDiagram />
           <BrushBarDiagram />

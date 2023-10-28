@@ -2,13 +2,7 @@ import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import OutcomingList from "../OutcomingList";
 
-interface IDefaultCircleDiagramUI {
-  getPercent: (percent: number) => void;
-}
-
-const DefaultCircleDiagramUI: FC<IDefaultCircleDiagramUI> = ({
-  getPercent,
-}) => {
+const DefaultCircleDiagramUI = () => {
   const COLORS = [
     "#0088FE",
     "#00C49F",
@@ -31,7 +25,6 @@ const DefaultCircleDiagramUI: FC<IDefaultCircleDiagramUI> = ({
   }: any) => {
     const formatedPercent = +(percent * 100).toFixed(0);
     console.log("formatedPercent: ", formatedPercent);
-    getPercent(formatedPercent);
 
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);

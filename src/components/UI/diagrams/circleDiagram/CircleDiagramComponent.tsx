@@ -8,13 +8,6 @@ import DefaultCircleDiagramUI from "./DefaultCircleDiagramUI";
 
 const CircleDiagramComponent = () => {
   const transactionList = OutcomingList();
-  const transactionPercent: any[] = [];
-  const getPercent = (percent: number) => {
-    console.log(percent);
-
-    transactionPercent.push(percent);
-    // console.log("transactionPercent: ", transactionPercent);
-  };
 
   const visibleTransactionList = transactionList.map(
     (transaction: IOutcomingList, index) => (
@@ -29,7 +22,7 @@ const CircleDiagramComponent = () => {
   );
   return (
     <>
-      <DefaultCircleDiagramUI getPercent={getPercent} />
+      <DefaultCircleDiagramUI />
       <div>{visibleTransactionList}</div>
     </>
   );

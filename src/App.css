@@ -96,12 +96,6 @@ p {
   }
 }
 @media (max-width: 991px) {
-  .flex-column-reverse-lg {
-    flex-direction: column-reverse;
-  }
-  .flex-column-lg {
-    flex-direction: column;
-  }
   * {
     font-size: 13px;
   }

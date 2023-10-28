@@ -44,7 +44,7 @@ const RangeCalendar = () => {
       selected={range}
       footer={footer}
       onSelect={setRange}
-      className="border shadow p-3 m-0 rounded-5"
+      className="shadow p-3 m-0 rounded-5"
     />
   );
 };
