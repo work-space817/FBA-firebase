@@ -1,15 +1,9 @@
-import ArrowsSVG from "../../helpers/selectorsSVG/UI/ArrowsSVG";
-import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
-import AreaDiagram from "../../components/UI/diagrams/areaDiagram/AreaDiagram";
+import AreaDiagram from "../../components/UI/diagrams/areaDiagram/SynchronizedAreaChart";
 import BrushBarDiagram from "../../components/UI/diagrams/brushBarDiagram/BrushBarDiagram";
-import CircleDiagram from "../../components/UI/diagrams/circleDiagram/DefaultCircleDiagramUI";
-import RadarDiagram from "../../components/UI/diagrams/radarDiagram/RadarDiagram";
-import CircleDiagramUI from "../../components/UI/diagrams/circleDiagram/DefaultCircleDiagramUI";
-import CircleDiagramComponent from "../../components/UI/diagrams/circleDiagram/CircleDiagramComponent";
 import DateSelector from "../../components/UI/DateSelector";
-import DefaultSelect from "../../components/common/select/DefaultSelect";
-import CustomActiveShapePieDiagram from "../../components/UI/diagrams/circleDiagram/CustomActiveShapePieDiagram";
-import TransactionCircleDiagram from "../../components/UI/diagramComponents/TransactionCircleDiagram";
+import TransactionCircleDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionCircle/TransactionCircleDiagram";
+import SynchronizedAreaChart from "../../components/UI/diagrams/areaDiagram/SynchronizedAreaChart";
+import TransactionSynchronizedAreaDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionSynchronizedArea/TransactionSynchronizedAreaDiagram";
 
 const StatisticPage = () => {
   return (
@@ -21,26 +15,28 @@ const StatisticPage = () => {
         </div>
         <div className="rounded-5 shadow col-10 col-lg-4">
           <div className="py-3">
-            <h4 className="ms-3 mb-3">Transaction diagrams</h4>
-            <TransactionCircleDiagram />
+            <h4 className="ms-3 mb-3">Income transactions</h4>
+            <TransactionCircleDiagram
+              circleColor={"#82ca9d"}
+              transactionType={"Income transaction"}
+            />
           </div>
         </div>
         <div className="rounded-5 shadow col-10 col-lg-4">
           <div className="py-3">
-            <h4 className="ms-3 mb-3">Transaction diagrams</h4>
-            <TransactionCircleDiagram />
+            <h4 className="ms-3 mb-3">Expense transaction</h4>
+            <TransactionCircleDiagram
+              circleColor={"#ed3737"}
+              transactionType={"Outcome transaction"}
+            />
           </div>
         </div>
       </div>
-      {/* <LineDiagram /> */}
-      {/* <AreaDiagram />
-          <BrushBarDiagram />
-          <RadarDiagram /> */}
       <div className="d-flex mb-5 col">
         <div className="rounded-5 shadow col">
           <div className="p-3">
             <h4 className="ms-3 mb-3">Area Diagram</h4>
-            <AreaDiagram />
+            <TransactionSynchronizedAreaDiagram />
           </div>
         </div>
       </div>

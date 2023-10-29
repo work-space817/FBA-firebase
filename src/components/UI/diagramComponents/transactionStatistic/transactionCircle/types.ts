@@ -1,14 +1,15 @@
-import { ITransaction } from "../../transactions/types";
+import { ITransaction } from "../../../transactions/types";
 
-export interface ICircleDiagramItem {
+export interface ITransactionCircleDiagramItem {
   category: string;
   countOfTransaction: number;
   valueOfTransaction: number;
   percentOfTransaction: number;
 }
-export interface IOutcomingList {
+export interface ITransactionStatisticList {
   summaryPercent?: number;
   summaryCategory: string;
+  summaryType: string;
   summaryValue: number;
   summaryCount: number;
   transactions: ITransaction[];

@@ -1,13 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "Group A", value: 4000 },
-  { name: "Group B", value: 3000 },
-  { name: "Group C", value: 3000 },
-  { name: "Group D", value: 2000 },
-];
-
+interface ICustomActiveShapePieDiagram {
+  circleColor: string;
+  statisticData: any[];
+}
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -32,11 +29,10 @@ const renderActiveShape = (props: any) => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 12;
   const ey = my;
   const textAnchor = cos >= 0 ? "start" : "end";
-
   return (
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
+        {payload.summaryCategory}
       </text>
       <Sector
         cx={cx}
@@ -81,7 +77,10 @@ const renderActiveShape = (props: any) => {
   );
 };
 
-export default function CustomActiveShapePieDiagram() {
+const CustomActiveShapePieDiagram: FC<ICustomActiveShapePieDiagram> = ({
+  circleColor,
+  statisticData,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_: any, index: number) => {
@@ -96,15 +95,16 @@ export default function CustomActiveShapePieDiagram() {
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={statisticData}
           cy={101}
           innerRadius={50}
           outerRadius={65}
-          fill="#8884d8"
-          dataKey="value"
+          fill={circleColor}
+          dataKey="summaryValue"
           onMouseEnter={onPieEnter}
         />
       </PieChart>
     </ResponsiveContainer>
   );
-}
+};
+export default CustomActiveShapePieDiagram;

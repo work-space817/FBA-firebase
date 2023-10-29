@@ -1,6 +1,7 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import OutcomingList from "../OutcomingList";
+import OutcomingList from "../TransactionStatisticList";
+import TransactionStatisticList from "../TransactionStatisticList";
 
 const DefaultCircleDiagramUI = () => {
   const COLORS = [
@@ -42,7 +43,7 @@ const DefaultCircleDiagramUI = () => {
       </text>
     );
   };
-  const transactionList = OutcomingList();
+  const transactionList = TransactionStatisticList();
   const visiblePieChartList = transactionList.map((entry, index) => {
     return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
   });

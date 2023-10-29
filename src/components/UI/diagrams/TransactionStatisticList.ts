@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { IDatesRange, ITransactionList } from "../../../store/reducers/types";
 import TransactionList from "../transactions/TransactionList";
-import { ITransaction } from "../transactions/types";
-import { IOutcomingList } from "./circleDiagram/types";
+import { ITransactionStatisticList } from "../diagramComponents/transactionStatistic/transactionCircle/types";
 import { parse } from "date-fns";
 
-const OutcomingList = () => {
+const TransactionStatisticList = () => {
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  //! selector ranges
   const dateFormater = (transactionDate: string) => {
     const dateInMilliseconds = parse(
       transactionDate,
@@ -23,14 +21,13 @@ const OutcomingList = () => {
   const { ranges } = useSelector(
     (store: any) => store.datesRange as IDatesRange
   );
-  const getOutcomingList = transactionList.filter(
+  const sortList = transactionList.filter(
     (transaction) =>
-      // transaction.transactionType === "Outcome transaction" &&
       ranges.from <= dateFormater(transaction.transactionDate) &&
       dateFormater(transaction.transactionDate) <= ranges.to
   );
-  const mergedTransactions = getOutcomingList.reduce(
-    (result: IOutcomingList[], transaction) => {
+  const mergedTransactions = sortList.reduce(
+    (result: ITransactionStatisticList[], transaction) => {
       const category = transaction.selectedCategories;
       const existingCategory = result.find(
         (group) => group.summaryCategory === category
@@ -44,6 +41,7 @@ const OutcomingList = () => {
         const summary = {
           summaryCategory: category,
           summaryValue: transaction.transactionValue,
+          summaryType: transaction.transactionType,
           summaryCount: 1,
           transactions: [transaction],
         };
@@ -53,9 +51,8 @@ const OutcomingList = () => {
     },
     []
   );
-
-  // console.log(mergedTransactions);
+  console.log(mergedTransactions);
   return mergedTransactions;
 };
 
-export default OutcomingList;
+export default TransactionStatisticList;

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import {
   AreaChart,
@@ -10,8 +11,28 @@ import {
 } from "recharts";
 import { ITransactionList } from "../../../../store/reducers/types";
 import TransactionList from "../../transactions/TransactionList";
+import TransactionStatisticList from "../TransactionStatisticList";
 
-const AreaDiagram = () => {
+interface ISynchronizedAreaChart {
+  circleColor: string;
+  statisticData: any[];
+}
+const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
+  circleColor,
+  statisticData,
+}) => {
+  console.log(statisticData, "in SynchronizedAreaChart");
+  const fetchTransactionsData = TransactionList();
+  // const { transactionList } = useSelector(
+  //   (store: any) => store.transactionList as ITransactionList
+  // );
+
+  const transactionList = TransactionStatisticList()
+    .filter((transaction) => transaction.summaryType === "Outcome transaction")
+    .map((transaction) => {
+      console.log(transaction);
+    });
+  console.log(transactionList);
   const data = [
     {
       name: "Січень",
@@ -20,6 +41,11 @@ const AreaDiagram = () => {
     },
     {
       name: "Лютий",
+      // info: {
+      //   total: 3000,
+      //   categories: 3000,
+      // },
+
       incoming: 3000,
       outcoming: 1398,
     },
@@ -97,8 +123,8 @@ const AreaDiagram = () => {
           <Area
             type="monotone"
             dataKey="incoming"
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke="#82ca9d"
+            fill="#82ca9d"
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -124,8 +150,8 @@ const AreaDiagram = () => {
           <Area
             type="monotone"
             dataKey="outcoming"
-            stroke="#82ca9d"
-            fill="#82ca9d"
+            stroke="#ed3737"
+            fill="#ed3737"
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -133,4 +159,4 @@ const AreaDiagram = () => {
   );
 };
 
-export default AreaDiagram;
+export default SynchronizedAreaChart;

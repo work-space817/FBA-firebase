@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import SelectCategoriesSVG from "../../../../helpers/selectorsSVG/SelectCategoriesSVG";
-import { ICircleDiagramItem } from "./types";
+import SelectCategoriesSVG from "../../../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import { ITransactionCircleDiagramItem } from "./types";
 
-const CircleDiagramItem: FC<ICircleDiagramItem> = ({
+const TransactionCircleDiagramItem: FC<ITransactionCircleDiagramItem> = ({
   category,
   countOfTransaction,
   valueOfTransaction,
@@ -26,4 +26,4 @@ const CircleDiagramItem: FC<ICircleDiagramItem> = ({
   );
 };
 
-export default CircleDiagramItem;
+export default TransactionCircleDiagramItem;
