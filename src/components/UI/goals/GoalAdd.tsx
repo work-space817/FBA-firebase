@@ -82,9 +82,6 @@ const GoalAdd = () => {
         onChange={handleChange}
         error={errors.cost}
         touched={touched.cost}
-        // onFocus={() => {
-        //   setFieldValue("transactionValue", "");
-        // }}
       />
       <InputComponent
         label="Expire date*"

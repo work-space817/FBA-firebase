@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { useSelector } from "react-redux";
 import {
   BarChart,
   Bar,
@@ -11,6 +12,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import DateFormater from "../../../../helpers/DateFormater";
+import { ITransactionList } from "../../../../store/reducers/types";
+import TransactionList from "../../transactions/TransactionList";
+import { ISummary } from "../../diagramComponents/transactionStatistic/types";
+import { parse } from "date-fns";
 const BrushBarDiagram = () => {
   const data = [
     { name: "1", uv: 300, pv: 456 },
@@ -45,6 +51,71 @@ const BrushBarDiagram = () => {
     { name: "30", uv: -99, pv: 322 },
     { name: "31", uv: -52, pv: 246 },
   ];
+  const fetchTransactionsData = TransactionList();
+  const { transactionList } = useSelector(
+    (store: any) => store.transactionList as ITransactionList
+  );
+
+  const formattedTransactions = transactionList.map((transaction) => {
+    const formattedDate = DateFormater(transaction.transactionDate);
+    const transactionDay = new Date(formattedDate).getDate();
+    return { transactionDay, transaction };
+  });
+
+  const mergedTransactions = transactionList.reduce(
+    (result: any[], currentTransaction) => {
+      const { transactionType, transactionDate, transactionValue } =
+        currentTransaction;
+      const dateInMilliseconds = parse(
+        transactionDate,
+        "dd.MM.yyyy",
+        new Date()
+      ).getTime();
+      const date = new Date(dateInMilliseconds).getDate();
+      const dateIndex = result.findIndex(
+        (item) => item.summaryDate === dateInMilliseconds
+      );
+
+      if (dateIndex === -1) {
+        result.push({
+          summaryDate: dateInMilliseconds,
+          summaryType: {
+            [transactionType]: {
+              summaryCount: 1,
+              summaryValue: transactionValue,
+              transactions: [currentTransaction],
+            },
+          },
+        });
+      } else {
+        // Дата існує в `result`, оновіть інформацію
+        if (!result[dateIndex].summaryType[transactionType]) {
+          result[dateIndex].summaryType[transactionType] = {
+            summaryCount: 1,
+            summaryValue: transactionValue,
+            transactions: [currentTransaction],
+          };
+        } else {
+          result[dateIndex].summaryType[transactionType].summaryCount++;
+          result[dateIndex].summaryType[transactionType].summaryValue +=
+            transactionValue;
+          result[dateIndex].summaryType[transactionType].transactions.push(
+            currentTransaction
+          );
+        }
+      }
+
+      return result;
+    },
+    []
+  );
+  console.log(mergedTransactions);
+
+  const b = (type: string) => {
+    const a = type === "in" ? "pv" : "uv";
+    return a;
+  };
+
   return (
     <ResponsiveContainer width="100%" height={400} className="">
       <BarChart
@@ -64,8 +135,8 @@ const BrushBarDiagram = () => {
           stroke="#8884d8"
           travellerWidth={15}
         />
-        <Bar dataKey="pv" fill="#8884d8" />
-        <Bar dataKey="uv" fill="#82ca9d" />
+        <Bar dataKey={b("in")} fill="#8884d8" />
+        <Bar dataKey={b("")} fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );

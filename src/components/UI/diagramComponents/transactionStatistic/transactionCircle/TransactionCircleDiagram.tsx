@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import CircleDiagramItem from "./TransactionCircleDiagramItem";
 import CustomActiveShapePieDiagram from "../../../diagrams/circleDiagram/CustomActiveShapePieDiagram";
-import { ITransactionStatisticList } from "./types";
 import TransactionStatisticList from "../../../diagrams/TransactionStatisticList";
+import { ITransactionStatisticList } from "../types";
 
 interface ITransactionCircleDiagram {
   circleColor: string;

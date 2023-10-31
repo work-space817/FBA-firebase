@@ -48,20 +48,14 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
 
     const hours = now.getHours().toString().padStart(2, "0");
     const minutes = now.getMinutes().toString().padStart(2, "0");
-    const day = now.getDate().toString().padStart(2, "0");
-    const month = (now.getMonth() + 1).toString().padStart(2, "0");
-    const year = now.getFullYear();
-
     const formattedTime = `${hours}:${minutes}`;
-    const formattedDate = `${day}.${month}.${year}`;
+    const formattedDate = now.toLocaleDateString();
     setCurrentDate(formattedDate);
     setCurrentTime(formattedTime);
     values.transactionDate = formattedDate;
     values.transactionTime = formattedTime;
   };
   const handleDateTime = () => {
-    // const convertDate = values.transactionDate.split("-").reverse().join("/");
-    // console.log("convertDate: ", convertDate);
     setCurrentDateTimeState(false);
     setHandleDateTimeState(true);
   };
@@ -92,8 +86,6 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       setHandleDateTimeState(false);
       setIconsHover(false);
       userBalance();
-      const convertDate = values.transactionDate.split("-").reverse().join(".");
-      values.transactionDate = convertDate;
 
       const transactionData = {
         ...values,

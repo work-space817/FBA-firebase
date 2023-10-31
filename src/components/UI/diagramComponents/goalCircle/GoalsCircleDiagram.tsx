@@ -1,6 +1,6 @@
 import CircleDiagramItem from "../transactionStatistic/transactionCircle/TransactionCircleDiagramItem";
 import OutcomingList from "../../diagrams/TransactionStatisticList";
-import { ITransactionStatisticList } from "../transactionStatistic/transactionCircle/types";
+import { ITransactionStatisticList } from "../transactionStatistic/types";
 import DefaultCircleDiagramUI from "../../diagrams/circleDiagram/DefaultCircleDiagramUI";
 import TransactionStatisticList from "../../diagrams/TransactionStatisticList";
 

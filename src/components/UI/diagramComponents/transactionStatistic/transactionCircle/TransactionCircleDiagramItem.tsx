@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import SelectCategoriesSVG from "../../../../../helpers/selectorsSVG/SelectCategoriesSVG";
-import { ITransactionCircleDiagramItem } from "./types";
+import { ITransactionCircleDiagramItem } from "../types";
 
 const TransactionCircleDiagramItem: FC<ITransactionCircleDiagramItem> = ({
   category,

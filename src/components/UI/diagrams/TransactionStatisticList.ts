@@ -2,29 +2,22 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { IDatesRange, ITransactionList } from "../../../store/reducers/types";
 import TransactionList from "../transactions/TransactionList";
-import { ITransactionStatisticList } from "../diagramComponents/transactionStatistic/transactionCircle/types";
+import { ITransactionStatisticList } from "../diagramComponents/transactionStatistic/types";
 import { parse } from "date-fns";
+import DateFormater from "../../../helpers/DateFormater";
 
 const TransactionStatisticList = () => {
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-  const dateFormater = (transactionDate: string) => {
-    const dateInMilliseconds = parse(
-      transactionDate,
-      "dd.MM.yyyy",
-      new Date()
-    ).getTime();
-    return dateInMilliseconds;
-  };
   const { ranges } = useSelector(
     (store: any) => store.datesRange as IDatesRange
   );
   const sortList = transactionList.filter(
     (transaction) =>
-      ranges.from <= dateFormater(transaction.transactionDate) &&
-      dateFormater(transaction.transactionDate) <= ranges.to
+      ranges.from <= DateFormater(transaction.transactionDate) &&
+      DateFormater(transaction.transactionDate) <= ranges.to
   );
   const mergedTransactions = sortList.reduce(
     (result: ITransactionStatisticList[], transaction) => {
@@ -32,7 +25,6 @@ const TransactionStatisticList = () => {
       const existingCategory = result.find(
         (group) => group.summaryCategory === category
       );
-
       if (existingCategory) {
         existingCategory.transactions.push(transaction);
         existingCategory.summaryValue += transaction.transactionValue;

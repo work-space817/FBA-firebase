@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   AreaChart,
@@ -12,6 +12,7 @@ import {
 import { ITransactionList } from "../../../../store/reducers/types";
 import TransactionList from "../../transactions/TransactionList";
 import TransactionStatisticList from "../TransactionStatisticList";
+import DateFormater from "../../../../helpers/DateFormater";
 
 interface ISynchronizedAreaChart {
   circleColor: string;
@@ -21,85 +22,78 @@ const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
   circleColor,
   statisticData,
 }) => {
-  console.log(statisticData, "in SynchronizedAreaChart");
   const fetchTransactionsData = TransactionList();
-  // const { transactionList } = useSelector(
-  //   (store: any) => store.transactionList as ITransactionList
-  // );
-
-  const transactionList = TransactionStatisticList()
-    .filter((transaction) => transaction.summaryType === "Outcome transaction")
-    .map((transaction) => {
-      console.log(transaction);
-    });
-  console.log(transactionList);
-  const data = [
-    {
-      name: "Січень",
-      incoming: 4000,
-      outcoming: 2400,
-    },
-    {
-      name: "Лютий",
-      // info: {
-      //   total: 3000,
-      //   categories: 3000,
-      // },
-
-      incoming: 3000,
-      outcoming: 1398,
-    },
-    {
-      name: "Березень",
-      incoming: 2000,
-      outcoming: 9800,
-    },
-    {
-      name: "Квітень",
-      incoming: 2780,
-      outcoming: 3908,
-    },
-    {
-      name: "Травень",
-      incoming: 1890,
-      outcoming: 4800,
-    },
-    {
-      name: "Червень",
-      incoming: 2390,
-      outcoming: 3800,
-    },
-    {
-      name: "Липень",
-      incoming: 3490,
-      outcoming: 4300,
-    },
-    {
-      name: "Серпень",
-      incoming: 3000,
-      outcoming: 1398,
-    },
-    {
-      name: "Вересень",
-      incoming: 2000,
-      outcoming: 9800,
-    },
-    {
-      name: "Жовтень",
-      incoming: 2780,
-      outcoming: 3908,
-    },
-    {
-      name: "Листопад",
-      incoming: 1890,
-      outcoming: 4800,
-    },
-    {
-      name: "Грудень",
-      incoming: 2390,
-      outcoming: 3800,
-    },
+  const { transactionList } = useSelector(
+    (store: any) => store.transactionList as ITransactionList
+  );
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
+  const formattedTransactions = transactionList.map((transaction) => {
+    const formattedDate = DateFormater(transaction.transactionDate);
+    const transactionMonth = new Date(formattedDate).toLocaleString("en-US", {
+      month: "short",
+    });
+    return { transactionMonth, transaction };
+  });
+
+  const mergedTransactions = formattedTransactions.reduce(
+    (result: any, currentTransaction) => {
+      const { transactionMonth, transaction } = currentTransaction;
+      const transactionType = transaction.transactionType;
+
+      result[transactionMonth] = result[transactionMonth] || {};
+      result[transactionMonth][transactionType] = result[transactionMonth][
+        transactionType
+      ] || {
+        summaryValue: 0,
+        summaryCount: 0,
+        transactions: [],
+      };
+
+      const typeEntry = result[transactionMonth][transactionType];
+      typeEntry.summaryValue += transaction.transactionValue;
+      typeEntry.summaryCount++;
+      typeEntry.transactions.push(currentTransaction);
+
+      return result;
+    },
+    {}
+  );
+  // console.log(mergedTransactions);
+  const mergedData = months.map((monthName) => {
+    const monthData = mergedTransactions[monthName] || {
+      "Income transaction": {
+        summaryValue: 0,
+        summaryCount: 0,
+        transactions: [],
+      },
+      "Outcome transaction": {
+        summaryValue: 0,
+        summaryCount: 0,
+        transactions: [],
+      },
+    };
+
+    return {
+      month: monthName,
+      income: monthData["Income transaction"]?.summaryValue || 0,
+      outcome: monthData["Outcome transaction"]?.summaryValue || 0,
+    };
+  });
+
+  // console.log(mergedData);
 
   return (
     <>
@@ -107,7 +101,7 @@ const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
         <AreaChart
           width={500}
           height={200}
-          data={data}
+          data={mergedData}
           syncId="anyId"
           margin={{
             top: 10,
@@ -117,12 +111,12 @@ const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="incoming"
+            dataKey={"income"}
             stroke="#82ca9d"
             fill="#82ca9d"
           />
@@ -134,7 +128,7 @@ const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
         <AreaChart
           width={500}
           height={200}
-          data={data}
+          data={mergedData}
           syncId="anyId"
           margin={{
             top: 10,
@@ -144,12 +138,12 @@ const SynchronizedAreaChart: FC<ISynchronizedAreaChart> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="outcoming"
+            dataKey="outcome"
             stroke="#ed3737"
             fill="#ed3737"
           />
