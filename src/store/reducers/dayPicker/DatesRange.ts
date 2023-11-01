@@ -3,7 +3,7 @@ import {
   DatesRangeActionType,
   IAuthUser,
   IDatesRange,
-} from "./types";
+} from "../types";
 
 const initState: IDatesRange = {
   ranges: { from: 0, to: 0 },

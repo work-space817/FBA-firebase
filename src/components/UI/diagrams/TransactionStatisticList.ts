@@ -43,7 +43,7 @@ const TransactionStatisticList = () => {
     },
     []
   );
-  console.log(mergedTransactions);
+  // console.log(mergedTransactions);
   return mergedTransactions;
 };
 

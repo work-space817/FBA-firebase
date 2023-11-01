@@ -61,4 +61,11 @@ export interface IDatesRange {
 }
 export enum DatesRangeActionType {
   SET_DATES_RANGE = "SET_DATES_RANGE",
+  SET_MONTH_AND_YEAR = "SET_MONTH_AND_YEAR",
+}
+export interface IMonthAndYearRange {
+  selectedMonthAndYear: { month: number; year: number };
+}
+export enum MonthAndYearRangeActionType {
+  SET_MONTH_AND_YEAR = "SET_MONTH_AND_YEAR",
 }

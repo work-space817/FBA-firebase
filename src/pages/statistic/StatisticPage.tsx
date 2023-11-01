@@ -4,6 +4,7 @@ import DateSelector from "../../components/UI/DateSelector";
 import TransactionCircleDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionCircle/TransactionCircleDiagram";
 import SynchronizedAreaChart from "../../components/UI/diagrams/areaDiagram/SynchronizedAreaChart";
 import TransactionSynchronizedAreaDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionSynchronizedArea/TransactionSynchronizedAreaDiagram";
+import { DayPicker } from "react-day-picker";
 
 const StatisticPage = () => {
   return (
@@ -32,18 +33,17 @@ const StatisticPage = () => {
           </div>
         </div>
       </div>
-      <div className="d-flex mb-5 col">
-        <div className="rounded-5 shadow col">
-          <div className="p-3">
-            <h4 className="ms-3 mb-3">Area Diagram</h4>
-            <TransactionSynchronizedAreaDiagram />
-          </div>
-        </div>
-      </div>
+
       <div className="rounded-5 shadow mb-5">
         <div className="py-3 px-2">
           <h4 className="ms-3 mb-3">Circle Diagram</h4>
           <BrushBarDiagram />
+        </div>
+      </div>
+      <div className="mb-5 col rounded-5 shadow">
+        <div className="p-3">
+          <h4 className="ms-3 mb-3">Area Diagram</h4>
+          <TransactionSynchronizedAreaDiagram />
         </div>
       </div>
     </>

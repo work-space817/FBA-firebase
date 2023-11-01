@@ -1,8 +1,11 @@
 import { addDays, format } from "date-fns";
-import { DateRange, DayPicker } from "react-day-picker";
-import React, { useState } from "react";
+import { Caption, DateRange, DayPicker } from "react-day-picker";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { DatesRangeActionType } from "../../store/reducers/types";
+import {
+  DatesRangeActionType,
+  MonthAndYearRangeActionType,
+} from "../../store/reducers/types";
 const RangeCalendar = () => {
   const dispatch = useDispatch();
 
@@ -26,6 +29,18 @@ const RangeCalendar = () => {
       );
     }
   }
+
+  const handleMonthChange = (date: Date) => {
+    const b = dispatch({
+      type: MonthAndYearRangeActionType.SET_MONTH_AND_YEAR,
+      payload: { month: date.getMonth() + 1, year: date.getFullYear() },
+    });
+  };
+
+  useEffect(() => {
+    handleMonthChange(new Date());
+  }, []);
+
   dispatch({
     type: DatesRangeActionType.SET_DATES_RANGE,
     payload: {
@@ -37,6 +52,10 @@ const RangeCalendar = () => {
   // console.log(b);
   return (
     <DayPicker
+      captionLayout="dropdown-buttons"
+      fromYear={2015}
+      toYear={2025}
+      onMonthChange={handleMonthChange}
       showOutsideDays
       ISOWeek
       mode="range"
