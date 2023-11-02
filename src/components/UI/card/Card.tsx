@@ -53,7 +53,7 @@ const Card = () => {
                 <div className="p-3 p-sm-4">
                   <h5 className="font-Quicksand-SemiBold mb-0 ">cloudcash</h5>
 
-                  <p className="fs--1 text-white-50">RPEMIUM ACCOUNT</p>
+                  <p className="fs--1 text-white-50">PREMIUM ACCOUNT</p>
 
                   <div className="w-100 d-flex justify-content-center ">
                     <div className="typing-demo fs-5 py-3">{randomDigit()}</div>

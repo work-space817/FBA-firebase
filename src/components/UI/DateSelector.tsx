@@ -6,7 +6,7 @@ import {
   DatesRangeActionType,
   MonthAndYearRangeActionType,
 } from "../../store/reducers/types";
-const RangeCalendar = () => {
+const DateSelector = () => {
   const dispatch = useDispatch();
 
   const date = new Date();
@@ -21,7 +21,7 @@ const RangeCalendar = () => {
   if (range?.from) {
     if (!range.to) {
       footer = <p>{format(range.from, "PPP")}</p>;
-    } else if (range.to) {
+    } else if (range?.to) {
       footer = (
         <p>
           {format(range.from, "PPP")} - {format(range.to, "PPP")}
@@ -31,7 +31,7 @@ const RangeCalendar = () => {
   }
 
   const handleMonthChange = (date: Date) => {
-    const b = dispatch({
+    dispatch({
       type: MonthAndYearRangeActionType.SET_MONTH_AND_YEAR,
       payload: { month: date.getMonth() + 1, year: date.getFullYear() },
     });
@@ -41,15 +41,16 @@ const RangeCalendar = () => {
     handleMonthChange(new Date());
   }, []);
 
-  dispatch({
-    type: DatesRangeActionType.SET_DATES_RANGE,
-    payload: {
-      ...range,
-      from: range?.from?.getTime(),
-      to: range?.to?.getTime() || range?.from?.getTime(),
-    },
-  });
-  // console.log(b);
+  useEffect(() => {
+    dispatch({
+      type: DatesRangeActionType.SET_DATES_RANGE,
+      payload: {
+        ...range,
+        from: range?.from?.getTime(),
+        to: range?.to?.getTime() || range?.from?.getTime(),
+      },
+    });
+  }, [range]);
   return (
     <DayPicker
       captionLayout="dropdown-buttons"
@@ -67,4 +68,4 @@ const RangeCalendar = () => {
     />
   );
 };
-export default RangeCalendar;
+export default DateSelector;

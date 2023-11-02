@@ -152,7 +152,9 @@ const TransactionTable = () => {
         <div className="rounded-circle border px-2">{currentPage}</div>
         <div
           className={`d-flex align-items-center rounded-4 shadow ${
-            slicedData.length < itemsPerPage ? "d-none" : ""
+            slicedData.length <= itemsPerPage && currentPage !== 1
+              ? "d-none"
+              : ""
           }`}
         >
           <div className="p-2" onClick={() => setCurrentPage(currentPage + 1)}>

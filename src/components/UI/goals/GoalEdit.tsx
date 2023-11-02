@@ -84,6 +84,7 @@ const GoalEdit: React.FC = () => {
           <h4 className="me-xxl-3 me-0">Edit your goal</h4>
           {selectedGoal != null ? (
             <Goal
+              isExpire={false}
               id={selectedGoal.id}
               cost={selectedGoal.cost}
               expireDate={selectedGoal.expireDate}
@@ -93,6 +94,7 @@ const GoalEdit: React.FC = () => {
             />
           ) : (
             <Goal
+              isExpire={false}
               id={""}
               cost={"$$$"}
               expireDate={"Expire date"}

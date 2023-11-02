@@ -6,6 +6,7 @@ import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import DateFormater from "../../../helpers/DateFormater";
 
 const Goal: FC<IGoal> = ({
   cost,
@@ -17,6 +18,9 @@ const Goal: FC<IGoal> = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const now = new Date().getTime();
+  const formattedExpireDate = DateFormater(expireDate);
+
   const selectGoal = async () => {
     navigate("/transactions");
     const fetchGoals = await getGoalsData();
@@ -33,7 +37,9 @@ const Goal: FC<IGoal> = ({
   return (
     <>
       <div
-        className="rounded-5 shadow"
+        className={`shadow rounded-5 ${
+          now > formattedExpireDate ? "border border-danger" : ""
+        }`}
         style={{ width: "9rem" }}
         onClick={selectGoal}
       >
@@ -45,7 +51,11 @@ const Goal: FC<IGoal> = ({
           </div>
 
           <h4>{cost} UAH</h4>
-          <span className="text-black-50">
+          <span
+            className={` ${
+              now > formattedExpireDate ? "text-danger" : "text-black-50"
+            }`}
+          >
             {expireDate}
             <GoalSVG id="Clock" />
           </span>

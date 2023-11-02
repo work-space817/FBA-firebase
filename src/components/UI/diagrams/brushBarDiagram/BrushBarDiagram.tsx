@@ -9,7 +9,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import DateFormater from "../../../../helpers/DateFormater";
@@ -30,27 +29,22 @@ const BrushBarDiagram = () => {
   const getDaysInMonth = new Date(
     selectedMonthAndYear.year,
     selectedMonthAndYear.month,
-    0
+    0,
+    23,
+    59,
+    59
   );
-  console.log("getDaysInMonth: ", getDaysInMonth);
-
-  //!  //!  //!  //!  //!  //!  //!  //!  //!  //!
+  const rangeFrom = new Date(
+    selectedMonthAndYear.year,
+    selectedMonthAndYear.month - 1,
+    1
+  );
+  const rangeTo = getDaysInMonth;
   const sortList = transactionList.filter(
     (transaction) =>
-      new Date(
-        selectedMonthAndYear.year,
-        selectedMonthAndYear.month - 1,
-        0
-      ).getTime() <= DateFormater(transaction.transactionDate) &&
-      DateFormater(transaction.transactionDate) <=
-        new Date(
-          selectedMonthAndYear.year,
-          selectedMonthAndYear.month,
-          0
-        ).getTime()
+      rangeFrom.getTime() <= DateFormater(transaction.transactionDate) &&
+      DateFormater(transaction.transactionDate) <= rangeTo.getTime()
   );
-  console.log(sortList);
-  //!  //!  //!  //!  //!  //!  //!  //!  //!  //!  //!
   const mergedTransactions = sortList.reduce(
     (result: any[], currentTransaction) => {
       const { transactionType, transactionDate, transactionValue } =
@@ -85,12 +79,10 @@ const BrushBarDiagram = () => {
           );
         }
       }
-
       return result;
     },
     []
   );
-  console.log(mergedTransactions);
   const mergedData = mergedTransactions.map((date) => {
     return {
       day: date.summaryDate,
@@ -110,13 +102,15 @@ const BrushBarDiagram = () => {
     }
   }
   const statisticData = mergedData.sort((a, b) => a.day - b.day);
-
+  // console.log("mergedTransactions", mergedTransactions);
+  // console.log("mergedData", mergedData);
+  // console.log("statisticData", statisticData);
   return (
     <ResponsiveContainer width="100%" height={400} className="">
       <BarChart
         data={statisticData}
         margin={{
-          left: -20,
+          left: -10,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
