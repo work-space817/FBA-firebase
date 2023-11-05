@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { IDatesRange, ITransactionList } from "../../../store/reducers/types";
-import TransactionList from "../transactions/TransactionList";
-import { ITransactionStatisticList } from "../diagramComponents/transactionStatistic/types";
-import { parse } from "date-fns";
-import DateFormater from "../../../helpers/DateFormater";
+import {
+  IDatesRange,
+  ITransactionList,
+} from "../../../../../store/reducers/types";
+import TransactionList from "../../../transactions/TransactionList";
+import { ITransactionStatisticList } from "../types";
+import DateFormater from "../../../../../helpers/DateFormater";
 
 const TransactionStatisticList = () => {
   const fetchTransactionsData = TransactionList();

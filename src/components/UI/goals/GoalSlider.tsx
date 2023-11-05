@@ -48,7 +48,6 @@ const GoalSlider: React.FC = () => {
     .slice(currentIndex, currentIndex + visibleGoals)
     .map((goal, index) => (
       <Goal
-        isExpire={false}
         key={index}
         title={goal.title}
         cost={goal.cost}

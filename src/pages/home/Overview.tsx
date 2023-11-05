@@ -6,7 +6,7 @@ import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import getUserInformation from "../../api/userInfo/getUserInformation";
 import OperationMenu from "../../components/UI/OperationMenu";
-import LineDiagram from "../../components/UI/diagrams/lineDiagram/LineDiagram";
+import GoalsCircleDiagram from "../../components/UI/diagramComponents/goalCircle/GoalsCircleDiagram";
 
 const Overview: FC = () => {
   const dispatch = useDispatch();
@@ -29,15 +29,16 @@ const Overview: FC = () => {
       </div>
 
       <div className="d-flex gap-3">
-        <div className="col-6 rounded-5 shadow">
+        {/* <div className="col-6 rounded-5 shadow">
           <div className="p-3">
             <h4 className="ms-3 mb-3">Line Diagram</h4>
             <LineDiagram />
           </div>
-        </div>
-        <div className="col-6 rounded-5 shadow">
+        </div> */}
+        <div className="col rounded-5 shadow">
           <div className="p-3">
             <h4 className="ms-3 mb-3">User Info</h4>
+            <GoalsCircleDiagram />
           </div>
         </div>
       </div>

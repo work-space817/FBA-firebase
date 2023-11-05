@@ -14,13 +14,3 @@ export interface ITransactionStatisticList {
   summaryCount: number;
   transactions: ITransaction[];
 }
-export interface ISummary {
-  summaryDate: number;
-  summaryType: [
-    transactionType: {
-      summaryCount: number;
-      summaryValue: number;
-      transaction: ITransaction[];
-    }
-  ];
-}

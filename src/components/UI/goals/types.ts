@@ -5,12 +5,10 @@ export interface IGoal {
   index: any;
   selectedCategories: string | React.ReactNode;
   id: string;
-  isExpire: boolean;
 }
 export interface IGoalAdd {
   title: string;
   cost: string;
-  isExpire: boolean;
 }
 
 export interface IGoalEdit {

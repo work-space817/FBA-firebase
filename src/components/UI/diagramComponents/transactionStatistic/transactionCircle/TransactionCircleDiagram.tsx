@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
-import CircleDiagramItem from "./TransactionCircleDiagramItem";
-import CustomActiveShapePieDiagram from "../../../diagrams/circleDiagram/CustomActiveShapePieDiagram";
-import TransactionStatisticList from "../../../diagrams/TransactionStatisticList";
+import TransactionCircleDiagramItem from "./TransactionCircleDiagramItem";
+import TransactionStatisticList from "./TransactionStatisticList";
 import { ITransactionStatisticList } from "../types";
+import CustomActiveShapePieDiagram from "../../../../../lib/recharts/circleDiagram/CustomActiveShapePieDiagram";
 
 interface ITransactionCircleDiagram {
   circleColor: string;
@@ -13,13 +13,14 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
   circleColor,
   transactionType,
 }) => {
+  console.log(TransactionStatisticList());
   const transactionList = TransactionStatisticList().filter(
     (transaction) => transaction.summaryType === transactionType
   );
   const visibleTransactionList = transactionList
     .sort((a: any, b: any) => b.summaryValue - a.summaryValue)
     .map((transaction: ITransactionStatisticList, index) => (
-      <CircleDiagramItem
+      <TransactionCircleDiagramItem
         key={index}
         category={transaction.summaryCategory}
         countOfTransaction={transaction.summaryCount}

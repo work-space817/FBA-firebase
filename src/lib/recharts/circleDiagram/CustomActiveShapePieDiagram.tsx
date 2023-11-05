@@ -1,10 +1,7 @@
 import React, { FC, useCallback, useState } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
+import { ICircleDiagramTypes } from "./types";
 
-interface ICustomActiveShapePieDiagram {
-  circleColor: string;
-  statisticData: any[];
-}
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -77,7 +74,7 @@ const renderActiveShape = (props: any) => {
   );
 };
 
-const CustomActiveShapePieDiagram: FC<ICustomActiveShapePieDiagram> = ({
+const CustomActiveShapePieDiagram: FC<ICircleDiagramTypes> = ({
   circleColor,
   statisticData,
 }) => {
@@ -99,7 +96,7 @@ const CustomActiveShapePieDiagram: FC<ICustomActiveShapePieDiagram> = ({
           cy={101}
           innerRadius={50}
           outerRadius={65}
-          fill={circleColor}
+          fill={circleColor as string}
           dataKey="summaryValue"
           onMouseEnter={onPieEnter}
         />

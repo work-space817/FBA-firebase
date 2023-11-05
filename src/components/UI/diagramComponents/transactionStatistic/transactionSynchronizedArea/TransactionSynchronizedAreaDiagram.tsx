@@ -1,18 +1,6 @@
 import { FC } from "react";
-import AreaDiagram from "../../../diagrams/areaDiagram/SynchronizedAreaChart";
-import TransactionStatisticList from "../../../diagrams/TransactionStatisticList";
-import SynchronizedAreaChart from "../../../diagrams/areaDiagram/SynchronizedAreaChart";
-
-// interface ITransactionSynchronizedAreaDiagram {
-//   circleColor: string;
-//   transactionType: string;
-// }
-// const TransactionSynchronizedAreaDiagram: FC<
-//   ITransactionSynchronizedAreaDiagram
-// > = ({ circleColor, transactionType }) => {
-//   const transactionList = TransactionStatisticList().filter(
-//     (transaction) => transaction.summaryType === transactionType
-//   );
+import TransactionStatisticList from "../transactionCircle/TransactionStatisticList";
+import SynchronizedAreaChart from "../../../../../lib/recharts/areaDiagram/SynchronizedAreaChart";
 
 const TransactionSynchronizedAreaDiagram = () => {
   const transactionList = TransactionStatisticList();

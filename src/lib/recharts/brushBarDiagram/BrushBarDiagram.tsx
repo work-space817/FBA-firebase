@@ -11,12 +11,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import DateFormater from "../../../../helpers/DateFormater";
+import TransactionList from "../../../components/UI/transactions/TransactionList";
+import DateFormater from "../../../helpers/DateFormater";
 import {
-  IMonthAndYearRange,
   ITransactionList,
-} from "../../../../store/reducers/types";
-import TransactionList from "../../transactions/TransactionList";
+  IMonthAndYearRange,
+} from "../../../store/reducers/types";
 
 const BrushBarDiagram = () => {
   const fetchTransactionsData = TransactionList();

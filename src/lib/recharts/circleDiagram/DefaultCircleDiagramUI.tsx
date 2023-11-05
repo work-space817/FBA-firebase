@@ -1,9 +1,11 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import OutcomingList from "../TransactionStatisticList";
-import TransactionStatisticList from "../TransactionStatisticList";
+import { ICircleDiagramTypes } from "./types";
 
-const DefaultCircleDiagramUI = () => {
+const DefaultCircleDiagramUI: FC<ICircleDiagramTypes> = ({
+  circleColor,
+  statisticData,
+}) => {
   const COLORS = [
     "#0088FE",
     "#00C49F",
@@ -43,19 +45,18 @@ const DefaultCircleDiagramUI = () => {
       </text>
     );
   };
-  const transactionList = TransactionStatisticList();
-  const visiblePieChartList = transactionList.map((entry, index) => {
+  const visiblePieChartList = statisticData.map((entry, index) => {
     return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
   });
   return (
     <ResponsiveContainer width="100%" height={175} className="">
       <PieChart width={400} height={400}>
         <Pie
-          data={transactionList}
+          data={COLORS}
           cx="50%"
           cy="50%"
           labelLine={false}
-          // label={renderCustomizedLabel}
+          label={renderCustomizedLabel}
           outerRadius={80}
           fill="#8884d8"
           dataKey="summaryValue"

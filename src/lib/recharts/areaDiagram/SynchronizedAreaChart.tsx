@@ -9,14 +9,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import TransactionList from "../../../components/UI/transactions/TransactionList";
+import DateFormater from "../../../helpers/DateFormater";
 import {
-  IMonthAndYearRange,
   ITransactionList,
-} from "../../../../store/reducers/types";
-import TransactionList from "../../transactions/TransactionList";
-import TransactionStatisticList from "../TransactionStatisticList";
-import DateFormater from "../../../../helpers/DateFormater";
-
+  IMonthAndYearRange,
+} from "../../../store/reducers/types";
 interface ISynchronizedAreaChart {
   circleColor: string;
   statisticData: any[];

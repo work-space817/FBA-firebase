@@ -1,27 +1,18 @@
-import CircleDiagramItem from "../transactionStatistic/transactionCircle/TransactionCircleDiagramItem";
-import OutcomingList from "../../diagrams/TransactionStatisticList";
-import { ITransactionStatisticList } from "../transactionStatistic/types";
-import DefaultCircleDiagramUI from "../../diagrams/circleDiagram/DefaultCircleDiagramUI";
-import TransactionStatisticList from "../../diagrams/TransactionStatisticList";
+import GoalStatisticList from "./GoalStatisticList";
+import DefaultCircleDiagramUI from "../../../../lib/recharts/circleDiagram/DefaultCircleDiagramUI";
+import DateFormater from "../../../../helpers/DateFormater";
+import TwoLevelPieDiagram from "../../../../lib/recharts/circleDiagram/TwoLevelPieDiagram";
 
 const GoalsCircleDiagram = () => {
-  const transactionList = TransactionStatisticList();
+  const goalList = GoalStatisticList();
 
-  const visibleTransactionList = transactionList.map(
-    (transaction: ITransactionStatisticList, index) => (
-      <CircleDiagramItem
-        key={index}
-        category={transaction.summaryCategory}
-        countOfTransaction={transaction.summaryCount}
-        valueOfTransaction={transaction.summaryValue}
-        percentOfTransaction={0}
-      />
-    )
-  );
   return (
     <>
-      <DefaultCircleDiagramUI />
-      <div>{visibleTransactionList}</div>
+      <TwoLevelPieDiagram
+        circleColor={["#FF0e42", "#36de22"]}
+        statisticData={goalList}
+      />
+      {/* <div>{visibleTransactionList}</div> */}
     </>
   );
 };

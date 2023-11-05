@@ -18,7 +18,6 @@ const GoalAdd = () => {
   const init: IGoalAdd = {
     title: "",
     cost: "",
-    isExpire: false,
   };
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
@@ -88,6 +87,7 @@ const GoalAdd = () => {
         // fromDate={today}
         mode="single"
         required
+        ISOWeek
         selected={selectedDay}
         onSelect={setSelectedDay}
         footer={footer}
