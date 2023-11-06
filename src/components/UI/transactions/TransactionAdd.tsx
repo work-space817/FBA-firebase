@@ -12,9 +12,9 @@ import {
 import SelectCategories from "../../common/selectCategories/SelectCategories";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 import { ITransactionAdd } from "./types";
-import setTransactionData from "../../../api/transactions/setTransactionData";
+import setTransactionData from "../../../api/firebase/transactions/setTransactionData";
 import { FC, useState } from "react";
-import setUserBalance from "../../../api/userBalance/setUserBalance";
+import setUserBalance from "../../../api/firebase/userBalance/setUserBalance";
 
 interface ITransactionType {
   transactionType: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IGoal } from "./types";
-import getGoalsData from "../../../api/goals/getGoalsData";
+import getGoalsData from "../../../api/firebase/goals/getGoalsData";
 import { useDispatch, useSelector } from "react-redux";
 import { GoalListActionType, IGoalList } from "../../../store/reducers/types";
 

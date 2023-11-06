@@ -2,7 +2,6 @@ import DateSelector from "../../components/UI/DateSelector";
 import TransactionBrushBarDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionBrushBar/TransactionBrushBarDiagram";
 import TransactionCircleDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionCircle/TransactionCircleDiagram";
 import TransactionSynchronizedAreaDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionSynchronizedArea/TransactionSynchronizedAreaDiagram";
-import BrushBarDiagram from "../../lib/recharts/brushBarDiagram/BrushBarDiagram";
 
 const StatisticPage = () => {
   return (

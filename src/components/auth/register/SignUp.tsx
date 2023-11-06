@@ -4,10 +4,10 @@ import { useFormik } from "formik";
 import { auth, firestore } from "../../../api/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/InputComponent";
-import setAuthToken from "../../../api/userInfo/setAuthToken";
+import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
 import { doc, setDoc } from "firebase/firestore";
-import { IBalance } from "../../../api/userBalance/types";
-import setUserBalance from "../../../api/userBalance/setUserBalance";
+import { IBalance } from "../../../api/firebase/userBalance/types";
+import setUserBalance from "../../../api/firebase/userBalance/setUserBalance";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import { useDispatch } from "react-redux";
@@ -33,9 +33,8 @@ const SignUp = () => {
       setAuthToken(userToken, uid);
       dispatch({ type: AuthUserActionType.LOGIN_USER });
 
-      console.log("first");
+      console.log("signed up");
       navigate("/");
-      console.log("second");
       const userId = user.uid;
       const additionalUserInformation = doc(firestore, "users", userId);
       await setDoc(additionalUserInformation, {

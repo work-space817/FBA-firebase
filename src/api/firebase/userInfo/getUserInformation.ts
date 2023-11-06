@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { collection, doc, getDocs } from "firebase/firestore";
-import { auth, firestore } from "../config";
-import getUserId from "../userInfo/getUserId";
-import { ISignUp } from "../../components/auth/register/types";
+import { auth, firestore } from "../../config";
+import getUserId from "../../../helpers/functions/getUserId";
+import { ISignUp } from "../../../components/auth/register/types";
 
 const getUserInformation = async () => {
   const userId = getUserId();

@@ -1,4 +1,4 @@
-import { IBalance } from "../../api/userBalance/types";
+import { IBalance } from "../../api/firebase/userBalance/types";
 import { IGoal } from "../../components/UI/goals/types";
 import { ITransaction } from "../../components/UI/transactions/types";
 

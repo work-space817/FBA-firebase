@@ -1,6 +1,6 @@
 import { collection, doc, getDocs } from "firebase/firestore";
-import { firestore } from "../config";
-import getUserId from "../userInfo/getUserId";
+import { firestore } from "../../config";
+import getUserId from "../../../helpers/functions/getUserId";
 
 const getGoalsData = async () => {
   const userId = getUserId();

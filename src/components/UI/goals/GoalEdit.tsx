@@ -7,7 +7,7 @@ import {
   IGoalSelect,
 } from "../../../store/reducers/types";
 import { deleteDoc, updateDoc } from "firebase/firestore";
-import getGoalsData from "../../../api/goals/getGoalsData";
+import getGoalsData from "../../../api/firebase/goals/getGoalsData";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { IGoalEdit } from "./types";

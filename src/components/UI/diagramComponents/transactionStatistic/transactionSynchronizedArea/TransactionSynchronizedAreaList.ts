@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import DateFormater from "../../../../../helpers/DateFormater";
+import DateFormater from "../../../../../helpers/functions/DateFormater";
 import {
   ITransactionList,
   IMonthAndYearRange,
@@ -83,7 +83,7 @@ const TransactionSynchronizedAreaList = () => {
     },
     []
   );
-  console.log(mergedTransactions);
+  // console.log(mergedTransactions);
   const mergedData = months.map((month) => {
     const monthData = mergedTransactions.find(
       (item: any) => item.summaryMonth === month
@@ -99,7 +99,6 @@ const TransactionSynchronizedAreaList = () => {
 
     return { month, income, outcome };
   });
-  console.log(mergedData);
   return mergedData;
 };
 

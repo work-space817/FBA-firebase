@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import DateFormater from "../../../../../helpers/DateFormater";
+import DateFormater from "../../../../../helpers/functions/DateFormater";
 import {
   ITransactionList,
   IMonthAndYearRange,

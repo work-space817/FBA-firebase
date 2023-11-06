@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import getGoalsData from "../../../api/goals/getGoalsData";
+import getGoalsData from "../../../api/firebase/goals/getGoalsData";
 import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
-import DateFormater from "../../../helpers/DateFormater";
+import DateFormater from "../../../helpers/functions/DateFormater";
 
 const Goal: FC<IGoal> = ({
   cost,

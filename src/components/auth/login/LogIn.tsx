@@ -7,7 +7,7 @@ import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/InputComponent";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/config";
-import setAuthToken from "../../../api/userInfo/setAuthToken";
+import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
 
 const LogIn = () => {
   const init: ILogIn = {
@@ -31,7 +31,6 @@ const LogIn = () => {
       const userToken = (await getIdToken(user)) as string;
       const uid = auth.currentUser?.uid as string;
       setAuthToken(userToken, uid);
-      navigate("/");
     } catch (error) {
       console.log(error);
     }

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import GoalList from "../../../goals/GoalList";
 import { IGoalList } from "../../../../../store/reducers/types";
-import DateFormater from "../../../../../helpers/DateFormater";
+import DateFormater from "../../../../../helpers/functions/DateFormater";
 import { IGoalCircleStatisticList } from "../types";
 
 const GoalCircleStatisticList = () => {

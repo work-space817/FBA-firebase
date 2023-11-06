@@ -1,6 +1,6 @@
 import { addDoc, collection, doc } from "firebase/firestore";
-import getUserId from "../userInfo/getUserId";
-import { firestore } from "../config";
+import getUserId from "../../../helpers/functions/getUserId";
+import { firestore } from "../../config";
 
 const setTransactionData = async (values: any) => {
   const userId = getUserId();

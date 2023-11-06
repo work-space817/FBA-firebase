@@ -1,5 +1,12 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 interface ITwoLevelPieDiagram {
   outterData: any[];
@@ -9,8 +16,6 @@ const TwoLevelPieDiagram: FC<ITwoLevelPieDiagram> = ({
   outterData,
   innerData,
 }) => {
-  console.log("outterData", outterData);
-
   // const innerCOLORS = [
   //   "#770ef8",
   //   "#0088FE",
@@ -39,8 +44,8 @@ const TwoLevelPieDiagram: FC<ITwoLevelPieDiagram> = ({
         <Pie
           data={outterData}
           dataKey="summaryCount"
-          innerRadius={70}
-          outerRadius={90}
+          innerRadius={60}
+          outerRadius={80}
           fill="color"
           label
           //   label={renderCustomizedLabel}
@@ -52,12 +57,11 @@ const TwoLevelPieDiagram: FC<ITwoLevelPieDiagram> = ({
             />
           ))}
         </Pie>
+
         <Pie
           data={innerData}
-          cx="50%"
-          cy="50%"
           labelLine={false}
-          outerRadius={60}
+          outerRadius={50}
           fill="#b30e42"
           dataKey="summaryGoalCount"
         >

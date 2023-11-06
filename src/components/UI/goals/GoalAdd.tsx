@@ -2,7 +2,7 @@ import InputComponent from "../../common/input/InputComponent";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
-import setGoalsData from "../../../api/goals/setGoalsData";
+import setGoalsData from "../../../api/firebase/goals/setGoalsData";
 import {
   ISelectCategories,
   GoalListActionType,

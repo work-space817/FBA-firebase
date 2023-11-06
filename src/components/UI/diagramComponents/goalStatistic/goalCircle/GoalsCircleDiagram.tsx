@@ -1,4 +1,5 @@
 import TwoLevelPieDiagram from "../../../../../lib/recharts/circleDiagram/TwoLevelPieDiagram";
+import CircleDiagramItem from "../../CircleDiagramItem";
 import { IGoalByCategory } from "../types";
 import GoalCircleStatisticList from "./GoalCircleStatisticList";
 
@@ -11,13 +12,49 @@ const GoalsCircleDiagram = () => {
       visiblePieChartList.push(goal)
     );
   });
+  const visibleList = (state: boolean) => {
+    const visibleActiveGoalList = goalList
+      .filter((goal: any, index) => goal.isExpire === state)
+      .map((goal, index) => {
+        const goals = goal.goalsByCategory.map((goal) => (
+          <CircleDiagramItem
+            key={index + goal.summaryGoalValue}
+            category={goal.summaryGoalCategory as string}
+            count={goal.summaryGoalCount}
+            value={goal.summaryGoalValue}
+            percent={0}
+            typeOfAction={"goals"}
+          />
+        ));
+        return goals;
+      });
+    return visibleActiveGoalList;
+  };
+
   return (
     <>
       <TwoLevelPieDiagram
         outterData={goalList}
         innerData={visiblePieChartList}
       />
-      {/* <div>{visibleTransactionList}</div> */}
+      <div className="d-flex">
+        <div className="visibleCircleList px-3 col-6">
+          <h5>Active goals</h5>
+          {visibleList(false).length > 0 ? (
+            visibleList(false)
+          ) : (
+            <h5 className="text-center">No one goals was created</h5>
+          )}
+        </div>
+        <div className="visibleCircleList px-3 col-6">
+          <h5>Expired goals</h5>
+          {visibleList(true).length > 0 ? (
+            visibleList(true)
+          ) : (
+            <h5 className="text-center">No one goals was created</h5>
+          )}
+        </div>
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import {
   ITransactionList,
 } from "../../../../../store/reducers/types";
 import TransactionList from "../../../transactions/TransactionList";
-import DateFormater from "../../../../../helpers/DateFormater";
+import DateFormater from "../../../../../helpers/functions/DateFormater";
 import { ITransaction } from "../../../transactions/types";
 import { ITransactionCircleStatisticList } from "./types";
 

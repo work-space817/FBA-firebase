@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getUserBalance from "../../../api/userBalance/getUserBalance";
+import getUserBalance from "../../../api/firebase/userBalance/getUserBalance";
 import {
   IUserBalance,
   UserBalanceActionType,

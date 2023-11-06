@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
-import TransactionCircleDiagramItem from "./TransactionCircleDiagramItem";
 import CustomActiveShapePieDiagram from "../../../../../lib/recharts/circleDiagram/CustomActiveShapePieDiagram";
 import TransactionCircleStatisticList from "./TransactionCircleStatisticList";
 import { ITransactionCircleStatisticList } from "./types";
+import CircleDiagramItem from "../../CircleDiagramItem";
 
 interface ITransactionCircleDiagram {
   circleColor: string;
@@ -19,12 +19,13 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
   const visibleTransactionList = transactionListByType
     .sort((a: any, b: any) => b.summaryValue - a.summaryValue)
     .map((transaction: ITransactionCircleStatisticList, index) => (
-      <TransactionCircleDiagramItem
+      <CircleDiagramItem
         key={index}
         category={transaction.summaryCategory}
-        countOfTransaction={transaction.summaryCount}
-        valueOfTransaction={transaction.summaryValue}
-        percentOfTransaction={0}
+        count={transaction.summaryCount}
+        value={transaction.summaryValue}
+        percent={0}
+        typeOfAction={"transactions"}
       />
     ));
   return (
@@ -33,7 +34,7 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
         circleColor={circleColor}
         statisticData={transactionListByType}
       />
-      <div className="visibleTransactionList px-3">
+      <div className="visibleCircleList px-3">
         {transactionListByType.length > 0 ? (
           visibleTransactionList
         ) : (

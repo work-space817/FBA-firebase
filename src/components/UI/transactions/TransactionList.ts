@@ -5,7 +5,7 @@ import {
   TransactionListActionType,
 } from "../../../store/reducers/types";
 import { ITransaction } from "./types";
-import getTransactionData from "../../../api/transactions/getTransactionData";
+import getTransactionData from "../../../api/firebase/transactions/getTransactionData";
 
 const TransactionList = () => {
   const [loading, setLoading] = useState<boolean>(false);

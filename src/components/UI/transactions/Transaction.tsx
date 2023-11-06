@@ -4,7 +4,7 @@ import { ITransaction } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
 import TransactionSVG from "../../../helpers/selectorsSVG/UI/TransactionSVG";
 import { TransactionListActionType } from "../../../store/reducers/types";
-import getTransactionData from "../../../api/transactions/getTransactionData";
+import getTransactionData from "../../../api/firebase/transactions/getTransactionData";
 import { deleteDoc } from "firebase/firestore";
 import ModalWindow from "../../common/modal/ModalWindow";
 
