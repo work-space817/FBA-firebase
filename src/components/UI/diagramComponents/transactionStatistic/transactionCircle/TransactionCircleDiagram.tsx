@@ -1,25 +1,24 @@
 import { FC, useState } from "react";
 import TransactionCircleDiagramItem from "./TransactionCircleDiagramItem";
-import TransactionStatisticList from "./TransactionStatisticList";
-import { ITransactionStatisticList } from "../types";
 import CustomActiveShapePieDiagram from "../../../../../lib/recharts/circleDiagram/CustomActiveShapePieDiagram";
+import TransactionCircleStatisticList from "./TransactionCircleStatisticList";
+import { ITransactionCircleStatisticList } from "./types";
 
 interface ITransactionCircleDiagram {
   circleColor: string;
   transactionType: string;
 }
-
 const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
   circleColor,
   transactionType,
 }) => {
-  console.log(TransactionStatisticList());
-  const transactionList = TransactionStatisticList().filter(
+  const transactionList = TransactionCircleStatisticList();
+  const transactionListByType = transactionList.filter(
     (transaction) => transaction.summaryType === transactionType
   );
-  const visibleTransactionList = transactionList
+  const visibleTransactionList = transactionListByType
     .sort((a: any, b: any) => b.summaryValue - a.summaryValue)
-    .map((transaction: ITransactionStatisticList, index) => (
+    .map((transaction: ITransactionCircleStatisticList, index) => (
       <TransactionCircleDiagramItem
         key={index}
         category={transaction.summaryCategory}
@@ -32,10 +31,10 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
     <>
       <CustomActiveShapePieDiagram
         circleColor={circleColor}
-        statisticData={transactionList}
+        statisticData={transactionListByType}
       />
       <div className="visibleTransactionList px-3">
-        {transactionList.length > 0 ? (
+        {transactionListByType.length > 0 ? (
           visibleTransactionList
         ) : (
           <h5 className="text-center">No one transaction was done</h5>

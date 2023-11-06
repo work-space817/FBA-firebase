@@ -6,7 +6,7 @@ import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import getUserInformation from "../../api/userInfo/getUserInformation";
 import OperationMenu from "../../components/UI/OperationMenu";
-import GoalsCircleDiagram from "../../components/UI/diagramComponents/goalCircle/GoalsCircleDiagram";
+import GoalsCircleDiagram from "../../components/UI/diagramComponents/goalStatistic/goalCircle/GoalsCircleDiagram";
 
 const Overview: FC = () => {
   const dispatch = useDispatch();

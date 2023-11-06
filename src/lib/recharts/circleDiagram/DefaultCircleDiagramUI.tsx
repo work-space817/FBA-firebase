@@ -1,6 +1,6 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { ICircleDiagramTypes } from "./types";
+import { ICircleDiagramTypes } from "./CustomActiveShapePieDiagram";
 
 const DefaultCircleDiagramUI: FC<ICircleDiagramTypes> = ({
   circleColor,

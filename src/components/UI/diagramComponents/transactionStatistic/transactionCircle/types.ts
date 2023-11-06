@@ -1,4 +1,4 @@
-import { ITransaction } from "../../transactions/types";
+import { ITransaction } from "../../../transactions/types";
 
 export interface ITransactionCircleDiagramItem {
   category: string;
@@ -6,7 +6,7 @@ export interface ITransactionCircleDiagramItem {
   valueOfTransaction: number;
   percentOfTransaction: number;
 }
-export interface ITransactionStatisticList {
+export interface ITransactionCircleStatisticList {
   summaryPercent?: number;
   summaryCategory: string;
   summaryType: string;

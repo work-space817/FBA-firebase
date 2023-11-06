@@ -1,38 +1,43 @@
 import React, { FC, PureComponent, useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { ICircleDiagramTypes } from "./types";
 
-const TwoLevelPieDiagram: FC<ICircleDiagramTypes> = ({
-  circleColor,
-  statisticData,
+interface ITwoLevelPieDiagram {
+  outterData: any[];
+  innerData: any[];
+}
+const TwoLevelPieDiagram: FC<ITwoLevelPieDiagram> = ({
+  outterData,
+  innerData,
 }) => {
-  console.log("statisticData", statisticData);
+  console.log("outterData", outterData);
 
+  // const innerCOLORS = [
+  //   "#770ef8",
+  //   "#0088FE",
+  //   "#3d85c6 ",
+  //   "#00C49F",
+  //   "#00BB28",
+  //   "#FF8042",
+  //   "#fc9ea3",
+  //   "#f8ec0e ",
+  // ];
   const innerCOLORS = [
-    "#770ef8",
     "#0088FE",
-    "#3d85c6 ",
-    "#00C49F",
-    "#00BB28",
-    "#FF8042",
-    "#803012",
+    "#00FF00",
+    "#FFFF00",
+    "#FF7F00",
     "#fc9ea3",
-    "#f8ec0e ",
+    "#ff00ff ",
+    "#9400D3",
+    "#4B0082",
+    "#0000FF ",
   ];
 
-  const visiblePieChartList: any[] = [];
-  const data03 = statisticData.map((doc: any, index) => {
-    return doc.goalsByCategory.map((goal: any) =>
-      visiblePieChartList.push(goal)
-    );
-  });
-  // console.log("data03", data03);
-  console.log("visiblePieChartList", visiblePieChartList);
   return (
     <ResponsiveContainer width="100%" height={250} className="">
       <PieChart width={400} height={400}>
         <Pie
-          data={statisticData}
+          data={outterData}
           dataKey="summaryCount"
           innerRadius={70}
           outerRadius={90}
@@ -40,7 +45,7 @@ const TwoLevelPieDiagram: FC<ICircleDiagramTypes> = ({
           label
           //   label={renderCustomizedLabel}
         >
-          {statisticData.map((doc, index) => (
+          {outterData.map((doc, index) => (
             <Cell
               key={`cell-${index}`}
               fill={doc.isExpire ? "#FF0e42" : "#36de22"}
@@ -48,15 +53,15 @@ const TwoLevelPieDiagram: FC<ICircleDiagramTypes> = ({
           ))}
         </Pie>
         <Pie
-          data={visiblePieChartList}
+          data={innerData}
           cx="50%"
           cy="50%"
           labelLine={false}
           outerRadius={60}
-          fill="#803012"
+          fill="#b30e42"
           dataKey="summaryGoalCount"
         >
-          {data03.map((entry, index) => (
+          {innerData.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
               fill={innerCOLORS[index % innerCOLORS.length]}

@@ -20,7 +20,7 @@ const GoalEdit: React.FC = () => {
   );
   const init: IGoalEdit = {
     title: "",
-    cost: "",
+    cost: 0,
     expireDate: "",
   };
 
@@ -94,7 +94,7 @@ const GoalEdit: React.FC = () => {
           ) : (
             <Goal
               id={""}
-              cost={"$$$"}
+              cost={0}
               expireDate={"Expire date"}
               title={"Your title"}
               index={<GoalSVG id="Edit" />}

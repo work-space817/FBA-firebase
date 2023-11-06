@@ -1,12 +1,12 @@
 import { FC } from "react";
-import TransactionStatisticList from "../transactionCircle/TransactionStatisticList";
 import SynchronizedAreaChart from "../../../../../lib/recharts/areaDiagram/SynchronizedAreaChart";
+import TransactionSynchronizedAreaList from "./TransactionSynchronizedAreaList";
 
 const TransactionSynchronizedAreaDiagram = () => {
-  const transactionList = TransactionStatisticList();
+  const transactionList = TransactionSynchronizedAreaList();
   return (
     <>
-      <SynchronizedAreaChart circleColor={""} statisticData={[]} />
+      <SynchronizedAreaChart statisticData={transactionList} />
     </>
   );
 };

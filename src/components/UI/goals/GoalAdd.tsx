@@ -17,7 +17,7 @@ import { DayPicker } from "react-day-picker";
 const GoalAdd = () => {
   const init: IGoalAdd = {
     title: "",
-    cost: "",
+    cost: 0,
   };
   const { selectedCategories } = useSelector(
     (store: any) => store.selectCategories as ISelectCategories
@@ -59,8 +59,8 @@ const GoalAdd = () => {
   const checkUpForm = yup.object({
     title: yup.string().required("Field should not be empty"),
     cost: yup
-      .string()
-      .matches(/[0-9]/, "Only number")
+      .number()
+      .positive("Value can not be less than 0")
       .required("Field should not be empty"),
   });
   const formik = useFormik({
@@ -84,7 +84,7 @@ const GoalAdd = () => {
       className="d-flex align-items-center flex-column"
     >
       <DayPicker
-        // fromDate={today}
+        fromDate={today}
         mode="single"
         required
         ISOWeek

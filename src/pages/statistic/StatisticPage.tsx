@@ -1,4 +1,5 @@
 import DateSelector from "../../components/UI/DateSelector";
+import TransactionBrushBarDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionBrushBar/TransactionBrushBarDiagram";
 import TransactionCircleDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionCircle/TransactionCircleDiagram";
 import TransactionSynchronizedAreaDiagram from "../../components/UI/diagramComponents/transactionStatistic/transactionSynchronizedArea/TransactionSynchronizedAreaDiagram";
 import BrushBarDiagram from "../../lib/recharts/brushBarDiagram/BrushBarDiagram";
@@ -6,27 +7,29 @@ import BrushBarDiagram from "../../lib/recharts/brushBarDiagram/BrushBarDiagram"
 const StatisticPage = () => {
   return (
     <>
-      <div className="d-flex gap-4 flex-column flex-lg-row align-items-center align-items-sm-end mb-4">
-        <div className="col-10 col-sm">
+      <div className="d-flex gap-4 flex-column flex-xxl-row align-items-center align-items-xxl-end mb-4">
+        <div className="">
           <h4 className="ms-2 mb-3">Select date's</h4>
           <DateSelector />
         </div>
-        <div className="rounded-5 shadow col-10 col-lg-4">
-          <div className="py-3">
-            <h4 className="ms-3 mb-3">Income transactions</h4>
-            <TransactionCircleDiagram
-              circleColor={"#82ca9d"}
-              transactionType={"Income transaction"}
-            />
+        <div className="d-flex flex-column flex-lg-row align-items-center col-12 col-xxl-8 gap-3 justify-content-evenly">
+          <div className="rounded-5 shadow col-12 col-sm-8 col-md-7 col-lg-5 col-xxl-6">
+            <div className="py-3">
+              <h4 className="ms-3 mb-3">Income transactions</h4>
+              <TransactionCircleDiagram
+                circleColor={"#82ca9d"}
+                transactionType={"Income transaction"}
+              />
+            </div>
           </div>
-        </div>
-        <div className="rounded-5 shadow col-10 col-lg-4">
-          <div className="py-3">
-            <h4 className="ms-3 mb-3">Expense transaction</h4>
-            <TransactionCircleDiagram
-              circleColor={"#ed3737"}
-              transactionType={"Outcome transaction"}
-            />
+          <div className="rounded-5 shadow col-12 col-sm-8 col-md-7 col-lg-5 col-xxl-6">
+            <div className="py-3">
+              <h4 className="ms-3 mb-3">Expense transaction</h4>
+              <TransactionCircleDiagram
+                circleColor={"#ed3737"}
+                transactionType={"Outcome transaction"}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -34,7 +37,7 @@ const StatisticPage = () => {
       <div className="rounded-5 shadow mb-5">
         <div className="py-3 px-2">
           <h4 className="ms-3 mb-3">Brush Bar Diagram</h4>
-          <BrushBarDiagram />
+          <TransactionBrushBarDiagram />
         </div>
       </div>
       <div className="mb-5 col rounded-5 shadow">

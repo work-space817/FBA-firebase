@@ -5,10 +5,11 @@ import {
   ITransactionList,
 } from "../../../../../store/reducers/types";
 import TransactionList from "../../../transactions/TransactionList";
-import { ITransactionStatisticList } from "../types";
 import DateFormater from "../../../../../helpers/DateFormater";
+import { ITransaction } from "../../../transactions/types";
+import { ITransactionCircleStatisticList } from "./types";
 
-const TransactionStatisticList = () => {
+const TransactionCircleStatisticList = () => {
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
@@ -22,7 +23,7 @@ const TransactionStatisticList = () => {
       DateFormater(transaction.transactionDate) <= ranges.to
   );
   const mergedTransactions = sortList.reduce(
-    (result: ITransactionStatisticList[], transaction) => {
+    (result: ITransactionCircleStatisticList[], transaction) => {
       const category = transaction.selectedCategories;
       const existingCategory = result.find(
         (group) => group.summaryCategory === category
@@ -49,4 +50,4 @@ const TransactionStatisticList = () => {
   return mergedTransactions;
 };
 
-export default TransactionStatisticList;
+export default TransactionCircleStatisticList;

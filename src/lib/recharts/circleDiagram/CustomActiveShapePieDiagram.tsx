@@ -1,7 +1,9 @@
 import React, { FC, useCallback, useState } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
-import { ICircleDiagramTypes } from "./types";
-
+export interface ICircleDiagramTypes {
+  circleColor?: string | string[];
+  statisticData: any[];
+}
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
   const {

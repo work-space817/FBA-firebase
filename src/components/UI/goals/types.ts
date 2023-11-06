@@ -1,5 +1,5 @@
 export interface IGoal {
-  cost: string;
+  cost: number;
   expireDate: string;
   title: string;
   index: any;
@@ -8,11 +8,11 @@ export interface IGoal {
 }
 export interface IGoalAdd {
   title: string;
-  cost: string;
+  cost: number;
 }
 
 export interface IGoalEdit {
   title: string;
-  cost: string;
+  cost: number;
   expireDate: string;
 }
