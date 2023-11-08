@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { collection, doc, getDocs } from "firebase/firestore";
-import { auth, firestore } from "../../config";
+import { auth, firestore } from "../config";
 import getUserId from "../../../helpers/functions/getUserId";
 import { ISignUp } from "../../../components/auth/register/types";
 

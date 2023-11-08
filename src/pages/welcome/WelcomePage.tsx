@@ -1,15 +1,12 @@
 import { useRef, useState } from "react";
 import SignUp from "../../components/auth/register/SignUp";
 import LogIn from "../../components/auth/login/LogIn";
-import { Modal } from "bootstrap";
-import { useSelector } from "react-redux";
-import { IAuthUser } from "../../store/reducers/types";
 import { useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
   const [logInVisible, setLogInVisible] = useState(false);
   const [signUpVisible, setSignUpVisible] = useState(false);
-
+  const navigate = useNavigate();
   const showLogIn = (e: React.MouseEvent<HTMLElement>) => {
     if (e) {
       setLogInVisible(true);

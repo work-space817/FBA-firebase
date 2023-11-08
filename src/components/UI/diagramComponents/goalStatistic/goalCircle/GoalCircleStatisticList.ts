@@ -57,7 +57,7 @@ const GoalCircleStatisticList = () => {
     },
     []
   );
-  // console.log("mergedGoals", mergedGoals);
+  console.log("mergedGoals", mergedGoals);
   return mergedGoals;
 };
 

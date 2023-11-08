@@ -13,21 +13,24 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
   transactionType,
 }) => {
   const transactionList = TransactionCircleStatisticList();
+  // console.log("transactionList: ", transactionList);
   const transactionListByType = transactionList.filter(
     (transaction) => transaction.summaryType === transactionType
   );
+
   const visibleTransactionList = transactionListByType
     .sort((a: any, b: any) => b.summaryValue - a.summaryValue)
-    .map((transaction: ITransactionCircleStatisticList, index) => (
-      <CircleDiagramItem
-        key={index}
-        category={transaction.summaryCategory}
-        count={transaction.summaryCount}
-        value={transaction.summaryValue}
-        percent={0}
-        typeOfAction={"transactions"}
-      />
-    ));
+    .map((transaction: ITransactionCircleStatisticList, index) => {
+      return (
+        <CircleDiagramItem
+          key={index}
+          category={transaction.summaryCategory}
+          count={transaction.summaryCount}
+          value={transaction.summaryValue}
+          typeOfAction={"transactions"}
+        />
+      );
+    });
   return (
     <>
       <CustomActiveShapePieDiagram

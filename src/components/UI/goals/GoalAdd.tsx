@@ -108,6 +108,9 @@ const GoalAdd = () => {
           type={"number"}
           value={values.cost}
           onChange={handleChange}
+          onFocus={() => {
+            setFieldValue("cost", "");
+          }}
           error={errors.cost}
           touched={touched.cost}
         />

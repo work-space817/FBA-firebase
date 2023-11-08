@@ -1,4 +1,5 @@
 import TwoLevelPieDiagram from "../../../../../lib/recharts/circleDiagram/TwoLevelPieDiagram";
+import { IGoal } from "../../../goals/types";
 import CircleDiagramItem from "../../CircleDiagramItem";
 import { IGoalByCategory } from "../types";
 import GoalCircleStatisticList from "./GoalCircleStatisticList";
@@ -16,16 +17,18 @@ const GoalsCircleDiagram = () => {
     const visibleActiveGoalList = goalList
       .filter((goal: any, index) => goal.isExpire === state)
       .map((goal, index) => {
-        const goals = goal.goalsByCategory.map((goal) => (
-          <CircleDiagramItem
-            key={index + goal.summaryGoalValue}
-            category={goal.summaryGoalCategory as string}
-            count={goal.summaryGoalCount}
-            value={goal.summaryGoalValue}
-            percent={0}
-            typeOfAction={"goals"}
-          />
-        ));
+        const goals = goal.goalsByCategory.map((goal: IGoalByCategory) => {
+          console.log("goal: ", goal);
+          return (
+            <CircleDiagramItem
+              key={index}
+              category={goal.summaryGoalCategory as string}
+              count={goal.summaryGoalCount}
+              value={goal.summaryGoalValue}
+              typeOfAction={"goals"}
+            />
+          );
+        });
         return goals;
       });
     return visibleActiveGoalList;

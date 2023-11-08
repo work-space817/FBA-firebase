@@ -11,12 +11,12 @@ import "./fonts/Quicksand-Regular.ttf";
 import "./fonts/Quicksand-Medium.ttf";
 import "./fonts/Quicksand-SemiBold.ttf";
 import "./fonts/Quicksand-Bold.ttf";
-import PrivateRoute from "./helpers/selectorsSVG/routers/PrivateRoute";
 import DefaultLayout from "./pages/layouts/default/DefaultLayout";
 import SettingsPage from "./pages/settings/SettingsPage";
 import StatisticPage from "./pages/statistic/StatisticPage";
 import TransactionPage from "./pages/transaction/TransactionPage";
 import HomePage from "./pages/home/HomePage";
+import PrivateRoute from "./helpers/routers/PrivateRoute";
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<HomePage />} />
             <Route path="transactions" element={<TransactionPage />} />
-            <Route path="statistic" element={<StatisticPage />} />{" "}
+            <Route path="statistic" element={<StatisticPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Route>

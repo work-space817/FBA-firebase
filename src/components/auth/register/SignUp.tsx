@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, getIdToken } from "firebase/auth";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { auth, firestore } from "../../../api/config";
+import { auth, firestore } from "../../../api/firebase/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/InputComponent";
 import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
@@ -32,21 +32,19 @@ const SignUp = () => {
       const uid = auth.currentUser?.uid as string;
       setAuthToken(userToken, uid);
       dispatch({ type: AuthUserActionType.LOGIN_USER });
-
       console.log("signed up");
-      navigate("/");
       const userId = user.uid;
       const additionalUserInformation = doc(firestore, "users", userId);
       await setDoc(additionalUserInformation, {
         ...values,
       });
-
       const userBalance: IBalance = {
         currentBalance: +values.currentBalance,
         incomingBalance: 0,
         outcomingBalance: 0,
       };
       setUserBalance(userBalance);
+      navigate("/");
     } catch (error: any) {
       console.log("Bad request", error);
     }
@@ -65,7 +63,8 @@ const SignUp = () => {
     validationSchema: checkUpForm,
   });
 
-  const { values, handleSubmit, handleChange, setFieldValue } = formik;
+  const { touched, errors, values, handleSubmit, handleChange, setFieldValue } =
+    formik;
 
   return (
     <>
@@ -77,13 +76,18 @@ const SignUp = () => {
           field="email"
           value={values.email}
           onChange={handleChange}
+          error={errors.email}
+          touched={touched.email}
         />
         <InputComponent
           label="Пароль"
           type="password"
           field="password"
           value={values.password}
+          autoComplete={"current-password"}
           onChange={handleChange}
+          error={errors.password}
+          touched={touched.password}
         />
         <InputComponent
           label="Current balance"
@@ -93,6 +97,8 @@ const SignUp = () => {
           onFocus={() => {
             setFieldValue("currentBalance", "");
           }}
+          error={errors.currentBalance}
+          touched={touched.currentBalance}
         />
         <button type="submit" className="btn btn-primary">
           Sign up

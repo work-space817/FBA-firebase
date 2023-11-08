@@ -74,8 +74,15 @@ const GoalEdit: React.FC = () => {
     onSubmit: onSubmitHandler,
     validationSchema: checkUpForm,
   });
-  const { values, touched, errors, handleSubmit, handleChange, handleReset } =
-    formik;
+  const {
+    values,
+    touched,
+    errors,
+    handleSubmit,
+    handleChange,
+    handleReset,
+    setFieldValue,
+  } = formik;
 
   return (
     <>
@@ -139,6 +146,9 @@ const GoalEdit: React.FC = () => {
               onChange={handleChange}
               error={errors.cost}
               touched={touched.cost}
+              onFocus={() => {
+                setFieldValue("cost", "");
+              }}
             />
             <InputComponent
               label="Expire date"

@@ -152,7 +152,8 @@ const TransactionTable = () => {
         <div className="rounded-circle border px-2">{currentPage}</div>
         <div
           className={`d-flex align-items-center rounded-4 shadow ${
-            slicedData.length <= itemsPerPage && currentPage !== 1
+            transactionList.length >= startIndex &&
+            transactionList.length <= endIndex
               ? "d-none"
               : ""
           }`}

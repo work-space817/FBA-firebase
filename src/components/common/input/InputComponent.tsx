@@ -3,13 +3,14 @@ import { FC, InputHTMLAttributes } from "react";
 
 interface InputGroupProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  type?: "text" | "password" | "email" | "number" | "date" | "time"; //може не передаватися у пропсах для компонента(| - один із можливих варіатнів, які можуть буть)
+  type?: "text" | "password" | "email" | "number" | "date" | "time";
   field?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   errors?: string[];
   error?: string | undefined;
   touched?: boolean | undefined;
+  autoComplete?: string;
 }
 
 const InputComponent: FC<InputGroupProps> = ({
@@ -23,6 +24,7 @@ const InputComponent: FC<InputGroupProps> = ({
   error,
   touched,
   onFocus,
+  autoComplete = "",
 }) => {
   return (
     <div className="mb-3 col">
@@ -39,6 +41,7 @@ const InputComponent: FC<InputGroupProps> = ({
         value={value}
         onChange={onChange}
         aria-describedby="emailHelp"
+        autoComplete={autoComplete}
         placeholder={placeholder}
         onFocus={onFocus}
       />

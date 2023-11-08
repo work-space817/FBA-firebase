@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   LineChart,
   Line,
@@ -9,28 +9,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "00", uv: 400, pv: 240 },
-  { name: "03", uv: 300, pv: 139 },
-  { name: "06", uv: 200, pv: 980 },
-  { name: "09", uv: 278, pv: 390 },
-  { name: "12", uv: 289, pv: 480 },
-  { name: "15", uv: 239, pv: 380 },
-  { name: "18", uv: 278, pv: 689 },
-  { name: "21", uv: 189, pv: 480 },
-  { name: "00", uv: 120, pv: 280 },
-];
-
-const LineDiagram = () => {
+interface ILiniarDiagram {
+  statisticData: any[];
+}
+const LineDiagram: FC<ILiniarDiagram> = ({ statisticData }) => {
   return (
     <ResponsiveContainer width="100%" height={175}>
-      <LineChart data={data} margin={{ left: -10 }}>
+      <LineChart data={statisticData} margin={{ left: -20, right: 5 }}>
         <CartesianGrid strokeDasharray="2 2" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="date" />
+        <YAxis domain={["auto", "auto"]} />
         <Tooltip />
-        <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="rate" stroke="#8884d8" />
       </LineChart>
     </ResponsiveContainer>
   );

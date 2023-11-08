@@ -1,5 +1,5 @@
 import { collection, doc, getDocs } from "firebase/firestore";
-import { firestore } from "../../config";
+import { firestore } from "../config";
 import getUserId from "../../../helpers/functions/getUserId";
 
 const getTransactionData = async () => {

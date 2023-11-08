@@ -4,14 +4,12 @@ interface ICircleDiagramItem {
   category: string;
   count: number;
   value: number;
-  percent: number;
   typeOfAction: string;
 }
 const CircleDiagramItem: FC<ICircleDiagramItem> = ({
   category,
   count,
   value,
-  percent,
   typeOfAction,
 }) => {
   return (
@@ -26,9 +24,8 @@ const CircleDiagramItem: FC<ICircleDiagramItem> = ({
           </span>
         </div>
       </div>
-      <div className="text-end d-flex flex-column">
+      <div className="text-end">
         <span className="fs--1">{value} $</span>
-        <span className="fs--1">{percent}%</span>
       </div>
     </div>
   );

@@ -2,13 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { ILogIn } from "./types";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/InputComponent";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../api/config";
+import { auth } from "../../../api/firebase/config";
 import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
-
+import { store } from "../../../store";
 const LogIn = () => {
   const init: ILogIn = {
     email: "",
@@ -31,6 +31,8 @@ const LogIn = () => {
       const userToken = (await getIdToken(user)) as string;
       const uid = auth.currentUser?.uid as string;
       setAuthToken(userToken, uid);
+      dispatch({ type: AuthUserActionType.LOGIN_USER });
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +63,7 @@ const LogIn = () => {
           type="password"
           field="password"
           value={data.password}
+          autoComplete={"current-password"}
           onChange={onChangeHandler}
         />
 
