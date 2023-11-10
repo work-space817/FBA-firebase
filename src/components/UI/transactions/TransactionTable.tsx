@@ -1,13 +1,12 @@
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { ITransactionList } from "../../../store/reducers/types";
 import { useSelector } from "react-redux";
 import TransactionList from "./TransactionList";
 import Transaction from "./Transaction";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import Loading from "../../common/loading/Loading";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 
-const TransactionTable = () => {
+const TransactionTable = memo(() => {
   const [searchTransactionList, setSearchTransactionList] = useState("");
   const fetchTransactionsData = TransactionList();
   const { transactionList } = useSelector(
@@ -63,7 +62,7 @@ const TransactionTable = () => {
     <>
       <div className="col d-flex flex-column rounded-5 shadow">
         <div className="p-2 p-sm-3">
-          {fetchTransactionsData ? <>{<Loading />}</> : <></>}
+          {/* {fetchTransactionsData ? <>{<Loading />}</> : <></>} */}
           <div className="d-flex justify-content-between align-items-center">
             <h4 className="p-2">Transactions history</h4>
             <input
@@ -166,6 +165,6 @@ const TransactionTable = () => {
       </div>
     </>
   );
-};
+});
 
 export default TransactionTable;

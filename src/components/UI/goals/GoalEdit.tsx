@@ -12,8 +12,10 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { IGoalEdit } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import GoalSelectSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
-const GoalEdit: React.FC = () => {
+import { memo, useCallback, useMemo } from "react";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
+
+const GoalEdit = memo(() => {
   const dispatch = useDispatch();
   const { selectedGoal } = useSelector(
     (store: any) => store.selectGoal as IGoalSelect
@@ -42,7 +44,6 @@ const GoalEdit: React.FC = () => {
       console.log("Bad request", error);
     }
   };
-
   const goalDoneDelete = async () => {
     try {
       const fetchGoals = await getGoalsData();
@@ -64,8 +65,8 @@ const GoalEdit: React.FC = () => {
   const checkUpForm = yup.object({
     title: yup.string().required("Field should not be empty"),
     cost: yup
-      .string()
-      .matches(/[0-9]/, "Only number")
+      .number()
+      .positive("Value can not be less than 0")
       .required("Field should not be empty"),
     expireDate: yup.string().required("Field should not be empty"),
   });
@@ -83,7 +84,9 @@ const GoalEdit: React.FC = () => {
     handleReset,
     setFieldValue,
   } = formik;
-
+  const handleFocus = useCallback(() => {
+    setFieldValue("cost", "");
+  }, [setFieldValue]);
   return (
     <>
       <div className="col-11 col-sm-8 col-md-5 d-flex rounded-5 shadow align-items-center ">
@@ -99,76 +102,80 @@ const GoalEdit: React.FC = () => {
               selectedCategories={selectedGoal.selectedCategories}
             />
           ) : (
-            <Goal
-              id={""}
-              cost={0}
-              expireDate={"Expire date"}
-              title={"Your title"}
-              index={<GoalSVG id="Edit" />}
-              selectedCategories={<GoalSelectSVG id={""} />}
-            />
+            <button
+              className="rounded-5 text-start"
+              disabled={selectedGoal === null}
+            >
+              <Goal
+                id={""}
+                cost={0}
+                expireDate={"Expire date"}
+                title={"Your title"}
+                index={<GoalSVG id="Edit" />}
+                selectedCategories={<SelectCategoriesSVG id={""} />}
+              />
+            </button>
           )}
           <div className="d-flex justify-content-evenly col-12 mt-1">
             <button
+              disabled={selectedGoal === null}
               type="submit"
               className="btn btn-secondary d-flex align-items-center gap-2"
               onClick={goalDoneDelete}
             >
-              {/* <GoalSVG id="Success" /> */}
-
               <p className="m-0 ">Done</p>
             </button>
             <button
+              disabled={selectedGoal === null}
               type="submit"
               className="btn btn-secondary d-flex align-items-center gap-2"
               onClick={goalDoneDelete}
             >
-              {/* <GoalSVG id="Delete" /> */}
-
               <p className="m-0 ">Delete</p>
             </button>
           </div>
         </div>
-        <div className="">
-          <form onSubmit={handleSubmit} className="col">
-            <InputComponent
-              label="Enter your title"
-              field="title"
-              value={values.title}
-              onChange={handleChange}
-              clientSideError={errors.title}
-              touched={touched.title}
-            />
-            <InputComponent
-              label="Enter goals' cost"
-              field="cost"
-              value={values.cost}
-              onChange={handleChange}
-              clientSideError={errors.cost}
-              touched={touched.cost}
-              onFocus={() => {
-                setFieldValue("cost", "");
-              }}
-            />
-            <InputComponent
-              label="Expire date"
-              type="date"
-              field="expireDate"
-              value={values.expireDate}
-              onChange={handleChange}
-              clientSideError={errors.expireDate}
-              touched={touched.expireDate}
-            />
-            <button
-              type="submit"
-              className="btn btn-primary border-0 bg-custom"
-            >
-              Update goal
-            </button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit} className="col-5">
+          <InputComponent
+            label="Enter your title"
+            field="title"
+            value={values.title}
+            onChange={handleChange}
+            clientSideError={errors.title}
+            touched={touched.title}
+            disabled={selectedGoal === null}
+          />
+          <InputComponent
+            label="Enter goals' cost"
+            field="cost"
+            type="number"
+            value={values.cost}
+            onChange={handleChange}
+            clientSideError={errors.cost}
+            touched={touched.cost}
+            onFocus={handleFocus}
+            disabled={selectedGoal === null}
+          />
+          <InputComponent
+            label="Expire date"
+            type="date"
+            field="expireDate"
+            value={values.expireDate}
+            onChange={handleChange}
+            clientSideError={errors.expireDate}
+            touched={touched.expireDate}
+            disabled={selectedGoal === null}
+          />
+          <button
+            type="submit"
+            className="btn btn-primary border-0 bg-custom"
+            disabled={selectedGoal === null}
+          >
+            Update goal
+          </button>
+        </form>
       </div>
     </>
   );
-};
+});
 export default GoalEdit;

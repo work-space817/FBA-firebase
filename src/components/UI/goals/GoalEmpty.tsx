@@ -1,8 +1,9 @@
+import { memo } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
 import ModalWindow from "../../common/modal/ModalWindow";
 import GoalAdd from "./GoalAdd";
 
-const GoalEmpty = () => {
+const GoalEmpty = memo(() => {
   return (
     <>
       <div className="col-3 goal-item d-flex flex-column align-items-center justify-content-evenly rounded-5 shadow">
@@ -17,6 +18,6 @@ const GoalEmpty = () => {
       </div>
     </>
   );
-};
+});
 
 export default GoalEmpty;

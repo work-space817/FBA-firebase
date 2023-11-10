@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import ArrowsSVG from "../../../helpers/selectorsSVG/UI/ArrowsSVG";
 import Goal from "./Goal";
 import Loading from "../../common/loading/Loading";
@@ -7,13 +14,12 @@ import GoalList from "./GoalList";
 import { useSelector } from "react-redux";
 import { IGoalList } from "../../../store/reducers/types";
 
-const GoalSlider: React.FC = () => {
+const GoalSlider = memo(() => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [visibleGoals, setVisibleGoals] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const fetchGoalData = GoalList();
-
   const { goalList } = useSelector((store: any) => store.goalList as IGoalList);
   const goalWidth = 135;
   const spacing = 10;
@@ -33,6 +39,7 @@ const GoalSlider: React.FC = () => {
 
     window.addEventListener("resize", updateVisibleGoals);
   }, []);
+
   const handleNextGoal = () => {
     if (currentIndex + visibleGoals < goalList.length) {
       setCurrentIndex(currentIndex + 1);
@@ -83,6 +90,6 @@ const GoalSlider: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default GoalSlider;

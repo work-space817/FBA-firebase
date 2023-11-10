@@ -14,7 +14,6 @@ const TransactionList = () => {
   const { isUpdatedList } = useSelector(
     (store: any) => store.transactionList as ITransactionList
   );
-
   const fetchUserTransactions = async () => {
     try {
       setLoading(true);
@@ -40,7 +39,7 @@ const TransactionList = () => {
     fetchUserTransactions();
   }, [isUpdatedList]);
 
-  return loading;
+  // return loading;
 };
 
 export default TransactionList;

@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 interface Props {
   id: string;
 }
 
-const HeaderSVG = ({ id }: Props) => {
+const HeaderSVG = memo(({ id }: Props) => {
   switch (id) {
     case "defaultUserIcon":
       return (
@@ -41,5 +43,5 @@ const HeaderSVG = ({ id }: Props) => {
     default:
       return <svg></svg>;
   }
-};
+});
 export default HeaderSVG;

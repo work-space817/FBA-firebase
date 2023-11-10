@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 interface IGoalSVGProps {
   id: string;
 }
 
-const GoalSVG = ({ id }: IGoalSVGProps) => {
+const GoalSVG = memo(({ id }: IGoalSVGProps) => {
   switch (id) {
     case "Success":
       return (
@@ -64,5 +66,5 @@ const GoalSVG = ({ id }: IGoalSVGProps) => {
     default:
       return <svg></svg>;
   }
-};
+});
 export default GoalSVG;

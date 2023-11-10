@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 interface Props {
   id: string;
 }
 
-const TransactionSVG = ({ id }: Props) => {
+const TransactionSVG = memo(({ id }: Props) => {
   switch (id) {
     case "Income transaction":
       return (
@@ -77,5 +79,5 @@ const TransactionSVG = ({ id }: Props) => {
     default:
       return <svg></svg>;
   }
-};
+});
 export default TransactionSVG;

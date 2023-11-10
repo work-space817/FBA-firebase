@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import SidebarSVG from "../../../helpers/selectorsSVG/layoutComponents/SidebarSVG";
 
-const DefaultNavbar = () => {
+const DefaultNavbar = memo(() => {
   return (
     <ul
       className="nav flex-nowrap flex-sm-wrap flex-sm-column  align-items-center align-items-sm-start"
@@ -14,7 +14,7 @@ const DefaultNavbar = () => {
             to="/"
             className="nav-link d-flex justify-content-center justify-content-sm-start align-items-center px-0"
           >
-            <SidebarSVG id="overview"></SidebarSVG>
+            <SidebarSVG id="overview" />
             <span className="font-Quicksand-Bold ms-3 d-none d-lg-inline text-black-50 fs-5 ">
               Home page
             </span>
@@ -27,7 +27,7 @@ const DefaultNavbar = () => {
             to="/transactions"
             className="nav-link d-flex justify-content-center justify-content-sm-start align-items-center px-0"
           >
-            <SidebarSVG id="transactions"></SidebarSVG>
+            <SidebarSVG id="transactions" />
             <span className="font-Quicksand-Bold ms-3 d-none d-lg-inline text-black-50 fs-5">
               Transactions
             </span>
@@ -40,7 +40,7 @@ const DefaultNavbar = () => {
             to="/statistic"
             className="nav-link d-flex justify-content-center justify-content-sm-start align-items-center px-0"
           >
-            <SidebarSVG id="statistic"></SidebarSVG>
+            <SidebarSVG id="statistic" />
             <span className="font-Quicksand-Bold ms-3 d-none d-lg-inline text-black-50 fs-5">
               Statistic
             </span>
@@ -53,7 +53,7 @@ const DefaultNavbar = () => {
             to="/settings"
             className="nav-link d-flex justify-content-center justify-content-sm-start align-items-center px-0"
           >
-            <SidebarSVG id="settings"></SidebarSVG>
+            <SidebarSVG id="settings" />
             <span className="font-Quicksand-Bold ms-3 d-none d-lg-inline text-black-50 fs-5">
               Settings
             </span>
@@ -62,6 +62,6 @@ const DefaultNavbar = () => {
       </div>
     </ul>
   );
-};
+});
 
 export default DefaultNavbar;

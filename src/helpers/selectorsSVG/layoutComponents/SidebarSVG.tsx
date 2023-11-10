@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 interface Props {
   id: string;
 }
 
-const SidebarSVG = ({ id }: Props) => {
+const SidebarSVG = memo(({ id }: Props) => {
   switch (id) {
     case "cloud":
       return (
@@ -177,6 +179,6 @@ const SidebarSVG = ({ id }: Props) => {
     default:
       return <svg></svg>;
   }
-};
+});
 
 export default SidebarSVG;

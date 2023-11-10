@@ -13,7 +13,7 @@ import SelectCategories from "../../common/selectCategories/SelectCategories";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/firebase/transactions/setTransactionData";
-import { FC, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import setUserBalance from "../../../api/firebase/user/userBalance/setUserBalance";
 
 interface ITransactionType {
@@ -137,6 +137,38 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     handleReset,
     setFieldValue,
   } = formik;
+  const iconsIncomeList = useMemo(
+    () => [
+      { item: <SelectCategoriesSVG id={"Salary"} />, id: "Salary" },
+      {
+        item: <SelectCategoriesSVG id={"Social payment"} />,
+        id: "Social payment",
+      },
+      { item: <SelectCategoriesSVG id={""} />, id: "Other" },
+    ],
+    []
+  );
+  const iconsOutcomeList = useMemo(
+    () => [
+      { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
+      { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
+      { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
+      {
+        item: <SelectCategoriesSVG id={"Renovation"} />,
+        id: "Renovation",
+      },
+      { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
+      {
+        item: <SelectCategoriesSVG id={"Entertainment"} />,
+        id: "Entertainment",
+      },
+      { item: <SelectCategoriesSVG id={"Other"} />, id: "Other" },
+    ],
+    []
+  );
+  const handleFocus = useCallback(() => {
+    setFieldValue("transactionValue", "");
+  }, [setFieldValue]);
   return (
     <form onSubmit={handleSubmit} className="col">
       <InputComponent
@@ -152,9 +184,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         type={"number"}
         field="transactionValue"
         value={values.transactionValue}
-        onFocus={() => {
-          setFieldValue("transactionValue", "");
-        }}
+        onFocus={handleFocus}
         onChange={handleChange}
         clientSideError={errors.transactionValue}
         touched={touched.transactionValue}
@@ -211,34 +241,13 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         <SelectCategories
           title="Select category of transaction"
           iconsHover={iconsHover}
-          icons={[
-            { item: <SelectCategoriesSVG id={"Salary"} />, id: "Salary" },
-            {
-              item: <SelectCategoriesSVG id={"Social payment"} />,
-              id: "Social payment",
-            },
-            { item: <SelectCategoriesSVG id={""} />, id: "Other" },
-          ]}
+          icons={iconsIncomeList}
         />
       ) : (
         <SelectCategories
-          title="Select category of goal"
+          title="Select category of transaction"
           iconsHover={iconsHover}
-          icons={[
-            { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
-            { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
-            { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
-            {
-              item: <SelectCategoriesSVG id={"Renovation"} />,
-              id: "Renovation",
-            },
-            { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
-            {
-              item: <SelectCategoriesSVG id={"Entertainment"} />,
-              id: "Entertainment",
-            },
-            { item: <SelectCategoriesSVG id={"Other"} />, id: "Other" },
-          ]}
+          icons={iconsOutcomeList}
         />
       )}
 

@@ -1,9 +1,10 @@
+import { memo } from "react";
+
 interface ISelectCategoriesProps {
   id: string;
-  // sizing: string;
 }
 
-const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
+const SelectCategoriesSVG = memo(({ id }: ISelectCategoriesProps) => {
   switch (id) {
     case "Shopping":
       return (
@@ -202,5 +203,5 @@ const SelectCategoriesSVG = ({ id }: ISelectCategoriesProps) => {
         </svg>
       );
   }
-};
+});
 export default SelectCategoriesSVG;

@@ -12,7 +12,7 @@ import SelectCategories from "../../common/selectCategories/SelectCategories";
 import { IGoalAdd } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 const GoalAdd = () => {
   const init: IGoalAdd = {
@@ -77,7 +77,27 @@ const GoalAdd = () => {
     handleReset,
     setFieldValue,
   } = formik;
-
+  const iconsList = useMemo(
+    () => [
+      { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
+      { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
+      { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
+      {
+        item: <SelectCategoriesSVG id={"Renovation"} />,
+        id: "Renovation",
+      },
+      { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
+      {
+        item: <SelectCategoriesSVG id={"Entertainment"} />,
+        id: "Entertainment",
+      },
+      { item: <SelectCategoriesSVG id={""} />, id: "Other" },
+    ],
+    []
+  );
+  const handleFocus = useCallback(() => {
+    setFieldValue("cost", "");
+  }, [setFieldValue]);
   return (
     <form
       onSubmit={handleSubmit}
@@ -108,45 +128,19 @@ const GoalAdd = () => {
           type={"number"}
           value={values.cost}
           onChange={handleChange}
-          onFocus={() => {
-            setFieldValue("cost", "");
-          }}
+          onFocus={handleFocus}
           clientSideError={errors.cost}
           touched={touched.cost}
         />
         <SelectCategories
           title="Select category of goal"
           iconsHover={false}
-          icons={[
-            { item: <SelectCategoriesSVG id={"Transport"} />, id: "Transport" },
-            { item: <SelectCategoriesSVG id={"Shopping"} />, id: "Shopping" },
-            { item: <SelectCategoriesSVG id={"Travels"} />, id: "Travels" },
-            {
-              item: <SelectCategoriesSVG id={"Renovation"} />,
-              id: "Renovation",
-            },
-            { item: <SelectCategoriesSVG id={"Holidays"} />, id: "Holidays" },
-            {
-              item: <SelectCategoriesSVG id={"Entertainment"} />,
-              id: "Entertainment",
-            },
-            { item: <SelectCategoriesSVG id={""} />, id: "Other" },
-          ]}
+          icons={iconsList}
         />
         <button type="submit" className="btn text-white bg-primary">
           Add goal
         </button>
       </div>
-
-      {/* <InputComponent
-        label="Expire date*"
-        type="date"
-        field="expireDate"
-        value={values.expireDate}
-        onChange={handleChange}
-        error={errors.expireDate}
-        touched={touched.expireDate}
-      /> */}
     </form>
   );
 };

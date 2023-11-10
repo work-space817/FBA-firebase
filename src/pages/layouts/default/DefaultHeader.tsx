@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import HeaderSVG from "../../../helpers/selectorsSVG/layoutComponents/HeaderSVG";
 import SidebarSVG from "../../../helpers/selectorsSVG/layoutComponents/SidebarSVG";
+import { memo } from "react";
 
-const DefaultHeader = () => {
+const DefaultHeader = memo(() => {
   const location = useLocation();
   const currentPage = location.pathname;
 
@@ -18,7 +19,7 @@ const DefaultHeader = () => {
         <nav className="navbar ">
           <div className="container-fluid">
             <div className="d-flex align-items-center gap-3">
-              <SidebarSVG id="cloud"></SidebarSVG>
+              <SidebarSVG id="cloud" />
               <p className="font-Quicksand-Bold fs-1 m-0">{splitCurrentPage}</p>
             </div>
 
@@ -33,6 +34,6 @@ const DefaultHeader = () => {
       </header>
     </>
   );
-};
+});
 
 export default DefaultHeader;

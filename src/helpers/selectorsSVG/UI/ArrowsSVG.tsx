@@ -1,10 +1,12 @@
+import { memo } from "react";
+
 interface Props {
   id: string;
   width: string;
   height: string;
 }
 
-const ArrowsSVG = ({ id, width, height }: Props) => {
+const ArrowsSVG = memo(({ id, width, height }: Props) => {
   switch (id) {
     case "ArrowLeft":
       return (
@@ -65,5 +67,5 @@ const ArrowsSVG = ({ id, width, height }: Props) => {
     default:
       return <svg></svg>;
   }
-};
+});
 export default ArrowsSVG;
