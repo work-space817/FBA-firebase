@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { FC, InputHTMLAttributes, memo, useCallback, useMemo } from "react";
 
-interface InputGroupProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CommonInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   type?: "text" | "password" | "email" | "number" | "date" | "time";
   field?: string;
@@ -11,7 +11,7 @@ interface InputGroupProps extends InputHTMLAttributes<HTMLInputElement> {
   touched?: boolean | undefined;
   autoComplete?: string;
 }
-const InputComponent: FC<InputGroupProps> = memo(
+const CommonInput: FC<CommonInputProps> = memo(
   ({
     label,
     type = "text",
@@ -59,4 +59,4 @@ const InputComponent: FC<InputGroupProps> = memo(
   }
 );
 
-export default InputComponent;
+export default CommonInput;

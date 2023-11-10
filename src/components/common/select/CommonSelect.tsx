@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 
-interface IDefaultSelect {
+interface ICommonSelect {
   options: any[];
   defaultValue?: string;
 }
-const DefaultSelect: FC<IDefaultSelect> = ({ options, defaultValue }) => {
+const CommonSelect: FC<ICommonSelect> = ({ options, defaultValue }) => {
   return (
     <select className="form-select w-25 mb-4 rounded-5">
       {options.map((option) => (
@@ -16,4 +16,4 @@ const DefaultSelect: FC<IDefaultSelect> = ({ options, defaultValue }) => {
   );
 };
 
-export default DefaultSelect;
+export default CommonSelect;

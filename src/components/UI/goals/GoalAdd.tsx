@@ -1,4 +1,4 @@
-import InputComponent from "../../common/input/InputComponent";
+import InputComponent from "../../common/input/CommonInput";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";

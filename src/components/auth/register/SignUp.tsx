@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { auth } from "../../../api/firebase/config";
 import { ISignUp } from "./types";
-import InputComponent from "../../common/input/InputComponent";
+import InputComponent from "../../common/input/CommonInput";
 import { IBalance } from "../../../api/firebase/user/userBalance/types";
 import setUserBalance from "../../../api/firebase/user/userBalance/setUserBalance";
 import { useNavigate } from "react-router-dom";

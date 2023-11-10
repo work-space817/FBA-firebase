@@ -6,14 +6,14 @@ import {
   IModalCloser,
   SelectCategoriesActionType,
 } from "../../../store/reducers/types";
-interface IModalProps {
+interface ICommonModal {
   children: React.ReactNode;
   title: string;
   buttonText?: string | React.ReactNode;
   customActive?: React.ReactNode;
 }
 
-const ModalWindow: FC<IModalProps> = ({
+const CommonModal: FC<ICommonModal> = ({
   children,
   title,
   buttonText,
@@ -84,4 +84,4 @@ const ModalWindow: FC<IModalProps> = ({
   );
 };
 
-export default ModalWindow;
+export default CommonModal;

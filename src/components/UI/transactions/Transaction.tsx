@@ -6,7 +6,7 @@ import TransactionSVG from "../../../helpers/selectorsSVG/UI/TransactionSVG";
 import { TransactionListActionType } from "../../../store/reducers/types";
 import getTransactionData from "../../../api/firebase/transactions/getTransactionData";
 import { deleteDoc } from "firebase/firestore";
-import ModalWindow from "../../common/modal/ModalWindow";
+import ModalWindow from "../../common/modal/CommonModal";
 
 const Transaction: FC<ITransaction> = ({
   transactionTitle,

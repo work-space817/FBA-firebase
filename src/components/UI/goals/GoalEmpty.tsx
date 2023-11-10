@@ -1,6 +1,6 @@
 import { memo } from "react";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import ModalWindow from "../../common/modal/ModalWindow";
+import ModalWindow from "../../common/modal/CommonModal";
 import GoalAdd from "./GoalAdd";
 
 const GoalEmpty = memo(() => {

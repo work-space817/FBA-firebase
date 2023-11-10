@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
-import InputComponent from "../../common/input/InputComponent";
+import InputComponent from "../../common/input/CommonInput";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/firebase/config";
 import setAuthToken from "../../../helpers/functions/setAuthToken";

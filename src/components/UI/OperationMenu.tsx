@@ -1,5 +1,5 @@
 import { Modal } from "bootstrap";
-import ModalWindow from "../common/modal/ModalWindow";
+import ModalWindow from "../common/modal/CommonModal";
 import GoalAdd from "./goals/GoalAdd";
 import TransactionAdd from "./transactions/TransactionAdd";
 

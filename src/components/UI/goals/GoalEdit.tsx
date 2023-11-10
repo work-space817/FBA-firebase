@@ -1,4 +1,4 @@
-import InputComponent from "../../common/input/InputComponent";
+import InputComponent from "../../common/input/CommonInput";
 import Goal from "./Goal";
 import { useDispatch, useSelector } from "react-redux";
 import {
