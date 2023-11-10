@@ -1,5 +1,4 @@
-import React, { FC, PureComponent } from "react";
-import { useSelector } from "react-redux";
+import React, { FC } from "react";
 import {
   BarChart,
   Bar,

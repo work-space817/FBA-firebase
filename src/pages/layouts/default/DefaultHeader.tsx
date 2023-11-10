@@ -1,18 +1,14 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IAuthUser } from "../../../store/reducers/types";
-import HeaderSVG from "../../../helpers/selectorsSVG/HeaderSVG";
-import SidebarSVG from "../../../helpers/selectorsSVG/SidebarSVG";
+import { Link, useLocation } from "react-router-dom";
+import HeaderSVG from "../../../helpers/selectorsSVG/layoutComponents/HeaderSVG";
+import SidebarSVG from "../../../helpers/selectorsSVG/layoutComponents/SidebarSVG";
 
 const DefaultHeader = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const currentPage = location.pathname;
 
   let splitCurrentPage =
     currentPage.slice(1).charAt(0).toUpperCase() + currentPage.slice(2);
-  if (splitCurrentPage == "") {
+  if (splitCurrentPage === "") {
     splitCurrentPage = "Overview";
   }
 

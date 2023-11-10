@@ -1,12 +1,5 @@
-import React, { FC, PureComponent, useMemo, useState } from "react";
-import {
-  PieChart,
-  Pie,
-  Sector,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import React, { FC } from "react";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 interface ITwoLevelPieDiagram {
   outterData: any[];

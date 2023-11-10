@@ -10,7 +10,7 @@ import {
 } from "../../../store/reducers/types";
 import SelectCategories from "../../common/selectCategories/SelectCategories";
 import { IGoalAdd } from "./types";
-import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import { format } from "date-fns";
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";

@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ITransaction } from "./types";
-import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import TransactionSVG from "../../../helpers/selectorsSVG/UI/TransactionSVG";
 import { TransactionListActionType } from "../../../store/reducers/types";
 import getTransactionData from "../../../api/firebase/transactions/getTransactionData";
@@ -24,7 +24,7 @@ const Transaction: FC<ITransaction> = ({
       const fetchTransactions = await getTransactionData();
 
       const fetchCurrentTransaction = fetchTransactions.docs.find(
-        (doc, docIndex) => (docIndex + 1 == index ? doc.data() : null)
+        (doc, docIndex) => (docIndex + 1 === index ? doc.data() : null)
       );
       const currentTransactionData = { ...fetchCurrentTransaction?.data(), id };
 

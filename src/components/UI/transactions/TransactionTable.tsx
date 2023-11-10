@@ -138,7 +138,7 @@ const TransactionTable = () => {
       <div className="d-flex justify-content-end align-items-center gap-3 p-4 ps-0">
         <div
           className={`d-flex align-items-center rounded-4 shadow ${
-            currentPage == 1 ? "d-none" : ""
+            currentPage === 1 ? "d-none" : ""
           }`}
         >
           <div

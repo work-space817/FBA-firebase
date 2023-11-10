@@ -19,7 +19,12 @@ const TransactionCircleDiagram: FC<ITransactionCircleDiagram> = ({
   );
 
   const visibleTransactionList = transactionListByType
-    .sort((a: any, b: any) => b.summaryValue - a.summaryValue)
+    .sort(
+      (
+        a: ITransactionCircleStatisticList,
+        b: ITransactionCircleStatisticList
+      ) => b.summaryValue - a.summaryValue
+    )
     .map((transaction: ITransactionCircleStatisticList, index) => {
       return (
         <CircleDiagramItem

@@ -1,5 +1,5 @@
 import { addDays, format } from "date-fns";
-import { Caption, DateRange, DayPicker } from "react-day-picker";
+import { DateRange, DayPicker } from "react-day-picker";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {

@@ -1,5 +1,5 @@
 import { IBalance } from "./types";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import getUserId from "../../../../helpers/functions/getUserId";
 import { firestore } from "../../config";
 

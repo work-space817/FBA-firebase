@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { firestore } from "../../config";
 import getUserId from "../../../../helpers/functions/getUserId";
 import { IBalance } from "./types";

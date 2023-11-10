@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
 import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
@@ -11,7 +10,6 @@ import RateLiniarDiagram from "../../components/UI/diagramComponents/rateStatist
 const HomePage = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-  const navigate = useNavigate();
   return (
     <>
       <div className="col d-flex mb-5 gap-3 flex-column-reverse flex-lg-row">
@@ -46,7 +44,7 @@ const HomePage = () => {
         {isAuth ? (
           <>
             <button>
-              {/* <Link
+              <Link
                 to="/auth"
                 onClick={(e) => {
                   localStorage.removeItem("token");
@@ -55,7 +53,7 @@ const HomePage = () => {
                 }}
               >
                 вихід
-              </Link> */}
+              </Link>
             </button>
           </>
         ) : (

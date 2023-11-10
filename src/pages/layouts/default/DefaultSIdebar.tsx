@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import SidebarSVG from "../../../helpers/selectorsSVG/SidebarSVG";
+import SidebarSVG from "../../../helpers/selectorsSVG/layoutComponents/SidebarSVG";
 import DefaultNavbar from "./DefaultNavbar";
 
 const DefaultSidebar = () => {

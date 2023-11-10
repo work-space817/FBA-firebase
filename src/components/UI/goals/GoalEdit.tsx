@@ -12,7 +12,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { IGoalEdit } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import GoalSelectSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import GoalSelectSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 const GoalEdit: React.FC = () => {
   const dispatch = useDispatch();
   const { selectedGoal } = useSelector(

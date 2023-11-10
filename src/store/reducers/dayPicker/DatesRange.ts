@@ -1,9 +1,4 @@
-import {
-  AuthUserActionType,
-  DatesRangeActionType,
-  IAuthUser,
-  IDatesRange,
-} from "../types";
+import { DatesRangeActionType, IDatesRange } from "../types";
 
 const initState: IDatesRange = {
   ranges: { from: 0, to: 0 },

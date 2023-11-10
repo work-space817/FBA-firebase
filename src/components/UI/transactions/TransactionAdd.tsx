@@ -10,7 +10,7 @@ import {
   UserBalanceActionType,
 } from "../../../store/reducers/types";
 import SelectCategories from "../../common/selectCategories/SelectCategories";
-import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/firebase/transactions/setTransactionData";
 import { FC, useState } from "react";
@@ -60,7 +60,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
     setHandleDateTimeState(true);
   };
   const userBalance = () => {
-    if (transactionType == "Income transaction") {
+    if (transactionType === "Income transaction") {
       console.log("updated");
       const changedBalance = {
         currentBalance: balance.currentBalance + values.transactionValue,
@@ -69,7 +69,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       };
       setUserBalance(changedBalance);
     }
-    if (transactionType == "Outcome transaction") {
+    if (transactionType === "Outcome transaction") {
       console.log("updated");
       const changedBalance = {
         currentBalance: balance.currentBalance - values.transactionValue,
@@ -207,7 +207,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
           <p className="m-0">Current date: {currentDate}</p>
         </div>
       ) : null}
-      {transactionType == "Income transaction" ? (
+      {transactionType === "Income transaction" ? (
         <SelectCategories
           title="Select category of transaction"
           iconsHover={iconsHover}

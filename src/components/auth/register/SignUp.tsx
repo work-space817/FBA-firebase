@@ -1,11 +1,9 @@
-import { createUserWithEmailAndPassword, getIdToken } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { auth, firestore } from "../../../api/firebase/config";
+import { auth } from "../../../api/firebase/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/InputComponent";
-import setAuthToken from "../../../helpers/functions/setAuthToken";
-import { doc, setDoc } from "firebase/firestore";
 import { IBalance } from "../../../api/firebase/user/userBalance/types";
 import setUserBalance from "../../../api/firebase/user/userBalance/setUserBalance";
 import { useNavigate } from "react-router-dom";

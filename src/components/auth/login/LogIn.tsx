@@ -86,11 +86,11 @@ const LogIn = () => {
 
   return (
     <>
-      <h1 className="text-center">Вхід на сайт</h1>
+      <h3 className="text-center">Log In</h3>
 
       <form onSubmit={handleSubmit} className="col-md-6">
         <InputComponent
-          label="Електронна адреса"
+          label="Email"
           type="email"
           field="email"
           value={values.email}
@@ -99,7 +99,7 @@ const LogIn = () => {
           touched={touched.email}
         />
         <InputComponent
-          label="Пароль"
+          label="Password"
           type="password"
           field="password"
           value={values.password}

@@ -5,7 +5,7 @@ import getGoalsData from "../../../api/firebase/goals/getGoalsData";
 import { GoalSelectActionType } from "../../../store/reducers/types";
 import { IGoal } from "./types";
 import GoalSVG from "../../../helpers/selectorsSVG/UI/GoalSVG";
-import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 import DateFormater from "../../../helpers/functions/DateFormater";
 
 const Goal: FC<IGoal> = ({
@@ -25,7 +25,7 @@ const Goal: FC<IGoal> = ({
     navigate("/transactions");
     const fetchGoals = await getGoalsData();
     const fetchCurrentGoal = fetchGoals.find((doc, docIndex) =>
-      docIndex + 1 == index ? doc.data() : null
+      docIndex + 1 === index ? doc.data() : null
     );
     const currentGoalData = { ...fetchCurrentGoal?.data(), id };
     console.log("currentGoalData: ", currentGoalData);

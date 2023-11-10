@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesSVG";
+import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
 interface ICircleDiagramItem {
   category: string;
   count: number;
