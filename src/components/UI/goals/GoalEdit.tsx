@@ -136,7 +136,7 @@ const GoalEdit: React.FC = () => {
               field="title"
               value={values.title}
               onChange={handleChange}
-              error={errors.title}
+              clientSideError={errors.title}
               touched={touched.title}
             />
             <InputComponent
@@ -144,7 +144,7 @@ const GoalEdit: React.FC = () => {
               field="cost"
               value={values.cost}
               onChange={handleChange}
-              error={errors.cost}
+              clientSideError={errors.cost}
               touched={touched.cost}
               onFocus={() => {
                 setFieldValue("cost", "");
@@ -156,7 +156,7 @@ const GoalEdit: React.FC = () => {
               field="expireDate"
               value={values.expireDate}
               onChange={handleChange}
-              error={errors.expireDate}
+              clientSideError={errors.expireDate}
               touched={touched.expireDate}
             />
             <button

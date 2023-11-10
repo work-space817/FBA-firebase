@@ -18,10 +18,9 @@ const GoalsCircleDiagram = () => {
       .filter((goal: any, index) => goal.isExpire === state)
       .map((goal, index) => {
         const goals = goal.goalsByCategory.map((goal: IGoalByCategory) => {
-          console.log("goal: ", goal);
           return (
             <CircleDiagramItem
-              key={index}
+              // key={}
               category={goal.summaryGoalCategory as string}
               count={goal.summaryGoalCount}
               value={goal.summaryGoalValue}

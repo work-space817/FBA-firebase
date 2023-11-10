@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getUserBalance from "../../../api/firebase/userBalance/getUserBalance";
+import getUserBalance from "../../../api/firebase/user/userBalance/getUserBalance";
 import {
   IUserBalance,
   UserBalanceActionType,
@@ -27,6 +27,11 @@ const UserBalance = () => {
         "Сталася помилка при отриманні балансу користувача:",
         error
       );
+    } finally {
+      dispatch({
+        type: UserBalanceActionType.UPDATE_BALANCE,
+        payload: false,
+      });
     }
   };
   useEffect(() => {

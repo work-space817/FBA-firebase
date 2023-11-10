@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import getUserInformation from "../../../api/firebase/userInfo/getUserInformation";
+import getUserInformation from "../../../api/firebase/user/userInfo/getUserInformation";
 import { ISignUp } from "../../auth/register/types";
 import { useEffect, useState } from "react";
 import { IUserBalance } from "../../../store/reducers/types";

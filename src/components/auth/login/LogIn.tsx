@@ -1,74 +1,116 @@
-import { ChangeEvent, FormEvent, useState } from "react";
 import { ILogIn } from "./types";
-import jwt_decode from "jwt-decode";
+import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/InputComponent";
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/firebase/config";
-import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
-import { store } from "../../../store";
+import setAuthToken from "../../../helpers/functions/setAuthToken";
+import { useFormik } from "formik";
+import setUserAuth from "../../../api/firebase/user/userInfo/setUserAuth";
 const LogIn = () => {
   const init: ILogIn = {
     email: "",
     password: "",
   };
 
-  const [error, setError] = useState<string>("");
-  const [data, setData] = useState<ILogIn>(init);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     const logInResult = await signInWithEmailAndPassword(
+  //       auth,
+  //       data.email,
+  //       data.password
+  //     );
+  //     const user = logInResult.user;
+  //     const userToken = (await getIdToken(user)) as string;
+  //     const uid = auth.currentUser?.uid as string;
+  //     setAuthToken(userToken, uid);
+  //     dispatch({ type: AuthUserActionType.LOGIN_USER });
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const onSubmitHandler = async (values: ILogIn) => {
     try {
       const logInResult = await signInWithEmailAndPassword(
         auth,
-        data.email,
-        data.password
+        values.email,
+        values.password
       );
-      const user = logInResult.user;
-      const userToken = (await getIdToken(user)) as string;
-      const uid = auth.currentUser?.uid as string;
-      setAuthToken(userToken, uid);
+      // const user = logInResult.user;
+      // const userToken = (await getIdToken(user)) as string;
+      // const uid = auth.currentUser?.uid as string;
+      await setAuthToken(logInResult);
       dispatch({ type: AuthUserActionType.LOGIN_USER });
       navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      const code = error.code;
+      console.log(code);
+      switch (code) {
+        case "auth/user-not-found":
+          setFieldError("email", "User was not found");
+          break;
+        case "auth/wrong-password":
+          setFieldError("password", "Wrong password");
+          break;
+        default:
+          break;
+      }
     }
   };
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+  const checkUpForm = yup.object({
+    email: yup
+      .string()
+      .required("Field should not be empty")
+      .email("Enter corrent email"),
+    password: yup
+      .string()
+      .required("Field should not be empty")
+      .min(6, "Password must have at least 6 symbols")
+      .matches(/[0-9a-zA-Z]/, "Enter only number & eng characters"),
+  });
+  const formik = useFormik({
+    initialValues: init,
+    onSubmit: onSubmitHandler,
+    validationSchema: checkUpForm,
+  });
+  const { touched, errors, values, handleSubmit, handleChange, setFieldError } =
+    formik;
+
   return (
     <>
       <h1 className="text-center">Вхід на сайт</h1>
 
-      <form onSubmit={onSubmitHandler} className="col-md-6">
-        {!!error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
+      <form onSubmit={handleSubmit} className="col-md-6">
         <InputComponent
           label="Електронна адреса"
+          type="email"
           field="email"
-          value={data.email}
-          onChange={onChangeHandler}
+          value={values.email}
+          onChange={handleChange}
+          clientSideError={errors.email} //?used formik object "errors"
+          touched={touched.email}
         />
-
         <InputComponent
           label="Пароль"
           type="password"
           field="password"
-          value={data.password}
+          value={values.password}
           autoComplete={"current-password"}
-          onChange={onChangeHandler}
+          onChange={handleChange}
+          clientSideError={errors.password} //?used formik object "errors"
+          touched={touched.password}
         />
 
         <button type="submit" className="btn btn-primary">
-          Вхід
+          Log in
         </button>
       </form>
     </>

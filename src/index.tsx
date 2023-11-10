@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { AuthUserActionType } from "./store/reducers/types";
-import setAuthToken from "./api/firebase/userInfo/setAuthToken";
+import setAuthToken from "./helpers/functions/setAuthToken";
 
 if (localStorage.token) {
-  setAuthToken(localStorage.token, localStorage.uid);
+  // setAuthToken(localStorage.token, localStorage.uid);
   store.dispatch({ type: AuthUserActionType.LOGIN_USER });
 }
 

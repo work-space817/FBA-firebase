@@ -4,13 +4,14 @@ import { useFormik } from "formik";
 import { auth, firestore } from "../../../api/firebase/config";
 import { ISignUp } from "./types";
 import InputComponent from "../../common/input/InputComponent";
-import setAuthToken from "../../../api/firebase/userInfo/setAuthToken";
+import setAuthToken from "../../../helpers/functions/setAuthToken";
 import { doc, setDoc } from "firebase/firestore";
-import { IBalance } from "../../../api/firebase/userBalance/types";
-import setUserBalance from "../../../api/firebase/userBalance/setUserBalance";
+import { IBalance } from "../../../api/firebase/user/userBalance/types";
+import setUserBalance from "../../../api/firebase/user/userBalance/setUserBalance";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import { useDispatch } from "react-redux";
+import setUserAuth from "../../../api/firebase/user/userInfo/setUserAuth";
 
 const SignUp = () => {
   const init: ISignUp = {
@@ -27,17 +28,8 @@ const SignUp = () => {
         values.email,
         values.password
       );
-      const user = SignUpResult.user;
-      const userToken = (await getIdToken(user)) as string;
-      const uid = auth.currentUser?.uid as string;
-      setAuthToken(userToken, uid);
+      const setAuth = await setUserAuth(values, SignUpResult);
       dispatch({ type: AuthUserActionType.LOGIN_USER });
-      console.log("signed up");
-      const userId = user.uid;
-      const additionalUserInformation = doc(firestore, "users", userId);
-      await setDoc(additionalUserInformation, {
-        ...values,
-      });
       const userBalance: IBalance = {
         currentBalance: +values.currentBalance,
         incomingBalance: 0,
@@ -46,12 +38,40 @@ const SignUp = () => {
       setUserBalance(userBalance);
       navigate("/");
     } catch (error: any) {
-      console.log("Bad request", error);
+      console.log("error: ", error);
+      const code = error.code;
+      switch (code) {
+        case "auth/email-already-in-use":
+          setFieldError("email", "Account is already exist");
+          break;
+        case "auth/invalid-email":
+          setFieldError("email", "Bad email adress");
+          break;
+        case "auth/weak-password":
+          setFieldError("password", "Weak password");
+          break;
+        case "auth/missing-email":
+          setFieldError("email", "Email have not to enter");
+          break;
+        case "auth/user-disabled":
+          setFieldError("email", "Account was deleted");
+          break;
+        default:
+          break;
+      }
     }
   };
+
   const checkUpForm = yup.object({
-    email: yup.string().required("Field should not be empty"),
-    password: yup.string().required("Field should not be empty"),
+    email: yup
+      .string()
+      .required("Field should not be empty")
+      .email("Enter corrent email"),
+    password: yup
+      .string()
+      .required("Field should not be empty")
+      .min(6, "Password must have at least 6 symbols")
+      .matches(/[0-9a-zA-Z]/, "Enter only number & eng characters"),
     currentBalance: yup
       .number()
       .positive("Value can not be less than 0")
@@ -63,30 +83,37 @@ const SignUp = () => {
     validationSchema: checkUpForm,
   });
 
-  const { touched, errors, values, handleSubmit, handleChange, setFieldValue } =
-    formik;
+  const {
+    touched,
+    errors,
+    values,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    setFieldError,
+  } = formik;
 
   return (
     <>
-      <h1 className="text-center">Реєстрація на сайт</h1>
+      <h1 className="text-center">Sign up</h1>
       <form onSubmit={handleSubmit} className="col-md-6">
         <InputComponent
-          label="Електронна адреса"
+          label="Email"
           type="email"
           field="email"
           value={values.email}
           onChange={handleChange}
-          error={errors.email}
+          clientSideError={errors.email} //?used formik object "errors"
           touched={touched.email}
         />
         <InputComponent
-          label="Пароль"
+          label="Password"
           type="password"
           field="password"
           value={values.password}
           autoComplete={"current-password"}
           onChange={handleChange}
-          error={errors.password}
+          clientSideError={errors.password} //?used formik object "errors"
           touched={touched.password}
         />
         <InputComponent
@@ -97,7 +124,7 @@ const SignUp = () => {
           onFocus={() => {
             setFieldValue("currentBalance", "");
           }}
-          error={errors.currentBalance}
+          clientSideError={errors.currentBalance} //?used formik object "errors"
           touched={touched.currentBalance}
         />
         <button type="submit" className="btn btn-primary">

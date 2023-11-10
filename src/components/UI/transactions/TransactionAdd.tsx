@@ -14,7 +14,7 @@ import SelectCategoriesSVG from "../../../helpers/selectorsSVG/SelectCategoriesS
 import { ITransactionAdd } from "./types";
 import setTransactionData from "../../../api/firebase/transactions/setTransactionData";
 import { FC, useState } from "react";
-import setUserBalance from "../../../api/firebase/userBalance/setUserBalance";
+import setUserBalance from "../../../api/firebase/user/userBalance/setUserBalance";
 
 interface ITransactionType {
   transactionType: string;
@@ -101,6 +101,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
       });
       const updateBalance = dispatch({
         type: UserBalanceActionType.UPDATE_BALANCE,
+        payload: true,
       });
 
       const modalCloser = dispatch({
@@ -143,7 +144,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         field="transactionTitle"
         value={values.transactionTitle}
         onChange={handleChange}
-        error={errors.transactionTitle}
+        clientSideError={errors.transactionTitle}
         touched={touched.transactionTitle}
       />
       <InputComponent
@@ -155,7 +156,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
           setFieldValue("transactionValue", "");
         }}
         onChange={handleChange}
-        error={errors.transactionValue}
+        clientSideError={errors.transactionValue}
         touched={touched.transactionValue}
       />
       <label htmlFor="input">Choose the way*</label>
@@ -185,7 +186,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
             field="transactionTime"
             value={values.transactionTime}
             onChange={handleChange}
-            error={errors.transactionTime}
+            clientSideError={errors.transactionTime}
             touched={touched.transactionTime}
           />
           <InputComponent
@@ -194,7 +195,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
             field="transactionDate"
             value={values.transactionDate}
             onChange={handleChange}
-            error={errors.transactionDate}
+            clientSideError={errors.transactionDate}
             touched={touched.transactionDate}
           />
         </div>

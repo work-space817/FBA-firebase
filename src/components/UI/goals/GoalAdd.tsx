@@ -99,7 +99,7 @@ const GoalAdd = () => {
           field="title"
           value={values.title}
           onChange={handleChange}
-          error={errors.title}
+          clientSideError={errors.title}
           touched={touched.title}
         />
         <InputComponent
@@ -111,7 +111,7 @@ const GoalAdd = () => {
           onFocus={() => {
             setFieldValue("cost", "");
           }}
-          error={errors.cost}
+          clientSideError={errors.cost}
           touched={touched.cost}
         />
         <SelectCategories
