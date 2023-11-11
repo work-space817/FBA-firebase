@@ -8,8 +8,6 @@ import GoalsCircleDiagram from "../../components/UI/diagramComponents/goalStatis
 import RateLiniarDiagram from "../../components/UI/diagramComponents/rateStatistic/RateLiniarDiagram";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
   return (
     <>
       <div className="col d-flex mb-5 gap-3 flex-column-reverse flex-lg-row">
@@ -38,27 +36,6 @@ const HomePage = () => {
             <GoalsCircleDiagram />
           </div>
         </div>
-      </div>
-
-      <div>
-        {isAuth ? (
-          <>
-            <button>
-              <Link
-                to="/auth"
-                onClick={(e) => {
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("uid");
-                  dispatch({ type: AuthUserActionType.LOGOUT_USER });
-                }}
-              >
-                вихід
-              </Link>
-            </button>
-          </>
-        ) : (
-          <></>
-        )}
       </div>
     </>
   );

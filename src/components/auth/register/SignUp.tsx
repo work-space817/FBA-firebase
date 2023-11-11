@@ -73,6 +73,7 @@ const SignUp = () => {
     currentBalance: yup
       .number()
       .positive("Value can not be less than 0")
+      .typeError("Please enter numbers")
       .required("Field should not be empty"),
   });
   const formik = useFormik({
@@ -103,6 +104,7 @@ const SignUp = () => {
           onChange={handleChange}
           clientSideError={errors.email} //?used formik object "errors"
           touched={touched.email}
+          placeholder={"exampleMail@mail.com"}
         />
         <InputComponent
           label="Password"

@@ -23,10 +23,12 @@ const Goal: FC<IGoal> = memo(
       );
       const currentGoalData = { ...fetchCurrentGoal?.data(), id };
       console.log("currentGoalData: ", currentGoalData);
-      dispatch({
-        type: GoalSelectActionType.GOAL_SELECT,
-        payload: currentGoalData,
-      });
+      if (id) {
+        dispatch({
+          type: GoalSelectActionType.GOAL_SELECT,
+          payload: currentGoalData,
+        });
+      }
       if (location.pathname !== "/transactions") {
         navigate("/transactions");
       }

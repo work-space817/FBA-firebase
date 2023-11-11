@@ -1,16 +1,15 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
-// import "react-day-picker/dist/style.css";
+import "react-day-picker/dist/style.css";
+import "./App.css";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { AuthUserActionType } from "./store/reducers/types";
-import setAuthToken from "./helpers/functions/setAuthToken";
 
 if (localStorage.token) {
-  // setAuthToken(localStorage.token, localStorage.uid);
   store.dispatch({ type: AuthUserActionType.LOGIN_USER });
 }
 

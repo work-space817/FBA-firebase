@@ -1,10 +1,13 @@
+import { memo, useCallback, useMemo } from "react";
 import TwoLevelPieDiagram from "../../../../../lib/recharts/circleDiagram/TwoLevelPieDiagram";
 import CircleDiagramItem from "../../CircleDiagramItem";
 import { IGoalByCategory, IGoalCircleStatisticList } from "../types";
 import GoalCircleStatisticList from "./GoalCircleStatisticList";
 
-const GoalsCircleDiagram = () => {
+const GoalsCircleDiagram = memo(() => {
   const goalList = GoalCircleStatisticList();
+
+  console.log("goalList: ", goalList);
 
   const visiblePieChartList: IGoalByCategory[] = [];
   const innerData = goalList.map((doc: IGoalCircleStatisticList) => {
@@ -15,7 +18,7 @@ const GoalsCircleDiagram = () => {
   const visibleList = (state: boolean) => {
     const visibleActiveGoalList = goalList
       .filter((goal: IGoalCircleStatisticList) => goal.isExpire === state)
-      .map((goal) => {
+      .map((goal: any) => {
         const goals = goal.goalsByCategory.map((goal: IGoalByCategory) => {
           const goalKey = goal.goals.map((id) => id.id);
           // console.log(goalKey);
@@ -48,9 +51,7 @@ const GoalsCircleDiagram = () => {
           {visibleList(false).length > 0 ? (
             visibleList(false)
           ) : (
-            <h5 className="d-flex align-items-center">
-              No one goals was created
-            </h5>
+            <h5 className="pt-3">Goal wasn't created</h5>
           )}
         </div>
         <div className="visibleCircleList px-3 col-6 ">
@@ -58,14 +59,12 @@ const GoalsCircleDiagram = () => {
           {visibleList(true).length > 0 ? (
             visibleList(true)
           ) : (
-            <h5 className="d-flex align-items-center">
-              No one goals was created
-            </h5>
+            <h5 className="pt-3">Goal wasn't created</h5>
           )}
         </div>
       </div>
     </>
   );
-};
+});
 
 export default GoalsCircleDiagram;

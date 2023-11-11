@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ITransaction } from "./types";
 import SelectCategoriesSVG from "../../../helpers/selectorsSVG/common/SelectCategoriesSVG";
@@ -40,6 +40,13 @@ const Transaction: FC<ITransaction> = ({
       console.error("Сталася помилка при видаленні цілі:", error);
     }
   };
+  const ref = useRef(null);
+  const transformTitle = () => {
+    if (transactionTitle.length > 10) {
+      return transactionTitle.substring(0, 10) + "...";
+    }
+    return transactionTitle;
+  };
 
   return (
     <>
@@ -48,7 +55,7 @@ const Transaction: FC<ITransaction> = ({
           <TransactionSVG id={transactionType} />
         </td>
         <td>{index + 1}</td>
-        <td scope="row">{transactionTitle}</td>
+        <td scope="row">{transformTitle()}</td>
         <td className="text-black-50  d-flex gap-2">
           <SelectCategoriesSVG id={selectedCategories as string} />
 
@@ -61,7 +68,7 @@ const Transaction: FC<ITransaction> = ({
           {transactionDate}
         </td>
 
-        <td className="">{transactionValue} UAH</td>
+        <td>{transactionValue} UAH</td>
         <td>
           <span onClick={transactionDelete} className="d-none d-sm-block">
             <TransactionSVG id="Delete" />

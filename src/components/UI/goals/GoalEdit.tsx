@@ -91,7 +91,7 @@ const GoalEdit = memo(() => {
     <>
       <div className="col-11 col-sm-8 col-md-5 d-flex rounded-5 shadow align-items-center ">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
-          <h4 className="me-xxl-3 me-0">Edit your goal</h4>
+          <h4 className="me-xxl-3 me-0">Select goal to edit</h4>
           {selectedGoal != null ? (
             <Goal
               id={selectedGoal.id}
@@ -102,19 +102,14 @@ const GoalEdit = memo(() => {
               selectedCategories={selectedGoal.selectedCategories}
             />
           ) : (
-            <button
-              className="rounded-5 text-start"
-              disabled={selectedGoal === null}
-            >
-              <Goal
-                id={""}
-                cost={0}
-                expireDate={"Expire date"}
-                title={"Your title"}
-                index={<GoalSVG id="Edit" />}
-                selectedCategories={<SelectCategoriesSVG id={""} />}
-              />
-            </button>
+            <Goal
+              id={""}
+              cost={0}
+              expireDate={"Expire date"}
+              title={"Your title"}
+              index={<GoalSVG id="Edit" />}
+              selectedCategories={<SelectCategoriesSVG id={""} />}
+            />
           )}
           <div className="d-flex justify-content-evenly col-12 mt-1">
             <button
