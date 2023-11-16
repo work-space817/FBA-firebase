@@ -1,10 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import HeaderSVG from "../../../helpers/selectorsSVG/layoutComponents/HeaderSVG";
 import SidebarSVG from "../../../helpers/selectorsSVG/layoutComponents/SidebarSVG";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
+import getUserInformation from "../../../api/firebase/user/userInfo/getUserInformation";
+import { AuthUserActionType } from "../../../store/reducers/types";
+import { useDispatch } from "react-redux";
 
 const DefaultHeader = memo(() => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const currentPage = location.pathname;
 
   let splitCurrentPage =
@@ -23,8 +27,17 @@ const DefaultHeader = memo(() => {
               <p className="font-Quicksand-Bold fs-1 m-0">{splitCurrentPage}</p>
             </div>
 
-            <Link to="/settings" className="text-dark d-none d-md-inline">
-              <HeaderSVG id="defaultUserIcon" />
+            <Link
+              to="/auth"
+              className="text-dark d-none d-md-inline"
+              type="submit"
+              onClick={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("uid");
+                dispatch({ type: AuthUserActionType.LOGOUT_USER });
+              }}
+            >
+              <HeaderSVG id={"LogOut"} />
             </Link>
           </div>
           <p className="font-Quicksand-SemiBold fs-5 text-black-50 ps-2  d-sm-inline">

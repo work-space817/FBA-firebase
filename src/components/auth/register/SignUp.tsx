@@ -95,7 +95,7 @@ const SignUp = () => {
   return (
     <>
       <h1 className="text-center">Sign up</h1>
-      <form onSubmit={handleSubmit} className="col-md-6">
+      <form onSubmit={handleSubmit} className="col-8 col-md-6">
         <InputComponent
           label="Email"
           type="email"

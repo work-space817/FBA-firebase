@@ -4,11 +4,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthUserActionType } from "../../../store/reducers/types";
 import InputComponent from "../../common/input/CommonInput";
-import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../api/firebase/config";
 import setAuthToken from "../../../helpers/functions/setAuthToken";
 import { useFormik } from "formik";
-import setUserAuth from "../../../api/firebase/user/userInfo/setUserAuth";
 const LogIn = () => {
   const init: ILogIn = {
     email: "",
@@ -17,24 +16,6 @@ const LogIn = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   try {
-  //     const logInResult = await signInWithEmailAndPassword(
-  //       auth,
-  //       data.email,
-  //       data.password
-  //     );
-  //     const user = logInResult.user;
-  //     const userToken = (await getIdToken(user)) as string;
-  //     const uid = auth.currentUser?.uid as string;
-  //     setAuthToken(userToken, uid);
-  //     dispatch({ type: AuthUserActionType.LOGIN_USER });
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const onSubmitHandler = async (values: ILogIn) => {
     try {
       const logInResult = await signInWithEmailAndPassword(
@@ -42,9 +23,6 @@ const LogIn = () => {
         values.email,
         values.password
       );
-      // const user = logInResult.user;
-      // const userToken = (await getIdToken(user)) as string;
-      // const uid = auth.currentUser?.uid as string;
       await setAuthToken(logInResult);
       dispatch({ type: AuthUserActionType.LOGIN_USER });
       navigate("/");
@@ -88,7 +66,7 @@ const LogIn = () => {
     <>
       <h3 className="text-center">Log In</h3>
 
-      <form onSubmit={handleSubmit} className="col-md-6">
+      <form onSubmit={handleSubmit} className="col-md-4">
         <InputComponent
           label="Email"
           type="email"

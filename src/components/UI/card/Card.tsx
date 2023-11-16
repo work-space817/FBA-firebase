@@ -55,8 +55,10 @@ const Card = () => {
 
                   <p className="fs--1 text-white-50">PREMIUM ACCOUNT</p>
 
-                  <div className="w-100 d-flex justify-content-center ">
-                    <div className="typing-demo fs-5 py-3">{randomDigit()}</div>
+                  <div className="w-100 d-flex justify-content-center mx-2 m-sm-0 ">
+                    <div className="typing-demo fs-5 py-3 text-center">
+                      {randomDigit()}
+                    </div>
                   </div>
 
                   <div className="d-flex justify-content-between">
@@ -83,7 +85,7 @@ const Card = () => {
             <div className="col-4 ps-0  text-end d-flex flex-column gap-3">
               <div className=" d-flex flex-column">
                 <span className="font-Quicksand-SemiBold fs-2 text-primary">
-                  $ {balance?.currentBalance}
+                  &#8372; {balance?.currentBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Current balance
@@ -91,7 +93,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-success">
-                  $ {balance?.incomingBalance}
+                  &#8372; {balance?.incomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Income balance
@@ -99,7 +101,7 @@ const Card = () => {
               </div>
               <div className=" d-flex flex-column ">
                 <span className="font-Quicksand-SemiBold fs-4 text-danger">
-                  ${balance?.outcomingBalance}
+                  &#8372; {balance?.outcomingBalance}
                 </span>
                 <span className="font-Quicksand-SemiBold text-black-50 fs--1">
                   Outcome balance
@@ -119,7 +121,7 @@ const Card = () => {
               <span className="font-Quicksand-SemiBold text-black-50">
                 Weekly payment limit
               </span>
-              <span>$350 / $4000</span>
+              <span>&#8372; 350 / &#8372; 4000</span>
             </div>
           </div>
         </div>

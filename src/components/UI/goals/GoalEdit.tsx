@@ -89,7 +89,7 @@ const GoalEdit = memo(() => {
   }, [setFieldValue]);
   return (
     <>
-      <div className="col-11 col-sm-8 col-md-5 d-flex rounded-5 shadow align-items-center ">
+      <div className="col-11 col-sm-8 col-md-5 d-flex rounded-5 shadow align-items-center gap-4">
         <div className="p-3 d-flex flex-column align-items-center col-6 gap-3">
           <h4 className="me-xxl-3 me-0">Select goal to edit</h4>
           {selectedGoal != null ? (
@@ -163,7 +163,7 @@ const GoalEdit = memo(() => {
           />
           <button
             type="submit"
-            className="btn btn-primary border-0 bg-custom"
+            className="btn btn-primary"
             disabled={selectedGoal === null}
           >
             Update goal

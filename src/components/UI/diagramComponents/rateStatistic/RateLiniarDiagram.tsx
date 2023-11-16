@@ -17,7 +17,7 @@ const RateLiniarDiagram = () => {
 
   const getData = async () => {
     const USD = await getExchangeRate("USD", rangeFrom, rangeTo);
-    console.log("USD: ", USD);
+    // console.log("USD: ", USD);
     setRateUSD(USD);
     const EUR = await getExchangeRate("EUR", rangeFrom, rangeTo);
     setRateEUR(EUR);

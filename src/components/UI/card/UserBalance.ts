@@ -16,7 +16,7 @@ const UserBalance = () => {
     try {
       setLoading(true);
       const fetchUserBalance = await getUserBalance();
-      console.log("fetchUserBalance", fetchUserBalance);
+      // console.log("fetchUserBalance", fetchUserBalance);
       dispatch({
         type: UserBalanceActionType.SET_BALANCE,
         payload: fetchUserBalance,

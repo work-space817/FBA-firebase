@@ -45,7 +45,6 @@ const CommonInput: FC<CommonInputProps> = memo(
           onFocus={onFocus}
           disabled={disabled}
         />
-
         {clientSideError && touched && (
           <div
             id="validationServerUsernameFeedback"

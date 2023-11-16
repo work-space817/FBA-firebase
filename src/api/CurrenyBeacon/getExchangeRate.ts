@@ -16,7 +16,7 @@ const getExchangeRate = async (
     }
   );
   const result = await response.json();
-  console.log("Результат getExchangeRate:", result);
+  // console.log("Результат getExchangeRate:", result);
   const data = Object.keys(result.response).map((date) => {
     return {
       date: date.slice(8),

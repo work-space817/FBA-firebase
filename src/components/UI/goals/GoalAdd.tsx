@@ -137,7 +137,7 @@ const GoalAdd = () => {
           iconsHover={false}
           icons={iconsList}
         />
-        <button type="submit" className="btn text-white bg-primary">
+        <button type="submit" className="btn btn-primary">
           Add goal
         </button>
       </div>

@@ -10,7 +10,7 @@ import RateLiniarDiagram from "../../components/UI/diagramComponents/rateStatist
 const HomePage = () => {
   return (
     <>
-      <div className="col d-flex mb-5 gap-3 flex-column-reverse flex-lg-row">
+      <div className="col d-flex mb-5 gap-3 flex-column-reverse flex-lg-row ">
         <Card />
         <div className="col col-lg-6">
           <OperationMenu />
@@ -30,7 +30,7 @@ const HomePage = () => {
             <RateLiniarDiagram />
           </div>
         </div>
-        <div className="col rounded-5 shadow">
+        <div className="col rounded-5 shadow mb-5 mb-sm-0">
           <div className="p-3">
             <h4 className="ms-3">Goals Status Diagram</h4>
             <GoalsCircleDiagram />

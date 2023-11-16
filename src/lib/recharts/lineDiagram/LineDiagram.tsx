@@ -16,7 +16,7 @@ interface ILiniarDiagram {
 const LineDiagram: FC<ILiniarDiagram> = ({ statisticData }) => {
   return (
     <ResponsiveContainer width="100%" height={175}>
-      <LineChart data={statisticData} margin={{ left: -25, right: 5 }}>
+      <LineChart data={statisticData} margin={{ left: -15, right: 5 }}>
         <CartesianGrid strokeDasharray="2 2" />
         <XAxis dataKey="date" />
         <YAxis domain={["auto", "auto"]} />

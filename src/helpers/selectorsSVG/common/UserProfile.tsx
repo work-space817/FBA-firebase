@@ -1,23 +1,23 @@
 import { memo } from "react";
 
-interface Props {
+interface ISelectCategoriesProps {
   id: string;
 }
 
-const HeaderSVG = memo(({ id }: Props) => {
+const UserProfile = memo(({ id }: ISelectCategoriesProps) => {
   switch (id) {
-    case "defaultUserIcon":
+    case "UserPhoto":
       return (
         <svg
-          className=" me-0 me-xxl-5 ms-2"
-          width="3rem"
-          height="3rem"
+          width="36"
+          height="36"
           viewBox="0 0 36 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <mask
             id="mask0_2011_6218"
+            // style="mask-type:alpha"
             maskUnits="userSpaceOnUse"
             x="0"
             y="0"
@@ -39,20 +39,17 @@ const HeaderSVG = memo(({ id }: Props) => {
           </g>
         </svg>
       );
-    case "LogOut":
+    default:
       return (
         <svg
-          version="1.1"
-          id="mdi-logout"
-          width="35"
-          height="35"
+          xmlns="http://www.w3.org/2000/svg"
+          width="2rem"
+          height="2rem"
           viewBox="0 0 24 24"
         >
-          <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
+          <path d="M12,1A11,11,0,1,0,23,12,11.013,11.013,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9.011,9.011,0,0,1,12,21Zm1-4.5v2H11v-2Zm3-7a3.984,3.984,0,0,1-1.5,3.122A3.862,3.862,0,0,0,13.063,15H11.031a5.813,5.813,0,0,1,2.219-3.936A2,2,0,0,0,13.1,7.832a2.057,2.057,0,0,0-2-.14A1.939,1.939,0,0,0,10,9.5,1,1,0,0,1,8,9.5V9.5a3.909,3.909,0,0,1,2.319-3.647,4.061,4.061,0,0,1,3.889.315A4,4,0,0,1,16,9.5Z" />
         </svg>
       );
-    default:
-      return <svg></svg>;
   }
 });
-export default HeaderSVG;
+export default UserProfile;

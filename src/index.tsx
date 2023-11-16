@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap";
 import "react-day-picker/dist/style.css";
 import "./App.css";
 import ReactDOM from "react-dom/client";

@@ -194,16 +194,12 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         <button
           type="button"
           onClick={getCurrentDateTime}
-          className="btn text-white bg-primary h-25"
+          className="btn btn-primary h-25"
         >
           Current time and date
         </button>
         <h6 className="m-0">OR</h6>
-        <button
-          type="button"
-          onClick={handleDateTime}
-          className="btn text-white bg-primary h-25"
-        >
+        <button type="button" className="btn btn-primary h-25">
           Handle time and date
         </button>
       </div>
@@ -251,7 +247,7 @@ const TransactionAdd: FC<ITransactionType> = ({ transactionType }) => {
         />
       )}
 
-      <button type="submit" className="btn text-white bg-primary">
+      <button type="submit" className="btn btn-primary">
         Add transaction
       </button>
     </form>

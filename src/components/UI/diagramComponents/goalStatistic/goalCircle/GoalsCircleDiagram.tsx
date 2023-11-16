@@ -7,7 +7,7 @@ import GoalCircleStatisticList from "./GoalCircleStatisticList";
 const GoalsCircleDiagram = memo(() => {
   const goalList = GoalCircleStatisticList();
 
-  console.log("goalList: ", goalList);
+  // console.log("goalList: ", goalList);
 
   const visiblePieChartList: IGoalByCategory[] = [];
   const innerData = goalList.map((doc: IGoalCircleStatisticList) => {
