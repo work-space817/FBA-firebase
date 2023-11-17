@@ -1,6 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { AuthUserActionType, IAuthUser } from "../../store/reducers/types";
 import Card from "../../components/UI/card/Card";
 import GoalSlider from "../../components/UI/goals/GoalSlider";
 import OperationMenu from "../../components/UI/OperationMenu";

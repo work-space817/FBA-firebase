@@ -29,7 +29,7 @@ const DefaultHeader = memo(() => {
 
             <Link
               to="/auth"
-              className="text-dark d-none d-md-inline"
+              className="text-dark d-inline"
               type="submit"
               onClick={() => {
                 localStorage.removeItem("token");

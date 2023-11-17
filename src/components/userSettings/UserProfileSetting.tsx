@@ -90,7 +90,7 @@ const UserProfileSetting = () => {
     setFieldValue,
   } = formik;
   return (
-    <div className="shadow rounded-5 col-5">
+    <div className="shadow rounded-5 col col-md-5">
       <div className="p-4">
         <h3 className="ms-0 mb-3">Edit profile</h3>
         <form onSubmit={handleSubmit} className="">

@@ -1,17 +1,13 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-interface DebounceFunction {
-  (...args: any[]): void;
-}
-
-export default function useDebounce(
-  callback: DebounceFunction,
+export default function useDebounce<T extends (...args: any[]) => void>(
+  callback: T,
   delay: number
-): DebounceFunction {
+): T {
   const timer = useRef<number | null>(null);
 
-  const debounceCallback: DebounceFunction = useCallback(
-    (...args) => {
+  const debounceCallback = useCallback(
+    (...args: Parameters<T>) => {
       if (timer.current) {
         clearTimeout(timer.current);
       }
@@ -21,7 +17,7 @@ export default function useDebounce(
       }, delay);
     },
     [callback, delay]
-  );
+  ) as T;
 
   return debounceCallback;
 }
