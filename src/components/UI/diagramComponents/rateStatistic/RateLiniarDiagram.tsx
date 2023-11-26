@@ -23,7 +23,7 @@ const RateLiniarDiagram = () => {
     setRateEUR(EUR);
   };
   useEffect(() => {
-    // getData();
+    getData();
   }, []);
   return (
     <>

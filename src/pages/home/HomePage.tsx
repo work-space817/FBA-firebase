@@ -15,7 +15,7 @@ const HomePage = () => {
           <div className="col rounded-5 shadow mt-5">
             <div className="p-3 d-flex justify-content-between align-items-center">
               <h4 className="m-0">Current exchange rate</h4>
-              <span>1/39/30</span>
+              <span>TO DO</span>
             </div>
           </div>
         </div>
